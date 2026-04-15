@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-teal: #0F766E;
+  --color-teal-dark: #0D5C57;
+  --color-teal-light: #CCFBF1;
+  --color-teal-pale: #F0FDFA;
+  --color-slate: #164E63;
+  --color-slate-nav: #0C3547;
+  --color-orange: #FF6B35;
+  --color-orange-soft: #FFF5EE;
+  --color-orange-mid: #FFDDD0;
+  --color-green: #10B981;
+  --color-off-white: #F8FAFB;
+  --color-border: #E5E7EB;
+  --color-text1: #1A1F36;
+  --color-text2: #6B7280;
+  --color-text3: #9CA3AF;
+  --font-family-sans: 'Inter', sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+:root {
+  --teal: #0F766E;
+  --teal-dark: #0D5C57;
+  --teal-light: #CCFBF1;
+  --teal-pale: #F0FDFA;
+  --slate: #164E63;
+  --slate-nav: #0C3547;
+  --orange: #FF6B35;
+  --orange-soft: #FFF5EE;
+  --orange-mid: #FFDDD0;
+  --green: #10B981;
+  --off-white: #F8FAFB;
+  --border: #E5E7EB;
+  --text1: #1A1F36;
+  --text2: #6B7280;
+  --text3: #9CA3AF;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F8FAFB;
+  color: #1A1F36;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Calc button hover lift effect */
+.calc-btn-hover {
+  transition: all 0.15s ease;
+}
+.calc-btn-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25);
+}
+
+/* Hero pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
