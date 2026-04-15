@@ -34,6 +34,10 @@ import { currencyConverter } from './calculators/finance/currency-converter'
 import { tipCalculator } from './calculators/finance/tip-calculator'
 import { percentage } from './calculators/finance/percentage'
 import { ageCalculator } from './calculators/finance/age-calculator'
+import { gpaCalculator } from './calculators/finance/gpa-calculator'
+import { dateDifference } from './calculators/finance/date-difference'
+import { unitConverter } from './calculators/finance/unit-converter'
+import { percentageChange } from './calculators/finance/percentage-change'
 
 // Health
 import { bmi } from './calculators/health/bmi'
@@ -79,6 +83,10 @@ const registry: Record<string, CalculatorConfig> = {
   'tip-calculator': tipCalculator,
   'percentage': percentage,
   'age-calculator': ageCalculator,
+  'gpa-calculator': gpaCalculator,
+  'date-difference': dateDifference,
+  'unit-converter': unitConverter,
+  'percentage-change': percentageChange,
   'bmi': bmi,
   'bmr-calories': bmrCalories,
   'body-fat': bodyFat,

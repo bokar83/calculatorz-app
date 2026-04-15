@@ -20,7 +20,9 @@ export default function HealthPage() {
 
       <h1 className="text-3xl font-extrabold text-[#1A1F36] mb-2">Health Calculators</h1>
       <p className="text-[#6B7280] mb-8 max-w-2xl">
-        Free tools for BMI, basal metabolic rate, body fat percentage, ideal body weight, water intake, heart rate zones, and more.
+        Free online health calculators for BMI, calorie needs, body fat percentage, ideal body weight, daily water intake, heart rate training zones, and more.
+        Use these tools to understand your body metrics, set realistic fitness targets, or check key health indicators without a doctor visit.
+        All calculators run instantly in your browser with no account needed.
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">

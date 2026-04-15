@@ -20,7 +20,9 @@ export default function FinancePage() {
 
       <h1 className="text-3xl font-extrabold text-[#1A1F36] mb-2">Finance Calculators</h1>
       <p className="text-[#6B7280] mb-8 max-w-2xl">
-        Free tools for salary conversions, loan payments, mortgage estimates, compound interest, tax planning, and more.
+        Free online finance calculators for salary, loans, mortgage payments, compound interest, tax estimates, savings goals, and investment returns.
+        Whether you are comparing job offers, planning a major purchase, or building a budget, these tools give you fast, accurate numbers with no sign-up required.
+        All calculators run in your browser and update instantly as you type.
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
