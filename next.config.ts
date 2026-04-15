@@ -4,9 +4,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  output: 'export',
   trailingSlash: true,
-  images: { unoptimized: true },
 }
 
 // PWA only in production, disabled during static export build to avoid webpack/turbopack conflict
