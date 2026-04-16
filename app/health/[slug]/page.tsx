@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { getCalculator, getAllSlugs } from '@/lib/registry'
 import CalculatorLoader from '@/components/calculator/CalculatorLoader'
 import AdZone from '@/components/AdZone'
-import ProWidget from '@/components/calculator/ProWidget'
 import FormulaBox from '@/components/content/FormulaBox'
 import RefTable from '@/components/content/RefTable'
 import FaqSection from '@/components/content/FaqSection'
@@ -83,12 +82,12 @@ export default async function HealthCalculatorPage({ params }: PageProps) {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <AdZone zone={1} className="mb-4" />
 
-        <nav className="text-sm text-[#6B7280] mb-4">
-          <Link href="/" className="hover:text-[#0F766E]">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/health" className="hover:text-[#0F766E]">Health</Link>
-          <span className="mx-2">/</span>
-          <span className="text-[#1A1F36] font-medium">{calc.title}</span>
+        <nav className="text-sm text-[#6B7280] mb-4 flex items-center flex-wrap gap-0.5 min-w-0">
+          <Link href="/" className="hover:text-[#0F766E] shrink-0">Home</Link>
+          <span className="mx-1.5 shrink-0">/</span>
+          <Link href="/health" className="hover:text-[#0F766E] shrink-0">Health</Link>
+          <span className="mx-1.5 shrink-0">/</span>
+          <span className="text-[#1A1F36] font-medium truncate">{calc.title}</span>
         </nav>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -125,7 +124,6 @@ export default async function HealthCalculatorPage({ params }: PageProps) {
 
           <aside className="hidden lg:flex flex-col gap-5 w-[268px] shrink-0">
             <AdZone zone={4} />
-            <ProWidget />
             <AdZone zone={5} />
           </aside>
         </div>

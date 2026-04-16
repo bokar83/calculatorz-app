@@ -47,10 +47,9 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden px-4 sm:px-8 py-10 sm:py-14"
         style={{
           background: 'linear-gradient(150deg, #0C3547 0%, #164E63 45%, #0F766E 100%)',
-          padding: '52px 32px 48px',
         }}
       >
         {/* Dot texture overlay + radial glow */}
@@ -66,26 +65,26 @@ export default function HomePage() {
 
           {/* Left: headline */}
           <div className="flex-1 text-left">
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/18 text-white/88 px-4 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-wide mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/18 text-white/88 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wide mb-5">
               <span className="w-[7px] h-[7px] rounded-full bg-[#10B981] pulse-dot inline-block" />
               Free · Accurate · No Sign-Up
             </div>
 
-            <h1 className="text-[40px] lg:text-[48px] font-extrabold text-white leading-[1.1] mb-4" style={{ letterSpacing: '-0.03em' }}>
+            <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] font-extrabold text-white leading-[1.1] mb-4" style={{ letterSpacing: '-0.03em' }}>
               The Smarter<br />Calculator for<br />
               <span className="text-[#FF6B35]">Everything</span>
             </h1>
 
-            <p className="text-[16px] text-white/70 mb-7 max-w-[380px] leading-relaxed">
+            <p className="text-[15px] sm:text-[16px] text-white/70 mb-6 max-w-[380px] leading-relaxed">
               40+ free calculators for finance and health. Accurate results, no account needed.
             </p>
 
             {/* Stats row */}
-            <div className="flex items-center gap-8 mb-7">
+            <div className="flex items-center gap-5 sm:gap-8 mb-6">
               {[['40+', 'Calculators'], ['100%', 'Free'], ['0', 'Sign-ups']].map(([num, label]) => (
                 <div key={label}>
-                  <div className="text-[28px] font-extrabold text-white" style={{ letterSpacing: '-0.02em' }}>{num}</div>
-                  <div className="text-[11px] text-white/55 uppercase tracking-wide mt-0.5">{label}</div>
+                  <div className="text-[22px] sm:text-[28px] font-extrabold text-white" style={{ letterSpacing: '-0.02em' }}>{num}</div>
+                  <div className="text-[10px] sm:text-[11px] text-white/55 uppercase tracking-wide mt-0.5">{label}</div>
                 </div>
               ))}
             </div>
@@ -123,11 +122,11 @@ export default function HomePage() {
 
       {/* TRUST STRIP */}
       <div className="bg-white border-b border-[#E5E7EB]">
-        <div className="max-w-[1060px] mx-auto px-4 py-3 flex items-center justify-center gap-6 flex-wrap">
+        <div className="max-w-[1060px] mx-auto px-4 py-2.5 flex items-center justify-center gap-3 sm:gap-6 flex-wrap">
           {trustItems.map(item => (
-            <div key={item.text} className="flex items-center gap-1.5 text-[12px] text-[#6B7280]">
+            <div key={item.text} className="flex items-center gap-1 text-[11px] sm:text-[12px] text-[#6B7280]">
               <span>{item.icon}</span>
-              <span>{item.text}</span>
+              <span className="whitespace-nowrap">{item.text}</span>
             </div>
           ))}
         </div>
@@ -142,7 +141,7 @@ export default function HomePage() {
         {/* Quick-access calculator shortcuts */}
         <div className="mb-8">
           <h2 className="text-[15px] font-bold text-[#1A1F36] mb-3">Most Used Calculators</h2>
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2">
             {[...topFinanceLinks, ...topHealthLinks].map(item => (
               <Link
                 key={item.slug}
@@ -178,7 +177,7 @@ export default function HomePage() {
               </div>
 
               {/* Finance calc grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {financeCalcs
                   .slice(0, 9)
                   .map(calc => (
@@ -201,26 +200,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Slim Pro banner */}
-            <div
-              className="rounded-xl px-5 py-3.5 flex items-center justify-between gap-4 mb-10"
-              style={{ background: 'linear-gradient(135deg, #0C3547 0%, #164E63 100%)' }}
-            >
-              <div className="flex items-center gap-4 flex-wrap">
-                <span className="text-[13px] font-bold text-white">CalcFlow Pro</span>
-                {['No ads', 'PDF exports', 'Save history'].map(f => (
-                  <span key={f} className="flex items-center gap-1 text-[12px] text-white/65">
-                    <span className="text-[#10B981] text-[10px] font-bold">✓</span> {f}
-                  </span>
-                ))}
-              </div>
-              <Link
-                href="/pro"
-                className="shrink-0 bg-[#FF6B35] hover:bg-[#e55a27] text-white font-bold text-[12px] px-4 py-2 rounded-lg whitespace-nowrap transition-all"
-              >
-                From $7/mo
-              </Link>
-            </div>
 
             <AdZone zone={2} className="mb-10" />
 
@@ -232,7 +211,7 @@ export default function HomePage() {
                 </h2>
                 <Link href="/health" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all 10</Link>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {healthCalcs.map(calc => (
                   <Link
                     key={calc.slug}
@@ -255,22 +234,6 @@ export default function HomePage() {
           {/* Sidebar */}
           <aside className="hidden lg:flex flex-col gap-4">
             <AdZone zone={4} />
-
-            {/* Pro widget */}
-            <div className="rounded-xl p-5 text-center" style={{ background: 'linear-gradient(150deg, #0C3547, #0F766E)', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
-              <h3 className="text-white text-[15px] font-bold mb-3">CalcFlow Pro</h3>
-              <div className="mb-3.5 text-left space-y-1.5">
-                {['No ads', 'PDF exports', 'Save history', 'Priority support'].map(f => (
-                  <div key={f} className="text-[12px] text-white/75 flex items-center gap-1.5">
-                    <span className="text-[#FF6B35] text-[9px]">✦</span> {f}
-                  </div>
-                ))}
-              </div>
-              <Link href="/pro" className="block w-full bg-[#FF6B35] hover:bg-[#e55a27] text-white font-bold text-[13px] py-2.5 rounded-lg transition-colors mb-1.5">
-                Get Pro
-              </Link>
-              <p className="text-[10px] text-white/40">From $7/mo · Cancel anytime</p>
-            </div>
 
             {/* Quick links sidebar */}
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-4" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>

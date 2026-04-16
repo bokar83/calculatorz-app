@@ -126,6 +126,12 @@ export const bmi: CalculatorConfig = {
       'A healthy BMI range of 18.5-24.9 applies to most adults; different ranges apply for children and some ethnic groups.',
     ],
   },
+  affiliate: {
+    partner: 'Noom',
+    label: 'Ready to move toward a healthier BMI?',
+    url: 'https://www.noom.com',
+    description: 'Noom uses psychology-based coaching to help you build lasting habits. 14-day free trial available.',
+  },
   jsonLd: {
     faqs: [
       { q: 'What is BMI?', a: 'Body Mass Index: weight in kg divided by height in meters squared. A screening tool for weight-related health risks.' },

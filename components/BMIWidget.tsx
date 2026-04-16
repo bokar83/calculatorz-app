@@ -178,23 +178,23 @@ export default function BMIWidget() {
             className="mt-3.5 rounded-xl p-4"
             style={{ background: 'linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)' }}
           >
-            <div className="grid grid-cols-3 gap-2">
-              <div className="rounded-lg py-3 px-2 text-center" style={{ background: 'rgba(255,255,255,0.18)' }}>
-                <div className="font-extrabold text-white leading-tight" style={{ fontSize: '22px', letterSpacing: '-0.5px' }}>
-                  {result.bmi}
+            <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-lg py-3 px-2 text-center" style={{ background: 'rgba(255,255,255,0.18)' }}>
+                  <div className="font-extrabold text-white leading-tight" style={{ fontSize: '22px', letterSpacing: '-0.5px' }}>
+                    {result.bmi}
+                  </div>
+                  <div className="text-[10px] text-white/60 uppercase tracking-wide mt-1">BMI Score</div>
                 </div>
-                <div className="text-[9px] text-white/60 uppercase tracking-wide mt-1">BMI Score</div>
+                <div className="rounded-lg py-3 px-2 text-center" style={{ background: 'rgba(255,255,255,0.1)' }}>
+                  <div className="font-bold leading-tight text-center" style={{ fontSize: '14px', color: result.color }}>
+                    {result.category}
+                  </div>
+                  <div className="text-[10px] text-white/60 uppercase tracking-wide mt-1">Category</div>
+                </div>
               </div>
-              <div className="rounded-lg py-3 px-2 text-center" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                <div className="font-bold leading-tight text-center" style={{ fontSize: '12px', color: result.color }}>
-                  {result.category}
-                </div>
-                <div className="text-[9px] text-white/60 uppercase tracking-wide mt-1">Category</div>
-              </div>
-              <div className="rounded-lg py-3 px-2 text-center" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                <div className="font-bold text-white/80 leading-tight" style={{ fontSize: '10px' }}>
-                  {result.tip}
-                </div>
+              <div className="rounded-lg py-2.5 px-3" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                <p className="text-[12px] text-white/75 leading-snug">{result.tip}</p>
               </div>
             </div>
           </div>

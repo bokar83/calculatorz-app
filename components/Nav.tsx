@@ -29,25 +29,10 @@ export default function Nav() {
           />
         </div>
 
-        {/* Go Pro CTA */}
-        <Link
-          href="/pro"
-          className="shrink-0 hidden md:inline-flex items-center gap-1 bg-[#FF6B35] hover:bg-[#e55a27] text-white text-[13px] font-bold px-4 py-[7px] rounded-md transition-all"
-          style={{ transition: 'all 0.15s' }}
-        >
-          Go Pro <span className="text-[10px]">✦</span>
-        </Link>
-
-        {/* Mobile: search + hamburger */}
-        <div className="flex md:hidden items-center gap-2 ml-auto">
-          <input
-            type="search"
-            placeholder="Search..."
-            className="w-[120px] bg-white/10 border border-white/15 rounded-md px-2.5 py-1 text-[12px] text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
-          />
-          <Link href="/pro" className="bg-[#FF6B35] text-white text-[11px] font-bold px-2.5 py-1 rounded-md">Pro</Link>
+        {/* Mobile: hamburger only — search lives in the dropdown */}
+        <div className="flex md:hidden items-center gap-3 ml-auto">
           <button
-            className="p-1 rounded focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="p-1.5 rounded focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -62,9 +47,14 @@ export default function Nav() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden border-t border-white/10 px-4 py-3 flex flex-col gap-2 text-[13px] font-medium">
-          <Link href="/finance" className="text-white/70 hover:text-white px-2 py-1" onClick={() => setMenuOpen(false)}>Finance</Link>
-          <Link href="/health" className="text-white/70 hover:text-white px-2 py-1" onClick={() => setMenuOpen(false)}>Health</Link>
+        <div className="md:hidden border-t border-white/10 px-4 py-3 flex flex-col gap-1 text-[14px] font-medium">
+          <input
+            type="search"
+            placeholder="Search calculators..."
+            className="w-full bg-white/10 border border-white/15 rounded-md px-3 py-2 text-[13px] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#0F766E] mb-1"
+          />
+          <Link href="/finance" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Finance</Link>
+          <Link href="/health" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Health</Link>
         </div>
       )}
     </nav>

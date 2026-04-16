@@ -125,7 +125,7 @@ export default function HeroCalculator() {
             className="mt-3.5 rounded-xl p-4"
             style={{ background: 'linear-gradient(135deg, #0C3547 0%, #0F766E 100%)' }}
           >
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 { label: 'Annual', value: result.annual, primary: true },
                 { label: 'Monthly', value: result.monthly },
@@ -138,12 +138,12 @@ export default function HeroCalculator() {
                   style={{ background: item.primary ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.1)' }}
                 >
                   <div
-                    className="font-extrabold text-white leading-tight"
-                    style={{ fontSize: item.primary ? '17px' : '13px', letterSpacing: '-0.5px' }}
+                    className="font-extrabold text-white leading-tight break-all"
+                    style={{ fontSize: item.primary ? '16px' : '14px', letterSpacing: '-0.5px' }}
                   >
                     {item.value}
                   </div>
-                  <div className="text-[9px] text-white/60 uppercase tracking-wide mt-1">{item.label}</div>
+                  <div className="text-[10px] text-white/60 uppercase tracking-wide mt-1">{item.label}</div>
                 </div>
               ))}
             </div>

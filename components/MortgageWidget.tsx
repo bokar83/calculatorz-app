@@ -104,7 +104,7 @@ export default function MortgageWidget() {
 
         {result ? (
           <div className="mt-3.5 rounded-xl p-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #1D4ED8 100%)' }}>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 { label: 'Monthly', value: result.monthly, primary: true },
                 { label: 'Principal', value: result.principal },

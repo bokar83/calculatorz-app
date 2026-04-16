@@ -3,8 +3,8 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer style={{ background: '#0C3547', marginTop: '8px' }}>
-      <div className="max-w-[1160px] mx-auto px-6 pt-12 pb-7">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-9 mb-9">
+      <div className="max-w-[1160px] mx-auto px-5 sm:px-6 pt-9 sm:pt-12 pb-6 sm:pb-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-9">
           {/* Brand col */}
           <div>
             <div className="text-[22px] font-extrabold text-white mb-2.5" style={{ letterSpacing: '-0.5px' }}>
@@ -108,11 +108,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/pro" className="text-[13px] font-semibold" style={{ color: '#FF6B35' }}>
-                  Go Pro ✦
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
