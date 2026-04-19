@@ -26,7 +26,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-[18px] font-bold text-[#1A1F36] mb-3">1. Site Operator</h2>
             <p className="leading-relaxed">
-              CalcFlow is an independent web publisher and the sole operator of calculatorz.tools. All content, tools, and services on this website are provided by the CalcFlow editorial team. For legal inquiries, contact us at <a href="mailto:legal@calculatorz.tools" className="text-[#0F766E] hover:underline">legal@calculatorz.tools</a>.
+              CalcFlow is an independent web publisher and the sole operator of calculatorz.tools, based in Salt Lake City, UT. All content, tools, and services on this website are provided by the CalcFlow editorial team. For legal inquiries, contact us at <a href="mailto:legal@calculatorz.tools" className="text-[#0F766E] hover:underline">legal@calculatorz.tools</a>.
             </p>
           </section>
 
