@@ -137,6 +137,9 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
                   )}
                 </div>
               )}
+              {field.hint && (
+                <p className="text-[11px] text-[#9CA3AF] mt-1 leading-relaxed">{field.hint}</p>
+              )}
             </div>
           )
         })}

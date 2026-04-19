@@ -23,6 +23,7 @@ export interface InputField {
   options?: { value: string; label: string }[]
   prefix?: string
   suffix?: string
+  hint?: string
 }
 
 export interface CalculatorResult {
@@ -67,6 +68,12 @@ export interface CalculatorConfig {
   }
   geo?: GeoContent
   affiliate?: AffiliateConfig
+  educational?: {
+    explainer: string
+    tips: string[]
+    commonMistakes: string[]
+    example: string
+  }
   jsonLd: {
     faqs: { q: string; a: string }[]
     howToSteps: string[]

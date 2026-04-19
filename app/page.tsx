@@ -44,7 +44,7 @@ const trustItems = [
   { icon: '🔒', text: 'No sign-up required' },
   { icon: '📱', text: 'Mobile-friendly' },
   { icon: '⚡', text: 'Instant results' },
-  { icon: '✅', text: 'Updated for 2024' },
+  { icon: '✅', text: 'Updated for 2026' },
   { icon: '🆓', text: '100% free forever' },
 ]
 
@@ -295,6 +295,58 @@ export default function HomePage() {
           </aside>
         </div>
       </div>
+
+      {/* Why CalcFlow */}
+      <section className="max-w-4xl mx-auto px-4 py-12">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#1A1F36] mb-3">
+            Why CalcFlow Exists
+          </h2>
+          <p className="text-[#6B7280] text-base max-w-2xl mx-auto leading-relaxed">
+            Most calculator sites give you an answer and leave you guessing. We built CalcFlow because we were frustrated by tools that do the math without explaining what it means.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+          <div className="bg-white rounded-xl border border-[#E5E7EB] p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: '#F0FFFE' }}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M9 2L11.09 7.26L17 8.27L13 12.14L14.18 18L9 15.27L3.82 18L5 12.14L1 8.27L6.91 7.26L9 2Z" fill="#0F766E"/>
+              </svg>
+            </div>
+            <h3 className="text-[15px] font-bold text-[#1A1F36] mb-2">Context, Not Just Numbers</h3>
+            <p className="text-[13px] text-[#6B7280] leading-relaxed">Every calculator comes with plain-language explanations, real-world examples, and guidance on how to interpret your result — not just the raw output.</p>
+          </div>
+
+          <div className="bg-white rounded-xl border border-[#E5E7EB] p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: '#F0FFFE' }}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <circle cx="9" cy="9" r="7" stroke="#0F766E" strokeWidth="1.5"/>
+                <path d="M9 5.5V9.5L11.5 12" stroke="#0F766E" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <h3 className="text-[15px] font-bold text-[#1A1F36] mb-2">Always Up to Date</h3>
+            <p className="text-[13px] text-[#6B7280] leading-relaxed">Tax brackets, contribution limits, and health reference ranges are reviewed regularly and updated when official sources change. No stale 2021 numbers here.</p>
+          </div>
+
+          <div className="bg-white rounded-xl border border-[#E5E7EB] p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: '#F0FFFE' }}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <rect x="2" y="2" width="14" height="14" rx="2" stroke="#0F766E" strokeWidth="1.5"/>
+                <path d="M5 9H13M5 6H10M5 12H8" stroke="#0F766E" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <h3 className="text-[15px] font-bold text-[#1A1F36] mb-2">No Sign-Up. No Tracking.</h3>
+            <p className="text-[13px] text-[#6B7280] leading-relaxed">Your inputs stay in your browser. We do not store what you type into any calculator. No account needed, no data sold, no strings attached.</p>
+          </div>
+        </div>
+
+        <div className="bg-[#F8FAFB] rounded-xl border border-[#E5E7EB] p-6 text-center">
+          <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-2xl mx-auto">
+            CalcFlow is built by a team with backgrounds in finance and operations — people who have spent years using spreadsheets and back-of-envelope math to make real decisions. We built the tools we wished existed.
+          </p>
+        </div>
+      </section>
     </>
   )
 }

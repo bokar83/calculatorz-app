@@ -14,9 +14,11 @@ export default function AffiliateStrip({ affiliate, show }: AffiliateStripProps)
       style={{ background: '#FFF5EE', border: '1px solid #FFDDD0' }}
     >
       <div className="flex-1">
+        <p className="text-[12px] text-[#6B7280] mb-3 px-1">
+          <strong className="text-[#374151]">Affiliate Disclosure:</strong> CalcFlow may earn a commission if you sign up through links on this page. This does not affect our editorial independence or the tools we recommend. We only feature products we believe provide genuine value.
+        </p>
         <div className="text-[12px] font-semibold text-[#1A1F36]">{affiliate.label}</div>
         <div className="text-[11px] text-[#6B7280] mt-0.5 leading-snug">{affiliate.description}</div>
-        <div className="text-[10px] text-[#9CA3AF] mt-1">Sponsored · Affiliate disclosure</div>
       </div>
       <a
         href={affiliate.url}

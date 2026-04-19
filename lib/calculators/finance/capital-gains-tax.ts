@@ -34,7 +34,7 @@ export const capitalGainsTax: CalculatorConfig = {
       else if (income < 191950) rate = 0.24
       else rate = 0.32
     } else {
-      // 2024 long-term rates
+      // 2025 long-term rates
       if (income <= 47025) rate = 0
       else if (income <= 518900) rate = 0.15
       else rate = 0.20

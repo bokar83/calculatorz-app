@@ -110,7 +110,7 @@ export const hourlyToSalary: CalculatorConfig = {
     example: '$25/hour × 40 hours/week × 52 weeks = $52,000/year. Monthly: $4,333. Bi-weekly paycheck: $2,000. Weekly: $1,000. A standard full-time employee works 2,080 hours per year.',
     keyFacts: [
       'The US federal minimum wage is $7.25/hour, equivalent to $15,080/year at 40 hours/week.',
-      'The US median hourly wage was approximately $22.50/hour in 2024, per the Bureau of Labor Statistics.',
+      'The US median hourly wage is approximately $23/hour as of 2025, per the Bureau of Labor Statistics.',
       'A standard full-time work year in the US is 2,080 hours (52 weeks × 40 hours).',
       'To estimate hourly rate from salary: divide annual salary by 2,080.',
     ],
@@ -120,6 +120,21 @@ export const hourlyToSalary: CalculatorConfig = {
     label: 'Boost your income with SoFi Personal Finance',
     url: 'https://www.sofi.com',
     description: 'Track earnings, set savings goals, and access financial tools in one app.',
+  },
+  educational: {
+    explainer: `Converting an hourly wage to an annual salary helps you compare job offers, negotiate compensation, and understand what your time is actually worth over a year. The math is straightforward: multiply your hourly rate by the number of hours you work each week, then multiply by how many weeks per year you work. A standard full-time schedule is 40 hours per week for 52 weeks, which gives you 2,080 working hours per year. That means $20/hour equals $41,600/year, and $50/hour equals $104,000/year. The conversion also works in reverse: if you know a salary, divide by 2,080 to find the hourly equivalent. This comparison matters when you are choosing between salaried and hourly positions, evaluating contract rates versus full-time roles, or figuring out whether a freelance gig actually pays better than your day job once you account for the hours involved.`,
+    tips: [
+      'Account for unpaid time off when calculating annual income. If you take two weeks of unpaid vacation, your effective weeks worked is 50, not 52, which reduces a $25/hour wage from $52,000 to $50,000.',
+      'When comparing a salaried offer to an hourly rate, factor in benefits. Employer-provided health insurance is typically worth $6,000-$15,000/year and is part of your total compensation package.',
+      'If you are a freelancer or contractor, remember that self-employment tax (15.3%) replaces the employee FICA split, and you are responsible for your own benefits. Your effective hourly rate needs to be 20-30% higher than an equivalent employee rate to break even.',
+      'Use the mental shortcut to quickly estimate annual salary: double your hourly rate and add three zeros. At $30/hour, that is $60,000/year, which is close to the actual $62,400.',
+    ],
+    commonMistakes: [
+      'Forgetting that the result is gross income before taxes. At $25/hour ($52,000/year), a single filer in a typical state might take home closer to $39,000 after federal, state, and FICA deductions.',
+      'Comparing hourly and salaried roles without accounting for overtime. Salaried employees often work more than 40 hours without extra pay, making their effective hourly rate lower than it appears.',
+      'Using 52 weeks when you have unpaid leave or work seasonally. A nurse working 46 weeks per year at $40/hour earns $73,600, not $83,200. Enter your actual weeks for an accurate number.',
+    ],
+    example: `Sofia is offered a contract at $35/hour for 35 hours per week. She works 50 weeks per year (taking 2 weeks unpaid). Her annual income is $35 x 35 x 50 = $61,250. She is also considering a salaried role at $68,000 that includes health insurance worth $9,000. The salaried offer's total compensation is effectively $77,000, making the salaried role worth about $6,750 more annually despite the lower headline number.`,
   },
   jsonLd: {
     faqs: [

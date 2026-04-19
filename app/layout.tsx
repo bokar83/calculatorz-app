@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import JsonLd from '@/components/content/JsonLd'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
@@ -35,6 +36,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
         />
+        <JsonLd schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'CalcFlow',
+          url: 'https://calculatorz.tools',
+          logo: 'https://calculatorz.tools/icon.png',
+          description: 'Free online calculators for finance and health, paired with plain-English education to help you understand your numbers.',
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'Customer Support',
+            email: 'hello@calculatorz.tools',
+          },
+          sameAs: [],
+        }} />
       </head>
       <body className="bg-[#F8FAFB] min-h-screen flex flex-col">
         <Nav />

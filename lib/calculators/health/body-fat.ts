@@ -89,6 +89,21 @@ export const bodyFat: CalculatorConfig = {
     ],
     howToSteps: ['Enter weight.', 'Enter measurements.', 'Select sex.', 'Click Calculate.'],
   },
+  educational: {
+    explainer: `Body fat percentage is the proportion of your total body weight that is fat tissue, as opposed to muscle, bone, organs, and water. Unlike BMI, which only uses height and weight, body fat percentage actually distinguishes between fat and lean mass. This matters because two people can weigh exactly the same and have the same BMI while one has 15% body fat and the other has 30%. This calculator uses the U.S. Navy tape measure method, which estimates body density from waist, neck, and hip measurements, then converts that to a fat percentage. It is not as precise as a DEXA scan or hydrostatic weighing, but it is accurate within 3-4 percentage points for most people, making it a practical option for tracking trends over time. The American Council on Exercise classifies healthy body fat as 14-24% for men and 21-31% for women, with athletes typically much lower.`,
+    tips: [
+      'Measure consistently: same time of day, same measuring tape, same body posture. Morning measurements before eating or exercising reduce daily fluctuation and give you comparable readings over weeks.',
+      'Track the trend, not the daily number. Body fat percentage from tape measures naturally varies by 1-2% based on hydration, food intake, and measuring technique. What matters is the direction over 4-6 week periods.',
+      'Reducing body fat while maintaining or building muscle (body recomposition) is more meaningful than reducing weight alone. If you lose 5 lbs of fat and gain 2 lbs of muscle, your weight changes less than your body composition does.',
+      'Visceral fat, the fat around your organs, is the metabolically dangerous type. Even if your total body fat percentage is acceptable, a large waist circumference is an independent cardiovascular risk factor worth discussing with a doctor.',
+    ],
+    commonMistakes: [
+      'Measuring in the wrong spot. Waist circumference for this formula should be measured at the navel, not the narrowest point. Neck measurement goes just below the larynx. Incorrect placement can throw the estimate off by 3-5%.',
+      'Treating the result as exact. The Navy method can be off by 3-4% compared to DEXA. If you calculate 22% body fat, your actual number could reasonably be anywhere from 18% to 26%. Use it for directional tracking.',
+      'Comparing your number to athlete standards when that is not your goal. Elite athletes carry 6-13% body fat (men) partly because their sport demands it, often at the cost of hormonal health and energy availability. Fitness-level body fat (14-17% men, 21-24% women) is healthier for most people.',
+    ],
+    example: `Tom is 5\'9" (69 inches), weighs 185 lbs, with a waist of 36 inches and neck of 15.5 inches. Using the Navy formula, his estimated body fat is 22.4%, placing him in the "acceptable" category (18-25% for men by ACE standards). His fat mass is approximately 41.4 lbs and lean mass is 143.6 lbs. His goal is to reach 18% body fat. At 185 lbs and 18%, he would carry 33.3 lbs of fat. He needs to lose about 8 lbs of fat while preserving lean mass, achievable through a moderate calorie deficit of 300-400 calories per day over 10-12 weeks.`,
+  },
   geo: {
     definition:
       'A body fat percentage calculator estimates the proportion of your total body mass that is fat tissue. The U.S. Navy tape measure method uses waist, neck, and hip circumferences to estimate body density, then applies the Siri equation (Body Fat % = (495 / Body Density) - 450) to derive fat percentage.',

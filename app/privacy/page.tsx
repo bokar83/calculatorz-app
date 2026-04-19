@@ -26,7 +26,10 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-[18px] font-bold text-[#1A1F36] mb-3">1. Who We Are</h2>
             <p className="leading-relaxed">
-              CalcFlow (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the website at calculatorz.tools, providing free online calculators for finance, health, and everyday decisions. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information.
+              CalcFlow is an independent web publisher operating calculatorz.tools. We provide free online calculators for finance, health, and everyday decisions. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For privacy-related inquiries, contact us at <a href="mailto:privacy@calculatorz.tools" className="text-[#0F766E] hover:underline">privacy@calculatorz.tools</a>.
             </p>
           </section>
 

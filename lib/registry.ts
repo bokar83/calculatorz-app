@@ -16,6 +16,7 @@ import { autoLoan } from './calculators/finance/auto-loan'
 import { personalLoan } from './calculators/finance/personal-loan'
 import { studentLoan } from './calculators/finance/student-loan'
 import { debtPayoff } from './calculators/finance/debt-payoff'
+import { calculator401k } from './calculators/finance/401k-calculator'
 import { debtToIncome } from './calculators/finance/debt-to-income'
 import { simpleInterest } from './calculators/finance/simple-interest'
 import { savingsGoal } from './calculators/finance/savings-goal'
@@ -50,6 +51,7 @@ import { heartRateZones } from './calculators/health/heart-rate-zones'
 import { dueDate } from './calculators/health/due-date'
 import { ovulation } from './calculators/health/ovulation'
 import { sleepCalculator } from './calculators/health/sleep-calculator'
+import { macronutrient } from './calculators/health/macronutrient'
 
 const registry: Record<string, CalculatorConfig> = {
   'hourly-to-salary': hourlyToSalary,
@@ -64,6 +66,7 @@ const registry: Record<string, CalculatorConfig> = {
   'personal-loan': personalLoan,
   'student-loan': studentLoan,
   'debt-payoff': debtPayoff,
+  '401k-calculator': calculator401k,
   'debt-to-income': debtToIncome,
   'compound-interest': compoundInterest,
   'simple-interest': simpleInterest,
@@ -97,6 +100,7 @@ const registry: Record<string, CalculatorConfig> = {
   'due-date': dueDate,
   'ovulation': ovulation,
   'sleep-calculator': sleepCalculator,
+  'macronutrient': macronutrient,
 }
 
 export function getCalculator(slug: string): CalculatorConfig | undefined {

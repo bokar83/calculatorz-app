@@ -87,7 +87,7 @@ export const autoLoan: CalculatorConfig = {
     ruleOfThumb: 'The 20/4/10 rule for car buying: put at least 20% down, finance for no more than 4 years, and keep total monthly vehicle costs (payment + insurance) below 10% of gross monthly income.',
     example: 'A $30,000 car with $3,000 down at 7.5% interest over 60 months = $540/month. Total interest paid: $2,379. Total cost: $32,379.',
     keyFacts: [
-      'The average new car loan rate in the US was 7.1% in 2024, according to Experian.',
+      'The average new car loan rate in the US was around 7% in 2025, according to Experian.',
       'The average new car loan term is 68.5 months — longer terms lower monthly payments but significantly increase total interest.',
       'Buyers with excellent credit (750+) typically qualify for rates 3-5% lower than buyers with fair credit.',
       'A $10,000 trade-in has the same financial effect as a $10,000 down payment.',
@@ -116,7 +116,7 @@ export const autoLoan: CalculatorConfig = {
     faqs: [
       {
         q: 'What is a good interest rate for a car loan?',
-        a: 'As of 2024-2025, excellent credit (750+) qualifies for rates around 4-6% on new cars. Good credit (700-749) sees 6-8%. Fair credit (600-699) typically sees 10-15%. Always get pre-approved by your bank or credit union before visiting the dealership.',
+        a: 'Excellent credit (750+) qualifies for rates around 4-6% on new cars. Good credit (700-749) sees 6-8%. Fair credit (600-699) typically sees 10-15%. Always get pre-approved by your bank or credit union before visiting the dealership.',
       },
       {
         q: 'How long should my auto loan be?',
@@ -145,7 +145,7 @@ export const autoLoan: CalculatorConfig = {
   },
   jsonLd: {
     faqs: [
-      { q: 'What is a good interest rate for a car loan?', a: 'Excellent credit (750+) qualifies for 4-6% on new cars in 2024-2025. Good credit sees 6-8%. Always get pre-approved before visiting the dealership.' },
+      { q: 'What is a good interest rate for a car loan?', a: 'Excellent credit (750+) qualifies for 4-6% on new cars. Good credit sees 6-8%. Always get pre-approved before visiting the dealership.' },
       { q: 'How long should my auto loan be?', a: 'Financial experts recommend 48-60 months maximum. Longer terms cost more in total interest and risk negative equity.' },
       { q: 'Should I put money down?', a: 'Yes. Aim for at least 20% down on a new car. It reduces your loan amount, monthly payment, and total interest paid.' },
       { q: 'What is the 20/4/10 rule for car buying?', a: '20% down, finance for no more than 4 years, total vehicle costs under 10% of gross monthly income.' },

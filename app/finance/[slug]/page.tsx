@@ -10,6 +10,8 @@ import FaqSection from '@/components/content/FaqSection'
 import RelatedGrid from '@/components/content/RelatedGrid'
 import JsonLd from '@/components/content/JsonLd'
 import GeoBlock from '@/components/content/GeoBlock'
+import Disclaimer from '@/components/content/Disclaimer'
+import EducationalBlock from '@/components/content/EducationalBlock'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -24,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const calc = getCalculator(slug)
   if (!calc) return {}
   return {
-    title: `${calc.title} — Free Online Calculator`,
+    title: `${calc.title} — Free Online Calculator | No Sign-Up Required`,
     description: calc.description,
     alternates: { canonical: `https://calculatorz.tools/finance/${slug}` },
     openGraph: {
@@ -47,7 +49,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     headline: calc.title,
     description: calc.description,
     dateModified: '2026-04-14',
-    author: { '@type': 'Organization', name: 'CalcFlow Editorial' },
+    author: { '@type': 'Organization', name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about' },
     publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
   }
 
@@ -82,12 +84,24 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     ],
   }
 
+  const calculatorSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    applicationCategory: 'FinanceApplication',
+    name: calc.title,
+    description: calc.description,
+    url: `https://calculatorz.tools/${calc.category}/${slug}`,
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  }
+
   return (
     <>
       <JsonLd schema={articleSchema} />
       <JsonLd schema={faqSchema} />
       <JsonLd schema={howToSchema} />
       <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={calculatorSchema} />
 
       <AdZone zone={0} />
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -101,8 +115,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
           <span className="text-[#1A1F36] font-medium truncate">{calc.title}</span>
         </nav>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="flex-1 min-w-0">
+        <div>
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 mb-6">
               <h1 className="text-2xl md:text-3xl font-extrabold text-[#1A1F36] mb-1">{calc.title}</h1>
               <p className="text-[#6B7280] text-sm mb-1">{calc.description}</p>
@@ -110,10 +123,10 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
             </div>
 
             <CalculatorLoader slug={slug} />
+            <Disclaimer />
 
             {calc.geo && <GeoBlock geo={calc.geo} calculatorTitle={calc.title} />}
-
-            <AdZone zone={2} className="mt-6" />
+            {calc.educational && <EducationalBlock educational={calc.educational} title={calc.title} />}
 
             <div className="mt-6">
               <h2 className="text-xl font-bold text-[#1A1F36] mb-3">How to Use</h2>
@@ -127,16 +140,8 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
             <FormulaBox formula={calc.formula} />
             <RefTable table={calc.content.refTable} />
 
-            <AdZone zone={3} className="mt-6" />
-
             <FaqSection faqs={calc.content.faqs} />
             <RelatedGrid slugs={calc.content.related} currentCategory="finance" />
-          </div>
-
-          <aside className="hidden lg:flex flex-col gap-5 w-[268px] shrink-0">
-            <AdZone zone={4} />
-            <AdZone zone={5} />
-          </aside>
         </div>
       </div>
     </>

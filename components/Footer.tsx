@@ -14,7 +14,7 @@ export default function Footer() {
               Every number, answered. Free calculators for finance, health, and everyday decisions.
             </p>
             <div className="flex flex-wrap gap-2">
-              {['No Ads on Pro', 'No Sign-Up', '100% Free'].map(badge => (
+              {['No Tracking', 'No Sign-Up', '100% Free'].map(badge => (
                 <span
                   key={badge}
                   className="text-[11px] px-2.5 py-1 rounded"
@@ -94,6 +94,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 ['About', '/about'],
+                ['Editorial Standards', '/editorial-standards'],
                 ['Privacy Policy', '/privacy'],
                 ['Terms of Use', '/terms'],
                 ['Contact', '/contact'],
