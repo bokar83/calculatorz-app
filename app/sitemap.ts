@@ -19,6 +19,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/health`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/privacy`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/terms`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/about`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.7 },
+    { url: `${BASE}/contact`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.5 },
+    { url: `${BASE}/editorial-standards`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.6 },
     ...calcs,
   ]
 }
