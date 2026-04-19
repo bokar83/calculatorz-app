@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${calc.title} — Free Online Calculator | No Sign-Up Required`,
     description: calc.description,
     alternates: { canonical: `https://calculatorz.tools/finance/${slug}` },
+    authors: [{ name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about' }],
+    other: {
+      'article:author': 'CalcFlow Editorial Team',
+      'article:modified_time': '2026-04-19',
+    },
     openGraph: {
       title: `${calc.title} — Free Online Calculator | CalcFlow`,
       description: calc.description,
@@ -119,7 +124,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 mb-6">
               <h1 className="text-2xl md:text-3xl font-extrabold text-[#1A1F36] mb-1">{calc.title}</h1>
               <p className="text-[#6B7280] text-sm mb-1">{calc.description}</p>
-              <p className="text-xs text-[#9CA3AF]">Updated {calc.updatedDate} &middot; CalcFlow Editorial</p>
+              <p className="text-xs text-[#9CA3AF]"><time dateTime="2026-04-19">Updated {calc.updatedDate}</time> &middot; CalcFlow Editorial</p>
             </div>
 
             <CalculatorLoader slug={slug} />

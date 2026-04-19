@@ -147,7 +147,7 @@ export const bmi: CalculatorConfig = {
     partner: 'Noom',
     label: 'Ready to move toward a healthier BMI?',
     url: 'https://www.noom.com',
-    description: 'Noom uses psychology-based coaching to help you build lasting habits. 14-day free trial available.',
+    description: 'Noom uses psychology-based coaching to help you build lasting habits. 14-day free trial available. (Note: CalcFlow earns a commission if you sign up through this link.)',
   },
   educational: {
     explainer: `BMI, or Body Mass Index, is a simple ratio of your weight to your height squared. It was designed in the 1830s as a population-level statistical tool, not as a medical diagnostic for individuals, and that context matters when reading your result. The calculation is the same for everyone: weight in kilograms divided by height in meters squared. A BMI between 18.5 and 24.9 is considered healthy for most adults. Below 18.5 is underweight. Between 25 and 29.9 is overweight. Above 30 is classified as obese. BMI is useful as a quick, free screening tool that flags potential weight-related health risks. Its main limitation is that it cannot distinguish between fat and muscle, so a very muscular person may have an "overweight" BMI while having excellent metabolic health, while someone with a "normal" BMI but very little muscle and high visceral fat may still face health risks. Use it as a starting point, not a verdict.`,

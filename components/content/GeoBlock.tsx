@@ -5,12 +5,7 @@ interface GeoBlockProps {
   calculatorTitle: string
 }
 
-/**
- * GEO (Generative Engine Optimization) content block.
- * Surfaces the definition, rule of thumb, worked example, and key facts
- * in a format that LLMs (ChatGPT, Perplexity, Claude, Gemini) pull for citations.
- * Also improves traditional SEO: adds semantic depth, LSI keywords, and structured facts.
- */
+/* Content block: definition, key facts, and worked examples. */
 export default function GeoBlock({ geo, calculatorTitle }: GeoBlockProps) {
   return (
     <section className="mt-6 space-y-3" aria-label={`About the ${calculatorTitle}`}>

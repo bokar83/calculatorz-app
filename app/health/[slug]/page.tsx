@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${calc.title} — Free Online Calculator | No Sign-Up Required`,
     description: calc.description,
     alternates: { canonical: `https://calculatorz.tools/health/${slug}` },
+    authors: [{ name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about' }],
+    other: {
+      'article:author': 'CalcFlow Editorial Team',
+      'article:modified_time': '2026-04-19',
+    },
     openGraph: {
       title: `${calc.title} — Free Online Calculator | CalcFlow`,
       description: calc.description,
@@ -119,10 +124,14 @@ export default async function HealthCalculatorPage({ params }: PageProps) {
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 mb-6">
               <h1 className="text-2xl md:text-3xl font-extrabold text-[#1A1F36] mb-1">{calc.title}</h1>
               <p className="text-[#6B7280] text-sm mb-1">{calc.description}</p>
-              <p className="text-xs text-[#9CA3AF]">Updated {calc.updatedDate} &middot; CalcFlow Editorial</p>
+              <p className="text-xs text-[#9CA3AF]"><time dateTime="2026-04-19">Updated {calc.updatedDate}</time> &middot; CalcFlow Editorial</p>
             </div>
 
             <CalculatorLoader slug={slug} />
+            <div className="mt-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-4">
+              <p className="text-[13px] font-semibold text-amber-900 mb-1">Medical Disclaimer</p>
+              <p className="text-[13px] text-amber-800 leading-relaxed">These calculators provide estimates for informational purposes only and do not constitute medical advice. Always consult a qualified healthcare provider before making health or medical decisions.</p>
+            </div>
             <Disclaimer />
 
             {calc.geo && <GeoBlock geo={calc.geo} calculatorTitle={calc.title} />}
