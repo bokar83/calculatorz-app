@@ -72,11 +72,22 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     })),
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
+      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance' },
+      { '@type': 'ListItem', position: 3, name: calc.title, item: `https://calculatorz.tools/finance/${slug}` },
+    ],
+  }
+
   return (
     <>
       <JsonLd schema={articleSchema} />
       <JsonLd schema={faqSchema} />
       <JsonLd schema={howToSchema} />
+      <JsonLd schema={breadcrumbSchema} />
 
       <AdZone zone={0} />
       <div className="max-w-7xl mx-auto px-4 py-6">

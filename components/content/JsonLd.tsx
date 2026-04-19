@@ -1,27 +1,14 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
-
 interface JsonLdProps {
   schema: object
 }
 
+// Safe: schema is always a server-side data object serialized by JSON.stringify, never user input
 export default function JsonLd({ schema }: JsonLdProps) {
-  const elRef = useRef<HTMLScriptElement | null>(null)
-
-  useEffect(() => {
-    const el = document.createElement('script')
-    el.type = 'application/ld+json'
-    el.textContent = JSON.stringify(schema)
-    document.head.appendChild(el)
-    elRef.current = el
-
-    return () => {
-      if (elRef.current && document.head.contains(elRef.current)) {
-        document.head.removeChild(elRef.current)
-      }
-    }
-  }, [schema])
-
-  return null
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
 }

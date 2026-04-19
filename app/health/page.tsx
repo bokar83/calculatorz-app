@@ -1,10 +1,35 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCalculatorsByCategory } from '@/lib/registry'
+import JsonLd from '@/components/content/JsonLd'
 
 export const metadata: Metadata = {
   title: 'Health Calculators — Free Online Tools',
   description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
+  alternates: { canonical: 'https://calculatorz.tools/health' },
+  openGraph: {
+    title: 'Health Calculators — Free Online Tools | CalcFlow',
+    description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
+    url: 'https://calculatorz.tools/health',
+    type: 'website',
+    siteName: 'CalcFlow',
+  },
+}
+
+const healthCollectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Health Calculators',
+  description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
+  url: 'https://calculatorz.tools/health',
+  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
+      { '@type': 'ListItem', position: 2, name: 'Health Calculators', item: 'https://calculatorz.tools/health' },
+    ],
+  },
 }
 
 export default function HealthPage() {
@@ -12,6 +37,7 @@ export default function HealthPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+      <JsonLd schema={healthCollectionSchema} />
       <nav className="text-sm text-[#6B7280] mb-6">
         <Link href="/" className="hover:text-[#0F766E]">Home</Link>
         <span className="mx-2">/</span>

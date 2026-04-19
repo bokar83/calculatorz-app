@@ -1,10 +1,35 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCalculatorsByCategory } from '@/lib/registry'
+import JsonLd from '@/components/content/JsonLd'
 
 export const metadata: Metadata = {
   title: 'Finance Calculators — Free Online Tools',
   description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more. Fast and accurate.',
+  alternates: { canonical: 'https://calculatorz.tools/finance' },
+  openGraph: {
+    title: 'Finance Calculators — Free Online Tools | CalcFlow',
+    description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more. Fast and accurate.',
+    url: 'https://calculatorz.tools/finance',
+    type: 'website',
+    siteName: 'CalcFlow',
+  },
+}
+
+const financeCollectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Finance Calculators',
+  description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more.',
+  url: 'https://calculatorz.tools/finance',
+  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
+      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance' },
+    ],
+  },
 }
 
 export default function FinancePage() {
@@ -12,6 +37,7 @@ export default function FinancePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+      <JsonLd schema={financeCollectionSchema} />
       <nav className="text-sm text-[#6B7280] mb-6">
         <Link href="/" className="hover:text-[#0F766E]">Home</Link>
         <span className="mx-2">/</span>

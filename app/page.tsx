@@ -5,10 +5,19 @@ import AdZone from '@/components/AdZone'
 import HeroCalculator from '@/components/HeroCalculator'
 import MortgageWidget from '@/components/MortgageWidget'
 import BMIWidget from '@/components/BMIWidget'
+import JsonLd from '@/components/content/JsonLd'
 
 export const metadata: Metadata = {
   title: 'CalcFlow — Free Online Calculators for Finance and Health',
   description: 'Free online calculators for salary, loans, mortgages, BMI, calories, and more. Fast, accurate, mobile-friendly.',
+  alternates: { canonical: 'https://calculatorz.tools' },
+  openGraph: {
+    title: 'CalcFlow — Free Online Calculators for Finance and Health',
+    description: 'Free online calculators for salary, loans, mortgages, BMI, calories, and more. Fast, accurate, mobile-friendly.',
+    url: 'https://calculatorz.tools',
+    type: 'website',
+    siteName: 'CalcFlow',
+  },
 }
 
 // Ordered by traffic volume (high → low)
@@ -39,12 +48,31 @@ const trustItems = [
   { icon: '🆓', text: '100% free forever' },
 ]
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CalcFlow',
+  url: 'https://calculatorz.tools',
+  description: 'Free online calculators for finance and health. Over 40 tools, mobile-friendly, no sign-up required.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'CalcFlow',
+    url: 'https://calculatorz.tools',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://calculatorz.tools/finance/{search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+}
+
 export default function HomePage() {
   const financeCalcs = getCalculatorsByCategory('finance')
   const healthCalcs = getCalculatorsByCategory('health')
 
   return (
     <>
+      <JsonLd schema={websiteSchema} />
       {/* HERO */}
       <section
         className="relative overflow-hidden px-4 sm:px-8 py-10 sm:py-14"
