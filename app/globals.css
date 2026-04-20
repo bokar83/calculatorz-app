@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@source "../components/**/*.{ts,tsx}";
+@source "../app/**/*.{ts,tsx}";
+@source "../lib/**/*.{ts,tsx}";
 
 @theme {
   --color-teal: #0F766E;
