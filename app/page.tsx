@@ -7,6 +7,8 @@ import MortgageWidget from '@/components/MortgageWidget'
 import BMIWidget from '@/components/BMIWidget'
 import JsonLd from '@/components/content/JsonLd'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
   title: 'CalcFlow — Free Online Calculators for Finance and Health',
   description: 'Free online calculators for salary, loans, mortgages, BMI, calories, and more. Fast, accurate, mobile-friendly.',
