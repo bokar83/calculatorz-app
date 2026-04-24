@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Privacy Policy — CalcFlow',
   description: 'CalcFlow privacy policy covering data collection, cookies, advertising, and your rights.',
+  alternates: { canonical: 'https://calculatorz.tools/privacy/' },
 }
 
 export default function PrivacyPage() {

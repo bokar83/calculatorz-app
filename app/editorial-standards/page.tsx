@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Editorial Standards — CalcFlow',
   description: 'How CalcFlow builds, tests, fact-checks, and maintains every calculator and educational guide on the site.',
+  alternates: { canonical: 'https://calculatorz.tools/editorial-standards/' },
 }
 
 export default function EditorialStandardsPage() {

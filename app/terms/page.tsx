@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Terms of Use — CalcFlow',
   description: 'CalcFlow terms of use covering calculator accuracy, disclaimers, intellectual property, and acceptable use.',
+  alternates: { canonical: 'https://calculatorz.tools/terms/' },
 }
 
 export default function TermsPage() {

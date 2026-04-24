@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${calc.title} — Free Online Calculator | No Sign-Up Required`,
     description: calc.description,
-    alternates: { canonical: `https://calculatorz.tools/finance/${slug}` },
-    authors: [{ name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about' }],
+    alternates: { canonical: `https://calculatorz.tools/finance/${slug}/` },
+    authors: [{ name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about/' }],
     other: {
       'article:author': 'CalcFlow Editorial Team',
       'article:modified_time': '2026-04-19',
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${calc.title} — Free Online Calculator | CalcFlow`,
       description: calc.description,
-      url: `https://calculatorz.tools/finance/${slug}`,
+      url: `https://calculatorz.tools/finance/${slug}/`,
       type: 'website',
     },
   }
@@ -54,8 +54,8 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     headline: calc.title,
     description: calc.description,
     dateModified: '2026-04-14',
-    author: { '@type': 'Organization', name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about' },
-    publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
+    author: { '@type': 'Organization', name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about/' },
+    publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools/' },
   }
 
   const faqSchema = {
@@ -83,9 +83,9 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
-      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance' },
-      { '@type': 'ListItem', position: 3, name: calc.title, item: `https://calculatorz.tools/finance/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools/' },
+      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance/' },
+      { '@type': 'ListItem', position: 3, name: calc.title, item: `https://calculatorz.tools/finance/${slug}/` },
     ],
   }
 
@@ -95,7 +95,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     applicationCategory: 'FinanceApplication',
     name: calc.title,
     description: calc.description,
-    url: `https://calculatorz.tools/${calc.category}/${slug}`,
+    url: `https://calculatorz.tools/${calc.category}/${slug}/`,
     operatingSystem: 'Web',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   }

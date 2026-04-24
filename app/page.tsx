@@ -12,11 +12,11 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'CalcFlow — Free Online Calculators for Finance and Health',
   description: 'Free online calculators for salary, loans, mortgages, BMI, calories, and more. Fast, accurate, mobile-friendly.',
-  alternates: { canonical: 'https://calculatorz.tools' },
+  alternates: { canonical: 'https://calculatorz.tools/' },
   openGraph: {
     title: 'CalcFlow — Free Online Calculators for Finance and Health',
     description: 'Free online calculators for salary, loans, mortgages, BMI, calories, and more. Fast, accurate, mobile-friendly.',
-    url: 'https://calculatorz.tools',
+    url: 'https://calculatorz.tools/',
     type: 'website',
     siteName: 'CalcFlow',
   },
@@ -54,12 +54,12 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'CalcFlow',
-  url: 'https://calculatorz.tools',
+  url: 'https://calculatorz.tools/',
   description: 'Free online calculators for finance and health. Over 40 tools, mobile-friendly, no sign-up required.',
   publisher: {
     '@type': 'Organization',
     name: 'CalcFlow',
-    url: 'https://calculatorz.tools',
+    url: 'https://calculatorz.tools/',
   },
   potentialAction: {
     '@type': 'SearchAction',

@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           '@context': 'https://schema.org',
           '@type': 'Organization',
           name: 'CalcFlow',
-          url: 'https://calculatorz.tools',
+          url: 'https://calculatorz.tools/',
           logo: 'https://calculatorz.tools/icon.png',
           description: 'Free online calculators for finance and health, paired with plain-English education to help you understand your numbers.',
           contactPoint: {
