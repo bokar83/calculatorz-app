@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'About CalcFlow — Built for People Who Deserve More Than a Number',
   description: 'CalcFlow was built out of frustration with bare calculator sites. Every tool ships with plain-English explanations, real examples, and practical guidance.',
+  alternates: { canonical: 'https://calculatorz.tools/about/' },
 }
 
 export default function AboutPage() {

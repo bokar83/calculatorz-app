@@ -7,21 +7,21 @@ const BASE = 'https://calculatorz.tools'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const calcs = getAllSlugs().map(({ slug, category }) => ({
-    url: `${BASE}/${category}/${slug}`,
+    url: `${BASE}/${category}/${slug}/`,
     lastModified: new Date('2026-04-15'),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
 
   return [
-    { url: BASE, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${BASE}/finance`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/health`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/privacy`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/terms`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/about`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.7 },
-    { url: `${BASE}/contact`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.5 },
-    { url: `${BASE}/editorial-standards`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.6 },
+    { url: `${BASE}/`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE}/finance/`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/health/`, lastModified: new Date('2026-04-15'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/privacy/`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/terms/`, lastModified: new Date('2026-04-15'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/about/`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.7 },
+    { url: `${BASE}/contact/`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.5 },
+    { url: `${BASE}/editorial-standards/`, lastModified: new Date('2026-04-19'), changeFrequency: 'yearly' as const, priority: 0.6 },
     ...calcs,
   ]
 }

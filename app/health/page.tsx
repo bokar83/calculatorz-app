@@ -6,11 +6,11 @@ import JsonLd from '@/components/content/JsonLd'
 export const metadata: Metadata = {
   title: 'Health Calculators — Free Online Tools',
   description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
-  alternates: { canonical: 'https://calculatorz.tools/health' },
+  alternates: { canonical: 'https://calculatorz.tools/health/' },
   openGraph: {
     title: 'Health Calculators — Free Online Tools | CalcFlow',
     description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
-    url: 'https://calculatorz.tools/health',
+    url: 'https://calculatorz.tools/health/',
     type: 'website',
     siteName: 'CalcFlow',
   },
@@ -21,13 +21,13 @@ const healthCollectionSchema = {
   '@type': 'CollectionPage',
   name: 'Health Calculators',
   description: 'Free health calculators for BMI, calories, body fat, ideal weight, water intake, sleep, and more.',
-  url: 'https://calculatorz.tools/health',
-  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
+  url: 'https://calculatorz.tools/health/',
+  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools/' },
   breadcrumb: {
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
-      { '@type': 'ListItem', position: 2, name: 'Health Calculators', item: 'https://calculatorz.tools/health' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools/' },
+      { '@type': 'ListItem', position: 2, name: 'Health Calculators', item: 'https://calculatorz.tools/health/' },
     ],
   },
 }

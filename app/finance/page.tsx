@@ -6,11 +6,11 @@ import JsonLd from '@/components/content/JsonLd'
 export const metadata: Metadata = {
   title: 'Finance Calculators — Free Online Tools',
   description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more. Fast and accurate.',
-  alternates: { canonical: 'https://calculatorz.tools/finance' },
+  alternates: { canonical: 'https://calculatorz.tools/finance/' },
   openGraph: {
     title: 'Finance Calculators — Free Online Tools | CalcFlow',
     description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more. Fast and accurate.',
-    url: 'https://calculatorz.tools/finance',
+    url: 'https://calculatorz.tools/finance/',
     type: 'website',
     siteName: 'CalcFlow',
   },
@@ -21,13 +21,13 @@ const financeCollectionSchema = {
   '@type': 'CollectionPage',
   name: 'Finance Calculators',
   description: 'Free finance calculators for salary, loans, mortgage, compound interest, tax, savings, and more.',
-  url: 'https://calculatorz.tools/finance',
-  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools' },
+  url: 'https://calculatorz.tools/finance/',
+  publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools/' },
   breadcrumb: {
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools' },
-      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools/' },
+      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance/' },
     ],
   },
 }

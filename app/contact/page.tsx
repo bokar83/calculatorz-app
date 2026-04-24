@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Contact CalcFlow — Questions, Feedback, and Support',
   description: 'Contact the CalcFlow team with questions, calculator feedback, error reports, or suggestions.',
+  alternates: { canonical: 'https://calculatorz.tools/contact/' },
 }
 
 export default function ContactPage() {
