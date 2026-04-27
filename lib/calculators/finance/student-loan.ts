@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 export const studentLoan: CalculatorConfig = {
   slug: 'student-loan',
@@ -51,6 +51,12 @@ export const studentLoan: CalculatorConfig = {
       { q: 'Should I pay off student loans early?', a: 'It depends on your interest rate versus potential investment returns.' },
     ],
     related: ['loan-payment', 'personal-loan', 'debt-payoff', 'debt-to-income', 'salary-to-hourly', 'income-tax'],
+  },
+  affiliate: {
+    partner: 'Credible',
+    label: 'Refinance your student loans and save',
+    url: 'https://www.credible.com/refinance-student-loans',
+    description: 'Compare real rates from multiple lenders in 2 minutes. No impact to your credit score.',
   },
   geo: {
     definition: 'A student loan calculator estimates the monthly payment and total repayment cost for federal or private student loans, applying standard amortization math to the loan balance, interest rate, and repayment term chosen from the available federal or private repayment plan options.',

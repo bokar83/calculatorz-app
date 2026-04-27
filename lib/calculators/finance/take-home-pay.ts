@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 // 2025 US Federal Tax Brackets (single filer)
 const BRACKETS_SINGLE = [
@@ -98,6 +98,12 @@ export const takeHomePay: CalculatorConfig = {
       { q: 'Does this include 401k contributions?', a: 'Pre-tax contributions reduce your taxable income and affect take-home pay.' },
     ],
     related: ['salary-to-hourly', 'hourly-to-salary', 'income-tax', 'raise-calculator', 'salary-comparison', 'retirement-savings'],
+  },
+  affiliate: {
+    partner: 'SoFi',
+    label: 'Earn more on every paycheck with SoFi',
+    url: 'https://www.sofi.com/banking/',
+    description: 'High-yield savings and no-fee checking. Get more from the money you take home.',
   },
   jsonLd: {
     faqs: [

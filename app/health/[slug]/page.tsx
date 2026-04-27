@@ -12,6 +12,7 @@ import JsonLd from '@/components/content/JsonLd'
 import GeoBlock from '@/components/content/GeoBlock'
 import Disclaimer from '@/components/content/Disclaimer'
 import EducationalBlock from '@/components/content/EducationalBlock'
+import AffiliateCard from '@/components/content/AffiliateCard'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -133,6 +134,7 @@ export default async function HealthCalculatorPage({ params }: PageProps) {
               <p className="text-[13px] text-amber-800 leading-relaxed">These calculators provide estimates for informational purposes only and do not constitute medical advice. Always consult a qualified healthcare provider before making health or medical decisions.</p>
             </div>
             <Disclaimer />
+            {calc.affiliate && <AffiliateCard affiliate={calc.affiliate} />}
 
             {calc.geo && <GeoBlock geo={calc.geo} calculatorTitle={calc.title} />}
             {calc.educational && <EducationalBlock educational={calc.educational} title={calc.title} />}

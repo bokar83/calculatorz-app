@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 const ACTIVITY_MULTIPLIERS: Record<string, number> = {
   sedentary: 1.2,
@@ -107,6 +107,12 @@ export const bmrCalories: CalculatorConfig = {
       'Eating back all exercise calories. Many fitness apps add exercise calories back to your daily budget, but people consistently overestimate calories burned during workouts. This often erases the deficit entirely.',
     ],
     example: `Nina is a 32-year-old woman, 145 lbs, 5\'5", working out 3 days per week. The Mifflin-St Jeor equation gives her a BMR of 1,471 kcal/day. At the "light" activity multiplier (1.375), her TDEE is 2,023 kcal/day. To lose 1 pound per week, she targets 1,523 kcal/day. After 12 weeks at a consistent 500-calorie daily deficit, she can expect to lose approximately 12 pounds, assuming no changes in activity and accurate tracking.`,
+  },
+  affiliate: {
+    partner: 'MyFitnessPal',
+    label: 'Track your calories with MyFitnessPal',
+    url: 'https://www.myfitnesspal.com',
+    description: 'The largest food database online. Log meals, track macros, and hit your goals.',
   },
   geo: {
     definition:

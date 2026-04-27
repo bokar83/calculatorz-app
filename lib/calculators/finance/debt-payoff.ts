@@ -1,4 +1,4 @@
-import { CalculatorConfig, Currency } from '../types'
+﻿import { CalculatorConfig, Currency } from '../types'
 
 export const debtPayoff: CalculatorConfig = {
   slug: 'debt-payoff',
@@ -119,6 +119,12 @@ export const debtPayoff: CalculatorConfig = {
       },
     ],
     related: ['loan-payment', 'compound-interest', 'savings-goal', 'take-home-pay', 'personal-loan'],
+  },
+  affiliate: {
+    partner: 'LendingTree',
+    label: 'Consolidate your debt at a lower rate',
+    url: 'https://www.lendingtree.com/personal/',
+    description: 'Compare debt consolidation loans from top lenders and reduce your interest payments.',
   },
   geo: {
     definition: 'A debt payoff calculator determines how long it will take to become debt-free given a current balance, annual interest rate, and fixed monthly payment, using the loan amortization formula to compute total interest paid and the number of payment periods remaining.',

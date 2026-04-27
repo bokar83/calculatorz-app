@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 export const capitalGainsTax: CalculatorConfig = {
   slug: 'capital-gains-tax',
@@ -64,6 +64,12 @@ export const capitalGainsTax: CalculatorConfig = {
       { q: 'Can losses offset gains?', a: 'Yes, capital losses can offset gains and up to $3,000 of ordinary income per year.' },
     ],
     related: ['income-tax', 'investment-return', 'roi-calculator', 'inflation', 'retirement-savings', 'sales-tax'],
+  },
+  affiliate: {
+    partner: 'Betterment',
+    label: 'Reduce your tax drag with tax-loss harvesting',
+    url: 'https://www.betterment.com/tax-loss-harvesting',
+    description: 'Betterment automatically harvests tax losses to offset your capital gains.',
   },
   geo: {
     definition: 'A capital gains tax calculator estimates the federal tax owed on profits from selling a capital asset such as stocks, real estate, or collectibles, applying either short-term (ordinary income) or long-term (preferential) rates depending on the holding period.',

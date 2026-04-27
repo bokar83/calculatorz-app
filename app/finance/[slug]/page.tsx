@@ -12,6 +12,7 @@ import JsonLd from '@/components/content/JsonLd'
 import GeoBlock from '@/components/content/GeoBlock'
 import Disclaimer from '@/components/content/Disclaimer'
 import EducationalBlock from '@/components/content/EducationalBlock'
+import AffiliateCard from '@/components/content/AffiliateCard'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -129,6 +130,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
 
             <CalculatorLoader slug={slug} />
             <Disclaimer />
+            {calc.affiliate && <AffiliateCard affiliate={calc.affiliate} />}
 
             {calc.geo && <GeoBlock geo={calc.geo} calculatorTitle={calc.title} />}
             {calc.educational && <EducationalBlock educational={calc.educational} title={calc.title} />}

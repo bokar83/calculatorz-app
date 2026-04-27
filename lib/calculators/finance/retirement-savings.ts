@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 export const retirementSavings: CalculatorConfig = {
   slug: 'retirement-savings',
@@ -96,6 +96,12 @@ export const retirementSavings: CalculatorConfig = {
       'Not accounting for Required Minimum Distributions (RMDs). Traditional 401(k) and IRA accounts require mandatory withdrawals starting at age 73, which affects your tax planning in retirement.',
     ],
     example: `Carlos is 35 years old with $40,000 saved. He contributes $600/month to his 401(k) and expects 7% average annual returns. The calculator projects he will have about $922,000 by age 65. Inflation-adjusted to today's dollars at 3% inflation, that is worth about $380,000 in current purchasing power. At the 4% withdrawal rule, his savings can support about $3,067/month in nominal retirement income, or roughly $1,267/month in today's dollars. He will need Social Security and possibly other income to hit his target retirement lifestyle.`,
+  },
+  affiliate: {
+    partner: 'Betterment',
+    label: 'Grow your retirement savings with Betterment',
+    url: 'https://www.betterment.com/retirement',
+    description: 'Automated IRA and 401(k) rollover investing. Set your target and let it compound.',
   },
   geo: {
     definition:

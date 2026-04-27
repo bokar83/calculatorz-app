@@ -1,4 +1,4 @@
-import { CalculatorConfig, Currency } from '../types'
+﻿import { CalculatorConfig, Currency } from '../types'
 
 export const investmentReturn: CalculatorConfig = {
   slug: 'investment-return',
@@ -89,6 +89,12 @@ export const investmentReturn: CalculatorConfig = {
       },
     ],
     related: ['compound-interest', 'retirement-savings', 'savings-goal', 'capital-gains-tax', '401k-calculator'],
+  },
+  affiliate: {
+    partner: 'Betterment',
+    label: 'Put your investment returns to work',
+    url: 'https://www.betterment.com/investing',
+    description: 'Automated, diversified portfolios designed to maximize long-term returns.',
   },
   geo: {
     definition: 'An investment return calculator projects the future value of an investment given an initial amount, regular contributions, expected annual return rate, and time horizon, using the future value of an annuity due formula to account for the compounding effect of periodic contributions.',

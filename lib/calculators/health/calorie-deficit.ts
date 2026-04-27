@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+﻿import { CalculatorConfig } from '../types'
 
 const ACTIVITY_MULT: Record<string, number> = {
   sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, very_active: 1.9,
@@ -72,6 +72,12 @@ export const calorieDeficit: CalculatorConfig = {
       { q: 'How fast is safe weight loss?', a: '1-2 pounds per week is considered safe and sustainable.' },
     ],
     related: ['bmr-calories', 'bmi', 'body-fat', 'ideal-body-weight', 'water-intake', 'heart-rate-zones'],
+  },
+  affiliate: {
+    partner: 'Noom',
+    label: 'Turn your deficit into lasting weight loss with Noom',
+    url: 'https://www.noom.com',
+    description: 'Psychology-based weight loss with personalized coaching and meal tracking.',
   },
   geo: {
     definition: 'A calorie deficit calculator determines the daily energy shortfall needed to achieve a target weight loss rate, by computing total daily energy expenditure (TDEE) from BMR and activity level, then subtracting the deficit corresponding to the desired weekly loss.',
