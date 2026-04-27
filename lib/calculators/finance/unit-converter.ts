@@ -228,6 +228,21 @@ export const unitConverter: CalculatorConfig = {
     ],
     related: ['percentage', 'bmi', 'water-intake', 'ideal-body-weight', 'percentage-change'],
   },
+  educational: {
+    explainer: 'Unit conversion is a precision skill with real consequences when done incorrectly. The United States is one of only three countries that have not formally adopted the International System of Units (SI), or metric system, alongside Myanmar and Liberia (National Institute of Standards and Technology). This creates daily friction for Americans working in medicine, science, international trade, or travel. In healthcare, drug dosing is almost universally calculated in metric units: milligrams per kilogram of body weight. A patient\'s weight in pounds must be accurately converted to kilograms before computing a safe medication dose, and a rounding error in that conversion can result in under-dosing or overdose. In cooking and food manufacturing, fluid ounces measure volume while ounces also measure weight, a distinction that catches most people off guard because the names are identical. In international trade, a shipment quoted in metric tons is not equivalent to US short tons (1 metric ton = 2,204.6 lbs vs. 1 US ton = 2,000 lbs). Temperature conversion involves both a scale factor and an offset, making it non-linear: you cannot simply multiply Celsius by a factor to get Fahrenheit; you must apply the full formula (F = C x 9/5 + 32).',
+    tips: [
+      'Memorize the five most-used conversion anchors: 1 inch = 2.54 cm exactly, 1 kg = 2.205 lbs, 1 mile = 1.609 km, 1 US gallon = 3.785 liters, and 0 degrees C = 32 degrees F. These seven relationships cover 80% of everyday conversion needs.',
+      'For temperature, remember two landmarks: water freezes at 0 degrees C (32 degrees F) and body temperature is approximately 37 degrees C (98.6 degrees F). Use these to sanity-check direction before accepting a conversion result.',
+      'Never assume "gallon" means the same thing internationally. A UK Imperial gallon is 4.546 liters versus a US gallon of 3.785 liters. Fuel economy comparisons between US mpg and UK mpg are meaningless without accounting for this 20% difference in gallon size.',
+      'For weight-based medication or supplement dosing, always use the exact kg figure rather than a rounded estimate. A 185-pound patient is 83.91 kg, not "about 84 kg." At 1 mg/kg dosing, the difference between 83 and 84 kg is a full milligram per dose.',
+    ],
+    commonMistakes: [
+      'Confusing fluid ounces with weight ounces. A fluid ounce is a unit of volume (29.57 mL); a weight ounce is a unit of mass (28.35 grams). One cup of water happens to weigh close to 8 ounces, but one cup of honey weighs roughly 12 ounces because density differs.',
+      'Using US gallons when UK gallons are specified, or vice versa. Because a UK gallon is about 20% larger than a US gallon, a recipe, fuel calculation, or trade shipment using the wrong gallon definition introduces a systematic 20% error in every line item.',
+      'Applying the Celsius-to-Fahrenheit conversion in the wrong direction or forgetting the +32 offset. Multiplying Celsius by 1.8 without adding 32, or adding 32 without scaling, are the two most common temperature conversion errors, and both produce results that can differ from the correct answer by dozens of degrees.',
+    ],
+    example: 'Sarah is a nurse administering a weight-based antibiotic. The patient, James, weighs 185 lbs. The prescribed dose is 15 mg/kg. Step 1: convert weight. 185 lbs x 0.453592 = 83.91 kg. Step 2: calculate dose. 83.91 kg x 15 mg/kg = 1,258.65 mg, rounded to 1,259 mg per the clinical protocol. If Sarah had used a rough estimate of 180 lbs (81.6 kg), the calculated dose would be 1,224 mg, a 35 mg underdose per administration. Over a 7-day course of twice-daily dosing, that imprecision compounds to a 490 mg shortfall in total drug delivery.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How do I convert Celsius to Fahrenheit?', a: 'F = (C x 9/5) + 32. Example: 20°C = 68°F.' },

@@ -73,6 +73,21 @@ export const percentage: CalculatorConfig = {
     ],
     related: ['sales-tax', 'tip-calculator', 'vat-calculator', 'profit-margin', 'roi-calculator', 'inflation'],
   },
+  educational: {
+    explainer: 'Percentage calculations are the foundation of consumer finance, tax math, and investing. Three core problems cover nearly every real-world situation. The first: what is X percent of Y? This answers tip calculations, sales tax, discount amounts, and commission payments. Multiply Y by X and divide by 100. The second: X is what percent of Y? This answers grade scoring, budget allocation, and market share analysis. Divide X by Y and multiply by 100. The third: percent change from A to B? This answers investment returns, salary increases, and inflation comparisons. Subtract A from B, divide by A, multiply by 100. Mental math shortcuts accelerate everyday use. To find 10% of any number, move the decimal one place left. To find 15%, calculate 10% and add half of that. To find 25%, divide by 4. To find 5%, halve the 10% figure. A critical distinction: percentage and percentage points are not the same. When a savings account rate rises from 1% to 2%, it increased by 1 percentage point but doubled in relative terms, a 100% increase in the rate itself. Mixing these up leads to significant misunderstandings in mortgage rate discussions, investment fee comparisons, and inflation reporting.',
+    tips: [
+      'Use the 10/5/1 building block method for fast mental math: find 10% first (move decimal left), then derive 5% (half of 10%) and 1% (a tenth of 10%), then combine to reach any percentage quickly.',
+      'Always double-check advertised discounts by working backward. If a price tag says "was $120, now $84," verify: ($120 - $84) / $120 x 100 = 30% off. Retailers occasionally misrepresent the original price in the markdown calculation.',
+      'Never add percentages directly when calculating compounding markups or stacked discounts. A 10% raise followed by a 10% raise is not a 20% increase; it is 1.1 x 1.1 = 1.21, or a 21% total increase.',
+      'In interest rate discussions, distinguish percentage points from percent change. A mortgage rate moving from 6% to 7% is a 1 percentage point increase but a 16.7% relative increase in your interest cost, a figure that matters when estimating payment changes.',
+    ],
+    commonMistakes: [
+      'Adding percentage increases directly instead of compounding them. Two consecutive 10% raises produce a 21% total increase (1.1 x 1.1), not 20%, because the second raise applies to the already-raised base.',
+      'Not knowing which value is the base for a percent change. Always divide by the starting value (the original, the old, the "before"). Dividing by the new or final value produces a smaller, incorrect result.',
+      'Confusing markup and margin. A 50% markup means cost plus 50% of cost (cost x 1.5). A 50% margin means profit is 50% of the selling price (cost = 50% of price). They produce very different numbers from the same inputs.',
+    ],
+    example: 'James is negotiating a car price. The sticker is $28,000. The dealer offers 8% off. The discount = 8% of $28,000 = $2,240. New price = $25,760. The dealer then offers an additional 3% loyalty discount. That 3% applies to the already-discounted price of $25,760, not the original $28,000. Additional discount = 3% of $25,760 = $772.80. Final price = $24,987.20. If instead both discounts were applied to the original price (8% + 3% = 11% of $28,000), the result would be $24,920, a $67.20 difference in the dealer\'s favor when applying each discount sequentially to the reduced price.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How to find a percentage of a number?', a: 'Multiply by percentage then divide by 100.' },

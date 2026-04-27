@@ -73,6 +73,32 @@ export const calorieDeficit: CalculatorConfig = {
     ],
     related: ['bmr-calories', 'bmi', 'body-fat', 'ideal-body-weight', 'water-intake', 'heart-rate-zones'],
   },
+  geo: {
+    definition: 'A calorie deficit calculator determines the daily energy shortfall needed to achieve a target weight loss rate, by computing total daily energy expenditure (TDEE) from BMR and activity level, then subtracting the deficit corresponding to the desired weekly loss.',
+    ruleOfThumb: 'A 500-calorie daily deficit produces approximately 1 pound of fat loss per week (3,500 calories per pound). A 1,000-calorie daily deficit produces approximately 2 pounds per week, which is the safe maximum recommended by most health authorities.',
+    example: 'Maria weighs 175 lbs, is moderately active, and wants to lose 1 pound per week. Her TDEE is 2,200 calories. Her daily calorie target is 2,200 minus 500 = 1,700 calories, creating a 3,500-calorie weekly deficit.',
+    keyFacts: [
+      'The CDC recommends a weight loss rate of 1 to 2 pounds per week as safe and sustainable for long-term success (CDC, Healthy Weight).',
+      'A 3,500-calorie deficit equals approximately 1 pound of fat; however, research shows this is an approximation that varies with metabolic adaptation (NIH, Hall et al., 2011).',
+      'Very low calorie diets below 800 calories per day are associated with muscle loss, nutrient deficiencies, and gallstone formation without medical supervision (NIH, National Institute of Diabetes).',
+      'Protein intake of 0.7 to 1.0 gram per pound of body weight during a deficit helps preserve lean muscle mass, according to peer-reviewed sports nutrition research (Journal of the International Society of Sports Nutrition).',
+    ],
+  },
+  educational: {
+    explainer: 'A calorie deficit occurs when you consume fewer calories than your body burns in a day. Your total daily energy expenditure (TDEE) combines your basal metabolic rate (BMR), the energy needed for basic organ function at rest, with a multiplier for physical activity. BMR is calculated using the Mifflin-St Jeor equation, which accounts for height, weight, age, and sex. The commonly cited rule that 3,500 calories equals 1 pound of fat is a useful approximation, but actual loss varies because your metabolism adapts as body weight decreases. A 20% deficit from TDEE is generally sustainable and minimizes muscle loss. Extreme deficits accelerate short-term weight loss but trigger metabolic slowdown and increase the risk of regaining weight. Spreading your deficit across both reduced food intake and increased exercise activity preserves lean mass better than diet restriction alone. Recalculating your TDEE every 10 to 15 pounds lost is important because a lighter body burns fewer calories at rest.',
+    tips: [
+      'Use a food scale and a tracking app for the first 2 to 4 weeks; research shows most people underestimate calorie intake by 20 to 40 percent.',
+      'Combine a moderate dietary reduction with regular exercise rather than cutting calories alone to preserve muscle mass and metabolic rate.',
+      'Keep your daily deficit at 500 to 750 calories rather than 1,000 or more; extreme restriction leads to fatigue, muscle loss, and dietary rebound.',
+      'Recalculate your TDEE every 10 to 15 pounds lost, because a lighter body requires fewer calories and your original deficit will shrink over time.',
+    ],
+    commonMistakes: [
+      'Overestimating calories burned during exercise: fitness trackers and cardio machines often overstate burn by 20 to 30 percent, leading people to eat back more than they earned.',
+      'Underestimating calories consumed: cooking oils, condiments, beverages, and bites while cooking are frequently omitted and can add 200 to 500 calories per day.',
+      'Choosing too aggressive a deficit: a deficit greater than 1,000 calories daily often causes muscle loss, hormonal disruption, and metabolic adaptation that makes continued loss harder.',
+    ],
+    example: 'David weighs 210 lbs and wants to lose 50 lbs. His TDEE is approximately 2,600 calories. At a 500-calorie daily deficit (2,100 calories per day), he needs a total reduction of 175,000 calories (50 lbs x 3,500). At 1 pound per week, that is 50 weeks. However, after losing 15 lbs his TDEE drops to roughly 2,450 calories, meaning the same 2,100 calorie intake now only creates a 350-calorie deficit, slowing progress to about 0.7 lbs per week. David should recalculate every 10 to 15 lbs to maintain the 500-calorie gap and stay on pace.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How many calories to lose 1 pound?', a: '3,500 calorie deficit equals approximately 1 pound.' },

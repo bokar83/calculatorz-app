@@ -143,6 +143,21 @@ export const autoLoan: CalculatorConfig = {
     url: 'https://www.lendingtree.com/auto/',
     description: 'Get pre-approved and compare rates from multiple lenders before you visit the dealership.',
   },
+  educational: {
+    explainer: 'An auto loan is a secured installment loan where the vehicle itself is collateral. Your monthly payment is calculated using the amortization formula, meaning early payments are weighted heavily toward interest while later payments chip away at principal. The APR (Annual Percentage Rate) is the true annual cost of borrowing and includes the interest rate plus any lender fees. A seemingly small difference in APR has a large impact: on a $30,000 loan over 60 months, a rate of 5% costs $3,968 in total interest, while 9% costs $7,422, nearly double. Depreciation is the silent cost most buyers ignore. A new car loses roughly 20% of its value in year one and up to 50% by year five, while your loan balance declines much more slowly in the early years due to amortization. This gap is called negative equity or being "underwater," and it is dangerous: if your car is totaled, insurance pays market value, not your loan balance. Evaluating a car purchase financially means comparing the total cost of ownership, including depreciation, insurance, maintenance, and fuel, against alternatives.',
+    tips: [
+      'Follow the 20/4/10 rule: put at least 20% down, keep the loan term to 4 years or fewer, and ensure total monthly vehicle costs (payment plus insurance) stay below 10% of your gross monthly income.',
+      'Get pre-approved by your bank or credit union before visiting a dealership. Pre-approval gives you a rate benchmark and removes the dealer\'s leverage to obscure the true cost by focusing only on monthly payment.',
+      'Watch for dealer financing traps: extended terms (72 or 84 months), payment-based negotiation that hides total price, and add-ons like GAP insurance or extended warranties rolled into the loan at inflated cost.',
+      'Calculate total cost of ownership before signing: add the total interest paid over the loan life to the purchase price, then estimate insurance, fuel, and maintenance to compare vehicles on true lifetime cost, not just sticker price.',
+    ],
+    commonMistakes: [
+      'Focusing only on the monthly payment allows dealers to extend loan terms or increase price while keeping the payment attractive. Always negotiate the vehicle price first, then discuss financing separately.',
+      'Financing a depreciating asset over too long a term means you are likely underwater for most of the loan. A 72-month or 84-month loan on a new car almost guarantees negative equity for the first 3-4 years.',
+      'Skipping pre-approval and relying on dealer financing means you have no rate benchmark and may accept an APR 2-4 points higher than you would qualify for at a bank or credit union.',
+    ],
+    example: 'James buys a $32,000 car with $3,000 down, financing $29,000 at 7.5% APR. On a 72-month term, his monthly payment is $501 and he pays $7,063 in total interest, for a total loan cost of $36,063. If he chooses a 48-month term instead, his payment rises to $704 per month but total interest drops to $4,785, saving $2,278 over the life of the loan. The 48-month option also means he reaches positive equity much faster, reducing his financial exposure if the vehicle is totaled or needs to be sold early.',
+  },
   jsonLd: {
     faqs: [
       { q: 'What is a good interest rate for a car loan?', a: 'Excellent credit (750+) qualifies for 4-6% on new cars. Good credit sees 6-8%. Always get pre-approved before visiting the dealership.' },

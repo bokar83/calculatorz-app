@@ -166,6 +166,21 @@ export const gpaCalculator: CalculatorConfig = {
     ],
     related: ['percentage', 'income-tax', 'hourly-to-salary', 'student-loan', 'savings-goal'],
   },
+  educational: {
+    explainer: 'GPA is a credit-weighted average, meaning a 4-credit course influences your GPA twice as much as a 2-credit elective. The formula multiplies each course grade (on the 4.0 scale) by its credit hours, sums those products, then divides by total credit hours attempted. GPA thresholds carry real financial consequences. A cumulative GPA of 3.5 or higher typically qualifies for Dean\'s List recognition at most universities, which can unlock merit scholarships ranging from partial tuition to full rides. A GPA of 3.0 or above is the standard benchmark for academic good standing, many employer hiring filters, and graduate school application floors. Dropping below 2.0 triggers academic probation at most institutions and can cause loss of financial aid eligibility under the Satisfactory Academic Progress (SAP) standards required by the Department of Education. Graduate school admissions committees at medical, law, and MBA programs use GPA as an initial filter, with competitive programs often screening below 3.5. Beyond academia, certain employers in finance, consulting, and government contracting use GPA cutoffs of 3.0 or 3.5 as a first-round screening criterion.',
+    tips: [
+      'Front-load difficult required courses in your first two years when your cumulative credit count is lower. A strong grade in a 4-credit core course in your freshman year moves your GPA more than the same grade in a senior elective.',
+      'Check whether your institution has a grade replacement or forgiveness policy. Some schools allow you to retake a course and replace the original grade in the GPA calculation, while others average both attempts.',
+      'Choose credit hours strategically when balancing your course load. Taking 18 credits while working part-time dilutes your study time across more courses, increasing the risk of grade drops across the board.',
+      'Understand the math before assuming one good semester will fix a low cumulative GPA. If you have 90 credits completed, you need 30 more credits to graduate. Even a perfect 4.0 in those 30 credits can only move a 2.8 GPA to approximately 3.0.',
+    ],
+    commonMistakes: [
+      'Assuming a strong final-year GPA will rescue a weak cumulative GPA. With 90 credits already locked in, a student needs to score well above their current average across every remaining credit just to approach a meaningful improvement in the cumulative figure.',
+      'Taking an overloaded semester to accelerate graduation without accounting for the grade risk. A single F in a 4-credit course at a 3.2 cumulative GPA can drop the overall average by nearly 0.15 points and trigger academic warning.',
+      'Not checking whether graduate school applications consider all attempts or only the best attempt for repeated courses. Many programs, including most medical school applicants via AMCAS, average all attempts and see every grade, making retakes a visible record rather than a clean slate.',
+    ],
+    example: 'David has completed 90 credit hours with a cumulative GPA of 2.8. His total grade points to date are 90 x 2.8 = 252. He has 30 credits remaining before graduation and needs a cumulative 3.0 to qualify for a merit scholarship. The required total grade points for a 3.0 across 120 credits is 120 x 3.0 = 360. He already has 252, so he needs 360 minus 252 = 108 grade points from his remaining 30 credits. That requires 108 / 30 = 3.6 GPA across all remaining courses, meaning he needs mostly A and A-minus grades for the rest of his degree.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How is GPA calculated?', a: 'Multiply each course grade by its credit hours, sum all grade points, then divide by total credit hours.' },

@@ -60,6 +60,32 @@ export const idealBodyWeight: CalculatorConfig = {
     ],
     related: ['bmi', 'body-fat', 'bmr-calories', 'calorie-deficit', 'water-intake', 'sleep-calculator'],
   },
+  geo: {
+    definition: 'An ideal body weight calculator estimates a target weight range using established medical formulas including Devine (1974), Robinson (1983), Miller (1983), and Hamwi (1964), each designed to estimate the weight at which physiological function is optimal for a given height.',
+    ruleOfThumb: 'The Devine formula (widely used in medication dosing) estimates ideal body weight as 50 kg plus 2.3 kg for each inch over 5 feet for men, and 45.5 kg plus 2.3 kg per inch for women. These are estimates, not targets for everyone.',
+    example: 'A 5-foot-8-inch man. Devine IBW = 50 plus (8 x 2.3) = 68.4 kg = 150.7 lbs. Robinson formula gives 52 plus (8 x 1.9) = 67.2 kg = 148.1 lbs. The formulas agree within 5 lbs for most heights.',
+    keyFacts: [
+      'IBW formulas were originally developed for clinical pharmacology to calculate drug dosages and ventilator tidal volumes, not as personal fitness targets (Devine BJ, 1974, Drug Intelligence and Clinical Pharmacy).',
+      'NIH defines a healthy weight as a BMI of 18.5 to 24.9, which often produces a wider range than IBW formulas, especially for taller or shorter individuals (NIH, National Heart, Lung, and Blood Institute).',
+      'IBW formulas systematically underestimate healthy weight for individuals with above-average muscle mass, including athletes and strength trainers, because they do not account for body composition (NIH).',
+      'A 10% range above and below IBW is commonly used in clinical settings to define an acceptable weight window, acknowledging individual variation in bone density and frame size (Robinson JD et al., 1983).',
+    ],
+  },
+  educational: {
+    explainer: 'Ideal body weight formulas were developed in the 1960s and 1970s primarily for clinical use, specifically to calculate medication doses and mechanical ventilator settings where drug distribution volume correlates with lean body mass rather than total weight. The four common formulas (Devine, Robinson, Miller, and Hamwi) produce similar estimates that vary by a few pounds for most heights, but can diverge more at the extremes of height. The Devine formula is the most frequently cited in medical literature; the Hamwi formula is popular in nutrition practice. IBW is distinct from BMI: BMI is a population-level screening tool that scales weight to height squared, while IBW is a single point estimate from a linear equation. Neither captures body composition, which is why a muscular person can be above IBW or BMI while carrying very little body fat. Clinicians use IBW as one data point alongside BMI, waist circumference, and body fat percentage for a complete picture.',
+    tips: [
+      'Use IBW as a reference range rather than a fixed target; it signals the ballpark appropriate for your height and sex without dictating an exact number on the scale.',
+      'Pair IBW with body fat percentage measurement (DEXA scan, hydrostatic weighing, or skinfold calipers) to understand whether your weight reflects muscle or fat.',
+      'Recognize that significant muscle mass legitimately raises your healthy weight above the IBW estimate; strength athletes and runners routinely carry 10 to 20 lbs more than their calculated IBW.',
+      'Consult a healthcare provider before using IBW for clinical decisions such as medication dosing, bariatric evaluation, or refeeding protocols, where the correct formula matters.',
+    ],
+    commonMistakes: [
+      'Treating IBW as a personal ideal regardless of individual build: a highly muscular person above IBW and an inactive person at IBW are not equally healthy, because body composition matters far more than the number.',
+      'Ignoring that IBW formulas were developed on specific patient populations from the 1960s, which were not representative of diverse body types, ethnicities, or modern athletic builds.',
+      'Using IBW instead of BMI for general health screening: IBW was designed for clinical dosing, not population health assessment; BMI paired with waist circumference is more appropriate for screening metabolic risk.',
+    ],
+    example: 'Sarah is 5 feet 4 inches and athletic, with significant muscle mass from three years of strength training. Her scale weight is 148 lbs. The Devine IBW for a 5\'4" woman = 45.5 kg + (4 x 2.3 kg) = 54.7 kg = 120.6 lbs, making her 27 lbs above IBW. However, a DEXA scan shows her body fat at 22 percent, placing her firmly in the athletic range (14 to 24 percent for women per ACE guidelines). Her IBW result reflects a formula limitation, not an unhealthy weight.',
+  },
   jsonLd: {
     faqs: [
       { q: 'What formulas are used?', a: 'Devine, Robinson, Miller, and Hamwi are common.' },

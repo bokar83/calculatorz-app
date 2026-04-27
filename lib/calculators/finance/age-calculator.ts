@@ -154,6 +154,21 @@ export const ageCalculator: CalculatorConfig = {
     ],
     related: ['income-tax', 'retirement-savings', 'savings-goal', 'emergency-fund', 'hourly-to-salary', 'compound-interest'],
   },
+  educational: {
+    explainer: 'Knowing your exact age in different units reveals more than a number on a birthday card. Every day you have lived represents actuarial data that insurance companies, retirement planners, and government programs use to make decisions about your financial life. Age 59 and a half is the IRS threshold for penalty-free withdrawals from traditional IRAs and most 401(k) plans. Withdraw a single day before that and you owe a 10% early withdrawal penalty on top of ordinary income tax. Age 65 is the Medicare eligibility date; missing the 7-month enrollment window around your 65th birthday can trigger permanent premium surcharges. Age 67 is the full Social Security retirement age for anyone born in 1960 or later, meaning claiming at 62 locks in a permanent 30% benefit reduction. Age 72 (or 73 for those born after 1950 under SECURE 2.0) triggers Required Minimum Distributions from tax-deferred accounts. Understanding precisely where you stand relative to these thresholds is not a trivia exercise; it is core retirement planning.',
+    tips: [
+      'Mark your half-birthday if you are approaching 59.5: your exact IRA withdrawal eligibility date is 6 calendar months after your actual birthday, not just the year you turn 59.',
+      'Set a Medicare enrollment reminder 3 months before your 65th birthday. The initial enrollment period is 7 months long and late enrollment in Part B causes a permanent 10% premium penalty for each 12-month delay.',
+      'Know your Social Security full retirement age precisely. Claiming even one month early permanently reduces your monthly benefit; delaying past full retirement age earns you delayed retirement credits of 8% per year up to age 70.',
+      'Update beneficiary designations on retirement accounts, life insurance, and estate documents at every major life milestone (marriage, divorce, birth of a child) rather than waiting for a scheduled review.',
+    ],
+    commonMistakes: [
+      'Assuming 59.5 means "the year you turn 59." The IRS requires you to be exactly 59 years and 6 calendar months old on the date of withdrawal, so if you were born in March, you are not eligible until September of your 59th year.',
+      'Missing the Medicare Special Enrollment Period. If you are covered by employer insurance when you turn 65, you have a special window to enroll after that coverage ends. Missing it triggers permanent late-enrollment penalties.',
+      'Forgetting to update beneficiary designations after major life events. Retirement accounts and life insurance pass by beneficiary designation, not by will, so an outdated beneficiary designation overrides even a recently updated will.',
+    ],
+    example: 'Maria was born on March 10, 1965. She turns 59 years and 6 months on September 10, 2024. She has a traditional IRA with a $120,000 balance. If she withdraws $20,000 on September 9, she owes a $2,000 early withdrawal penalty (10% of $20,000) plus income tax on the full $20,000. If she waits one day and withdraws on September 10, the penalty disappears entirely, saving her $2,000 before she pays a single dollar of income tax.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How do I calculate my exact age?', a: 'Subtract your birth date from today\'s date. Current year minus birth year, minus 1 if today is before your birthday this year.' },

@@ -181,6 +181,21 @@ export const dateDifference: CalculatorConfig = {
     ],
     related: ['age-calculator', 'percentage', 'savings-goal', 'due-date', 'retirement-savings'],
   },
+  educational: {
+    explainer: 'Date difference calculations appear in nearly every domain of financial and legal life. Contracts specify deliverable deadlines in calendar days. Lease agreements require written notice 30, 60, or 90 days before vacating, and a single miscounted day can forfeit a security deposit or trigger a lease break penalty. Legal statutes of limitations are typically expressed in calendar days from the date of injury, discovery, or breach, and missing that window permanently bars a claim regardless of its merit. Pregnancy is tracked in gestational weeks counted from the last menstrual period, where two extra days can shift a clinical milestone. Project planning distinguishes between calendar duration and business day duration: a 30-business-day project actually spans roughly 6 calendar weeks including weekends. The distinction between calendar days and business days is non-trivial in financial contexts. Payment terms of "net 30" in commercial invoicing typically mean 30 calendar days, while clearing and settlement timelines in securities trading operate on business days. Using the wrong day type can result in missed deadlines, late payment penalties, or failed compliance filings.',
+    tips: [
+      'Always confirm whether a contract deadline uses calendar days or business days. Commercial leases typically use calendar days for notice periods, while financial clearing and settlement windows use business days.',
+      'For statute of limitations tracking, count from the event date using calendar days and set your reminder at least 30 days before the deadline. Courts generally count the day after the triggering event as Day 1.',
+      'When planning project timelines, convert business day estimates to calendar weeks by dividing by 5 and rounding up. A 45-business-day project spans at least 9 full calendar weeks plus weekend days.',
+      'Leap year awareness matters for annual calculations spanning February. A contract from March 1, 2023 to February 28, 2025 is not exactly 2 years; the actual day count differs by 1 because 2024 is a leap year.',
+    ],
+    commonMistakes: [
+      'Doing manual date subtraction without accounting for leap years. Adding 365 days to a start date in a leap year lands you one day short of the same calendar date the following year.',
+      'Confusing inclusive versus exclusive day counting. "30 days from March 1" can mean March 30 (exclusive, not counting March 1) or March 31 (inclusive, counting March 1 as Day 1). Legal documents typically use the exclusive convention.',
+      'Using calendar days when a contract, statute, or settlement process specifies business days. A 10-business-day response window covers 2 full calendar weeks, not 10 calendar days.',
+    ],
+    example: 'Sarah signs a lease on March 3, 2024 with a 90-day written notice requirement before vacating. Counting 90 calendar days forward from March 3 lands on June 1, 2024. Because 2024 is a leap year, February has 29 days, but since her notice period falls entirely within March through June, the leap day does not affect her count. To vacate by September 1, she must give written notice no later than June 3, 2024, the date that is exactly 90 days prior.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How do I calculate the number of days between two dates?', a: 'Subtract the earlier date from the later in milliseconds and divide by 86,400,000 (ms per day).' },

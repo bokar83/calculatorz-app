@@ -59,6 +59,32 @@ export const debtToIncome: CalculatorConfig = {
     ],
     related: ['debt-payoff', 'mortgage-payment', 'personal-loan', 'loan-payment', 'take-home-pay', 'salary-comparison'],
   },
+  geo: {
+    definition: 'The debt-to-income (DTI) ratio is a personal finance metric that compares your total monthly debt obligations to your gross monthly income, expressed as a percentage, and used by lenders to assess your capacity to take on and repay new debt.',
+    ruleOfThumb: 'Conventional mortgage lenders typically require a back-end DTI ratio at or below 43%, while borrowers with a DTI at or below 36% receive the most favorable interest rates and broadest loan options. The front-end ratio (housing costs only) should ideally stay below 28%.',
+    example: 'A borrower earns $6,000 per month gross. Monthly obligations: mortgage $1,500, car payment $400, student loans $250, credit cards $150. Total debt = $2,300. DTI = $2,300 / $6,000 = 38.3%, which falls in the "good" range and qualifies for most conventional mortgages.',
+    keyFacts: [
+      'The Consumer Financial Protection Bureau defines a "qualified mortgage" as one where the borrower\'s DTI does not exceed 43%, a threshold tied to evidence that higher-DTI borrowers default at substantially higher rates (CFPB, Ability-to-Repay Rule, 2023).',
+      'Fannie Mae\'s Desktop Underwriter system will approve conventional loans up to a 50% DTI for borrowers with strong compensating factors such as large cash reserves and high credit scores (Fannie Mae Selling Guide, B3-6-02, 2024).',
+      'FHA loans allow back-end DTI ratios up to 57% in some cases, making them accessible to borrowers who cannot qualify for conventional loans, though the higher DTI increases default risk (HUD, FHA Single Family Housing Policy Handbook, 4000.1).',
+      'A 2022 Federal Reserve study found that households with a DTI above 40% were more than twice as likely to experience financial distress within two years compared to households with a DTI below 20% (Federal Reserve Board, Consumer Finance Survey Analysis, 2022).',
+    ],
+  },
+  educational: {
+    explainer: 'Your debt-to-income ratio (DTI) is one of the most important numbers a lender looks at when you apply for a mortgage, personal loan, or auto loan. It measures what percentage of your gross monthly income already goes toward debt payments. The calculation uses gross income (before taxes) on the bottom, and all minimum required monthly debt payments on the top. There are actually two DTI figures lenders care about. The front-end ratio counts only your housing payment (principal, interest, taxes, insurance, and HOA fees if applicable) divided by gross income. The back-end ratio adds all other debts on top of housing. When lenders refer to DTI generally, they mean the back-end ratio. A DTI below 36% puts you in a strong position with most lenders. Between 37-43% you can still qualify for most mortgages but may pay higher rates. Above 43%, conventional loan options narrow significantly. Improving your DTI before applying for a major loan, either by paying down balances or increasing income, can save you thousands of dollars in interest over the life of a loan.',
+    tips: [
+      'Before applying for a mortgage, spend 6 to 12 months paying down revolving credit card balances, since reducing your minimum payments directly lowers your DTI and may also improve your credit score.',
+      'Use gross income (before taxes and deductions) when calculating your own DTI, since lenders use gross figures and using net income will make your ratio look worse than what lenders will calculate.',
+      'If your DTI is borderline, ask your lender about compensating factors such as a large down payment, strong cash reserves, or a long stable employment history, which can offset a DTI above the standard threshold.',
+      'Avoid opening new credit accounts or taking on new loan payments in the months before applying for a mortgage, since any new minimum payment added to your obligations raises your DTI and could disqualify your application.',
+    ],
+    commonMistakes: [
+      'Using net (take-home) pay instead of gross income in the denominator, which inflates the calculated DTI ratio and makes your financial position look worse than the figure lenders will actually use.',
+      'Forgetting to include minimum required payments on credit cards with zero balances at the time of calculation, when in reality lenders include the minimum payment due based on the outstanding balance at application.',
+      'Treating DTI as a fixed number rather than something you can improve before applying, when in reality a targeted 3-month paydown of high-balance revolving debt can shift DTI by 3-5 percentage points and unlock better loan terms.',
+    ],
+    example: 'Maria earns $5,200 per month in gross salary. Her monthly debt obligations are: $1,100 rent (she is applying for a mortgage to replace this), $320 car payment, $180 student loan minimum, and $95 credit card minimum, totaling $1,695. Her current back-end DTI is $1,695 / $5,200 = 32.6%, which is excellent. The mortgage she is applying for would replace her rent with a $1,450 payment including taxes and insurance. Her new DTI would be ($1,450 + $320 + $180 + $95) / $5,200 = $2,045 / $5,200 = 39.3%, which qualifies for most conventional loans.',
+  },
   jsonLd: {
     faqs: [
       { q: 'What is a good DTI ratio?', a: 'Below 36% is good; below 43% typically required for mortgages.' },

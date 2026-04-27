@@ -72,6 +72,32 @@ export const vatCalculator: CalculatorConfig = {
     ],
     related: ['sales-tax', 'profit-margin', 'percentage', 'tip-calculator', 'income-tax', 'capital-gains-tax'],
   },
+  geo: {
+    definition: 'A VAT (Value Added Tax) calculator computes the tax component of a price at each stage of production and sale, where businesses collect VAT on sales and reclaim it on purchases, with the end consumer bearing the full tax cost.',
+    ruleOfThumb: 'To add VAT, multiply the net price by (1 + rate). To remove VAT from a gross price, divide by (1 + rate). For the UK standard 20% rate: net x 1.20 = gross; gross divided by 1.20 = net.',
+    example: 'A UK freelancer invoices a client $1,500 for services. With 20% VAT: VAT amount = $300, gross invoice = $1,800. The client pays $1,800; the freelancer remits $300 to HMRC.',
+    keyFacts: [
+      'VAT is used in over 170 countries and is the world\'s most common form of consumption tax, raising roughly 20% of global tax revenue according to OECD analysis (OECD, Consumption Tax Trends, 2024).',
+      'The UK standard VAT rate is 20%, with a reduced rate of 5% for domestic energy and certain social housing work, and a zero rate for most food, children\'s clothing, and books (HMRC, VAT Rates, 2024).',
+      'Unlike US sales tax, which is collected only at the final point of sale, VAT is collected at every stage of the supply chain, but businesses reclaim input VAT on their purchases so only the end consumer bears the full cost (OECD, Tax Policy Studies, 2022).',
+      'Businesses in the UK must register for VAT once their taxable turnover exceeds 90,000 GBP in any rolling 12-month period, a threshold that rose from 85,000 GBP in April 2024 (HMRC, VAT Registration Threshold, 2024).',
+    ],
+  },
+  educational: {
+    explainer: 'VAT, or Value Added Tax, is a consumption tax applied at every stage of the production and distribution chain, from raw materials through to the final sale to the consumer. Each business in the chain charges VAT on its sales (output VAT) and pays VAT on its purchases (input VAT). The business remits only the difference to the tax authority, meaning the tax burden passes through the chain until it lands entirely on the end consumer. This is fundamentally different from US sales tax, which is collected only once at the final retail point. For consumers, VAT is usually included in the displayed price in countries like the UK and across the EU, so what you see is what you pay. For businesses, VAT compliance requires tracking output and input tax separately on every transaction. Standard VAT rates vary significantly: 20% in the UK, 19% in Germany, 25% in Sweden and Norway, and 10% in Australia. Most countries also have reduced rates for essential goods like food, medicine, and children\'s items.',
+    tips: [
+      'If you are a VAT-registered business, always keep valid VAT invoices for every purchase, since you can only reclaim input VAT if you have a proper invoice from a VAT-registered supplier.',
+      'Check whether your country or region requires you to register for VAT before you hit the threshold, since some international digital service rules require registration as soon as you make a single sale to a consumer in certain countries.',
+      'When quoting prices to business clients, quote net (ex-VAT) prices, since VAT-registered businesses can reclaim the VAT. When quoting to consumers, quote gross (VAT-inclusive) prices to avoid confusion.',
+      'Use VAT accounting software or connect your bank to a tool that tracks VAT automatically, since manual VAT return errors are one of the most common reasons small businesses receive HMRC penalty notices.',
+    ],
+    commonMistakes: [
+      'Quoting a gross (VAT-inclusive) price to a client who then interprets it as the net price and adds VAT on top, resulting in a dispute over the invoice total and a 20% overbilling.',
+      'Missing the VAT registration threshold and continuing to operate without registering, which means you owe VAT on all past sales above the threshold even though you did not charge it to clients.',
+      'Failing to reclaim input VAT on legitimate business purchases such as equipment, software subscriptions, and office supplies, which costs VAT-registered businesses a significant amount each year.',
+    ],
+    example: 'James registers a UK limited company and takes on his first client project. He buys design software and office supplies for a net cost of $600, paying 20% VAT of $120 for a gross spend of $720. He invoices his client $1,000 net for the project plus 20% VAT of $200, sending a gross invoice of $1,200. At the end of the quarter, James calculates his VAT position: output VAT collected ($200) minus input VAT paid ($120) = $80 net VAT owed to HMRC. He keeps the $1,200 the client paid, remits $80 to HMRC, and retains $1,120 before income tax.',
+  },
   jsonLd: {
     faqs: [
       { q: 'What is VAT?', a: 'A consumption tax applied at each stage of production.' },

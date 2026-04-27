@@ -150,6 +150,21 @@ export const percentageChange: CalculatorConfig = {
     ],
     related: ['percentage', 'profit-margin', 'roi-calculator', 'inflation', 'income-tax'],
   },
+  educational: {
+    explainer: 'Percentage calculations come in three distinct modes, and using the wrong mode is one of the most common errors in financial math. Percentage change measures how much a value shifted relative to its starting point: divide the difference by the original value, then multiply by 100. This mode powers investment return reporting, salary increase calculations, and inflation measurement. Percentage of a whole answers "what share does this piece represent?" and is used in budgeting, tax calculations, tip math, and grade scoring. Reverse percentage works backward from a known result: if you know the final value and the percentage applied, you can recover the original base. This is useful when working out the pre-discount price of a sale item or the pre-tax base of a total invoice. A critical concept that confuses many investors is that percentage losses and gains are asymmetric. A 30% loss does not cancel out with a 30% gain. A 30% loss on $1,000 leaves $700. A subsequent 30% gain on $700 returns only $910, leaving the investor still $90 short of even. Recovery always requires a larger percentage gain than the percentage that was lost.',
+    tips: [
+      'When calculating investment returns, always divide by the original purchase price, not the current or final value. Dividing by the wrong base is the most frequent arithmetic error in personal finance.',
+      'Distinguish percentage points from percent change when reading about interest rates or economic data. A central bank raising rates from 4% to 5% is a 1 percentage point increase but a 25% relative increase in the rate itself.',
+      'Use the reverse percentage mode to verify discount claims while shopping. If a retailer says an item is "now $68" after a 15% discount, the original price should be $68 / (1 - 0.15) = $80, not $68 plus 15%.',
+      'For salary negotiations, calculate the percentage increase you are asking for before entering the conversation. Asking for a 10% raise on $72,000 is a $7,200 ask; framing it as a specific dollar amount often lands better in negotiation.',
+    ],
+    commonMistakes: [
+      'Dividing by the new value instead of the original when calculating percent change. If a stock rises from $80 to $100, the correct calculation is (100 - 80) / 80 x 100 = 25%, not (100 - 80) / 100 = 20%.',
+      'Confusing percentage points with percent change in financial news. When the unemployment rate drops from 5% to 4%, that is a 1 percentage point decrease but a 20% relative decrease. The two figures tell very different stories.',
+      'Applying a second percentage discount to the original price instead of the already-discounted price. A 20% discount followed by an additional 10% discount is not 30% off the original; the 10% applies to the already-reduced price.',
+    ],
+    example: 'Maria\'s salary increases from $72,000 to $78,000. Percent change = (78,000 - 72,000) / 72,000 x 100 = 8.33%. Now consider a stock that drops 30% from $1,000. It falls to $700. The stock then gains 30%. A 30% gain on $700 = $210, bringing the total to $910. The investor is still $90 (9%) below the original $1,000 starting value, despite the gain percentage matching the loss percentage exactly. To break even from a 30% loss, the required gain is 30 / 70 x 100 = 42.86%, not 30%.',
+  },
   jsonLd: {
     faqs: [
       { q: 'How do I calculate percentage increase?', a: '((New - Old) / Old) x 100. Positive result = increase.' },
