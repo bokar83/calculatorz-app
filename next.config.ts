@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/finance/take-home-pay-calculator-:state/',
+        destination: '/finance/take-home-pay-calculator/:state/',
+      },
+    ]
+  },
 }
 
 export default nextConfig
