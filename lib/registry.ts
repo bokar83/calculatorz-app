@@ -39,6 +39,9 @@ import { gpaCalculator } from './calculators/finance/gpa-calculator'
 import { dateDifference } from './calculators/finance/date-difference'
 import { unitConverter } from './calculators/finance/unit-converter'
 import { percentageChange } from './calculators/finance/percentage-change'
+import { hoursWorkedCalculator } from './calculators/finance/hours-worked-calculator'
+import { hexToRgb } from './calculators/finance/hex-to-rgb'
+import { cmToInches } from './calculators/finance/cm-to-inches'
 
 // Health
 import { bmi } from './calculators/health/bmi'
@@ -90,6 +93,9 @@ const registry: Record<string, CalculatorConfig> = {
   'date-difference': dateDifference,
   'unit-converter': unitConverter,
   'percentage-change': percentageChange,
+  'hours-worked-calculator': hoursWorkedCalculator,
+  'hex-to-rgb': hexToRgb,
+  'cm-to-inches': cmToInches,
   'bmi': bmi,
   'bmr-calories': bmrCalories,
   'body-fat': bodyFat,

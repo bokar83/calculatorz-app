@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllSlugs } from '@/lib/registry'
+import { getAllStateSlugs } from '@/lib/states'
 
 export const dynamic = 'force-static'
 
@@ -8,20 +9,28 @@ const BASE = 'https://calculatorz.tools'
 export default function sitemap(): MetadataRoute.Sitemap {
   const calcs = getAllSlugs().map(({ slug, category }) => ({
     url: `${BASE}/${category}/${slug}/`,
-    lastModified: new Date('2026-04-24'),
+    lastModified: new Date('2026-05-06'),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
 
+  const statePages = getAllStateSlugs().map(state => ({
+    url: `${BASE}/finance/take-home-pay-calculator-${state}/`,
+    lastModified: new Date('2026-05-06'),
+    changeFrequency: 'yearly' as const,
+    priority: 0.7,
+  }))
+
   return [
-    { url: `${BASE}/`, lastModified: new Date('2026-04-24'), changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${BASE}/finance/`, lastModified: new Date('2026-04-24'), changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/health/`, lastModified: new Date('2026-04-24'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/`, lastModified: new Date('2026-05-06'), changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE}/finance/`, lastModified: new Date('2026-05-06'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/health/`, lastModified: new Date('2026-05-06'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/privacy/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/terms/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/about/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly' as const, priority: 0.7 },
     { url: `${BASE}/contact/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly' as const, priority: 0.5 },
     { url: `${BASE}/editorial-standards/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly' as const, priority: 0.6 },
     ...calcs,
+    ...statePages,
   ]
 }
