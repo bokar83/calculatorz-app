@@ -24,6 +24,13 @@ export interface InputField {
   prefix?: string
   suffix?: string
   hint?: string
+  /**
+   * Marks a percent field that can ALSO be entered as an absolute amount.
+   * Value is the id of the base field it is a percent of (e.g. 'homePrice').
+   * The stored value stays the percent; the shell renders a $/% toggle and
+   * keeps the two views in sync live. calculate() reads the percent unchanged.
+   */
+  percentOf?: string
 }
 
 export interface CalculatorResult {

@@ -9,7 +9,7 @@ export const mortgagePayment: CalculatorConfig = {
   tabs: [{ id: 'basic', label: 'Monthly Payment' }],
   inputs: [
     { id: 'homePrice', label: 'Home Price', type: 'number', defaultValue: 350000, min: 0, step: 1000, prefix: '$', hint: 'The total purchase price of the home, not including closing costs.' },
-    { id: 'downPayment', label: 'Down Payment (%)', type: 'number', defaultValue: 20, min: 0, max: 100, step: 1, suffix: '%', hint: 'Most lenders require at least 3-5%. Putting 20% down eliminates PMI (private mortgage insurance), saving $100-200/month.' },
+    { id: 'downPayment', label: 'Down Payment', type: 'number', defaultValue: 20, min: 0, max: 100, step: 1, suffix: '%', percentOf: 'homePrice', hint: 'Enter a percentage or switch to $ to enter a dollar amount — the other updates automatically. Most lenders require at least 3-5%. Putting 20% down eliminates PMI, saving $100-200/month.' },
     { id: 'interestRate', label: 'Annual Interest Rate (%)', type: 'number', defaultValue: 7.0, min: 0, max: 30, step: 0.1, suffix: '%', hint: 'Check current rates at your bank or use sites like Bankrate. Even 0.5% makes a significant difference over 30 years.' },
     { id: 'loanTermYears', label: 'Loan Term (Years)', type: 'number', defaultValue: 30, min: 5, max: 30, step: 5, hint: '30-year loans have lower monthly payments; 15-year loans cost far less in total interest.' },
     { id: 'propertyTaxRate', label: 'Property Tax Rate (%/yr)', type: 'number', defaultValue: 1.1, min: 0, max: 5, step: 0.1, suffix: '%', hint: 'Your local rate varies by state and county. The US average is around 1.1%. Check your county assessor\'s website.' },

@@ -25,6 +25,8 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
     config.inputs.map(f => [f.id, f.defaultValue ?? (f.options?.[0]?.value ?? '')])
   )
   const [inputs, setInputs] = useState<Record<string, number | string>>(defaultInputs)
+  // Per-field input mode for percent-or-amount fields (e.g. down payment). Stored value stays the percent.
+  const [pctModes, setPctModes] = useState<Record<string, 'percent' | 'amount'>>({})
 
   const handleChange = (id: string, value: string) => {
     setInputs(prev => ({ ...prev, [id]: value }))
@@ -98,6 +100,75 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
           const displaySuffix = isImperial
             ? (field.suffix === 'kg' ? 'lbs' : field.suffix === 'cm' ? 'in' : field.suffix)
             : field.suffix
+
+          // Percent-or-amount field: render a $/% toggle and keep both views in sync live.
+          if (field.percentOf) {
+            const base = Number(inputs[field.percentOf]) || 0
+            const pct = Number(inputs[field.id]) || 0
+            const amount = base > 0 ? Math.round(base * pct / 100) : 0
+            const mode = pctModes[field.id] ?? 'percent'
+            const setMode = (m: 'percent' | 'amount') =>
+              setPctModes(prev => ({ ...prev, [field.id]: m }))
+            return (
+              <div key={field.id}>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-sm font-medium text-[#1A1F36]">{field.label}</label>
+                  <div className="flex rounded-md border border-[#E5E7EB] overflow-hidden text-xs">
+                    {(['percent', 'amount'] as const).map(m => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setMode(m)}
+                        className={`px-2.5 py-1 font-medium transition-colors focus:outline-none ${
+                          mode === m ? 'bg-[#0F766E] text-white' : 'bg-white text-[#6B7280] hover:text-[#1A1F36]'
+                        }`}
+                        aria-pressed={mode === m}
+                      >
+                        {m === 'percent' ? '%' : currency.symbol}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center border border-[#E5E7EB] rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-teal-400">
+                  {mode === 'amount' && (
+                    <span className="px-3 py-2 bg-[#F8FAFB] text-[#6B7280] text-sm border-r border-[#E5E7EB]">
+                      {currency.symbol}
+                    </span>
+                  )}
+                  <input
+                    type="number"
+                    value={mode === 'percent' ? String(inputs[field.id]) : String(amount)}
+                    min={0}
+                    max={mode === 'percent' ? 100 : (base || undefined)}
+                    step={mode === 'percent' ? field.step : 1000}
+                    onChange={e => {
+                      if (mode === 'percent') {
+                        handleChange(field.id, e.target.value)
+                      } else {
+                        const amt = Number(e.target.value) || 0
+                        const newPct = base > 0 ? (amt / base) * 100 : 0
+                        handleChange(field.id, String(Math.round(newPct * 1000) / 1000))
+                      }
+                    }}
+                    className="flex-1 px-3 py-2 text-sm text-[#1A1F36] focus:outline-none bg-white"
+                  />
+                  {mode === 'percent' && (
+                    <span className="px-3 py-2 bg-[#F8FAFB] text-[#6B7280] text-sm border-l border-[#E5E7EB]">%</span>
+                  )}
+                </div>
+                <p className="text-[11px] text-[#6B7280] mt-1 leading-relaxed">
+                  {base > 0
+                    ? (mode === 'percent'
+                        ? `= ${currency.symbol}${amount.toLocaleString('en-US')} down payment`
+                        : `= ${(Math.round(pct * 100) / 100).toLocaleString('en-US')}% of home price`)
+                    : 'Enter the home price above to see the equivalent.'}
+                </p>
+                {field.hint && (
+                  <p className="text-[11px] text-[#9CA3AF] mt-1 leading-relaxed">{field.hint}</p>
+                )}
+              </div>
+            )
+          }
 
           return (
             <div key={field.id}>
