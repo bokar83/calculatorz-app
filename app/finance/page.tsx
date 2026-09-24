@@ -51,6 +51,19 @@ export default function FinancePage() {
         All calculators run in your browser and update instantly as you type.
       </p>
 
+      <Link
+        href="/finance/salary-negotiation-calculator"
+        className="block bg-white border-2 border-[#0F766E] rounded-lg p-4 mb-6 hover:shadow-md transition-all group"
+      >
+        <div className="text-[11px] font-bold text-[#0F766E] uppercase tracking-wide mb-1">Featured</div>
+        <div className="text-base font-semibold text-[#1A1F36] group-hover:text-[#0F766E] transition-colors">
+          Salary Negotiation &amp; Take-Home Calculator
+        </div>
+        <div className="text-sm text-[#6B7280] mt-1">
+          Is that job offer actually worth taking? Compare real take-home pay across states, filing status, and W-2 vs. self-employed — then solve backward for your minimum negotiation target.
+        </div>
+      </Link>
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {calcs.map(calc => (
           <Link

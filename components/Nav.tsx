@@ -18,6 +18,7 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-0.5 text-[13px] font-medium">
           <Link href="/finance" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Finance</Link>
           <Link href="/health" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Health</Link>
+          <Link href="/finance/salary-negotiation-calculator" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Salary Negotiation</Link>
         </div>
 
         {/* Search */}
@@ -55,6 +56,7 @@ export default function Nav() {
           />
           <Link href="/finance" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Finance</Link>
           <Link href="/health" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Health</Link>
+          <Link href="/finance/salary-negotiation-calculator" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Salary Negotiation</Link>
         </div>
       )}
     </nav>
