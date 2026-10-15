@@ -111,7 +111,7 @@ export default function SearchBox({ inputClassName, onNavigate }: Props) {
             <div className="p-3 text-[13px]">
               <p className="mb-2">Search is unavailable right now. Browse instead:</p>
               <div className="flex gap-2 flex-wrap">
-                {[['/finance/', 'Finance'], ['/health/', 'Health'], ['/converters/', 'Converters']].map(([h, l]) => (
+                {[['/finance/', 'Finance'], ['/health/', 'Health'], ['/converters/', 'Converters'], ['/tools/', 'Tools']].map(([h, l]) => (
                   <Link key={h} href={h} onClick={() => { setOpen(false); onNavigate?.() }} className="px-3 py-2 rounded border border-[#E5E7EB] font-semibold text-[#0F766E]">{l}</Link>
                 ))}
               </div>
@@ -122,7 +122,7 @@ export default function SearchBox({ inputClassName, onNavigate }: Props) {
             <div className="p-3 text-[13px]" data-testid="search-empty">
               <p className="mb-2">No calculators found for &ldquo;{query.trim()}&rdquo;.</p>
               <div className="flex gap-2 flex-wrap">
-                {[['/finance/', 'Finance'], ['/health/', 'Health'], ['/converters/', 'Converters']].map(([h, l]) => (
+                {[['/finance/', 'Finance'], ['/health/', 'Health'], ['/converters/', 'Converters'], ['/tools/', 'Tools']].map(([h, l]) => (
                   <Link key={h} href={h} onClick={() => { setOpen(false); onNavigate?.() }} className="px-3 py-2 rounded border border-[#E5E7EB] font-semibold text-[#0F766E]">{l}</Link>
                 ))}
               </div>

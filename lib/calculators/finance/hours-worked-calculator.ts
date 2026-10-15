@@ -4,6 +4,7 @@ export const hoursWorkedCalculator: CalculatorConfig = {
   slug: 'hours-worked-calculator',
   title: 'Hours Worked Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate total hours worked between a start time and end time, with optional break deduction. Great for freelancers, contractors, and hourly employees.',
   updatedDate: 'May 2026',
   inputs: [

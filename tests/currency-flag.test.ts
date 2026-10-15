@@ -27,3 +27,10 @@ test('non-money calculators never have currency tabs', () => {
     assert.doesNotMatch(read(`lib/calculators/health/${f}`), /usesCurrency/, f)
   }
 })
+
+test('non-finance tools are grouped away from Finance (URLs unchanged)', () => {
+  const grp = (f: string) => (read(`lib/calculators/finance/${f}.ts`).match(/displayGroup:\s*'(\w+)'/) ?? [])[1]
+  for (const f of ['unit-converter', 'cm-to-inches', 'hex-to-rgb']) assert.equal(grp(f), 'converters', f)
+  for (const f of ['age-calculator', 'gpa-calculator', 'date-difference', 'percentage', 'percentage-change', 'hours-worked-calculator']) assert.equal(grp(f), 'tools', f)
+  for (const f of ['mortgage-payment', 'tip-calculator', 'inflation', 'currency-converter']) assert.equal(grp(f), undefined, f)
+})

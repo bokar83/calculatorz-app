@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getCalculatorsByCategory } from '@/lib/registry'
+import { getCalculatorsByGroup } from '@/lib/registry'
 import AdZone from '@/components/AdZone'
 import HeroCalculator from '@/components/HeroCalculator'
 import MortgageWidget from '@/components/MortgageWidget'
@@ -70,8 +70,8 @@ const websiteSchema = {
 }
 
 export default function HomePage() {
-  const financeCalcs = getCalculatorsByCategory('finance')
-  const healthCalcs = getCalculatorsByCategory('health')
+  const financeCalcs = getCalculatorsByGroup('finance')
+  const healthCalcs = getCalculatorsByGroup('health')
 
   return (
     <>
@@ -204,7 +204,7 @@ export default function HomePage() {
                 <h2 className="text-[18px] font-bold text-[#1A1F36] flex items-center gap-2">
                   Finance Calculators
                 </h2>
-                <Link href="/finance" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all 30</Link>
+                <Link href="/finance" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all {financeCalcs.length}</Link>
               </div>
 
               {/* Finance calc grid */}
@@ -240,7 +240,7 @@ export default function HomePage() {
                 <h2 className="text-[18px] font-bold text-[#1A1F36]">
                   Health Calculators
                 </h2>
-                <Link href="/health" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all 10</Link>
+                <Link href="/health" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all {healthCalcs.length}</Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {healthCalcs.map(calc => (

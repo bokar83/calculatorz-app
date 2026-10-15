@@ -4,6 +4,7 @@ export const hexToRgb: CalculatorConfig = {
   slug: 'hex-to-rgb',
   title: 'Hex to RGB Converter',
   category: 'finance',
+  displayGroup: 'converters',
   description: 'Convert hex color codes to RGB values instantly. Also outputs HSL and CSS-ready color values for designers and developers.',
   updatedDate: 'May 2026',
   inputs: [

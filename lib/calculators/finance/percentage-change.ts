@@ -4,6 +4,7 @@ export const percentageChange: CalculatorConfig = {
   slug: 'percentage-change',
   title: 'Percentage Change Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate percentage increase or decrease between two values. Also computes percentage of a number and reverse percentage.',
   updatedDate: 'April 2026',
   inputs: [

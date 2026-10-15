@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getCalculatorsByCategory } from '@/lib/registry'
+import { getCalculatorsByGroup } from '@/lib/registry'
 import JsonLd from '@/components/content/JsonLd'
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ const financeCollectionSchema = {
 }
 
 export default function FinancePage() {
-  const calcs = getCalculatorsByCategory('finance')
+  const calcs = getCalculatorsByGroup('finance')
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -63,6 +63,10 @@ export default function FinancePage() {
           Is that job offer actually worth taking? Compare real take-home pay across states, filing status, and W-2 vs. self-employed — then solve backward for your minimum negotiation target.
         </div>
       </Link>
+
+      <p className="text-sm text-[#6B7280] mb-4">
+        Looking for something else? Browse the <Link href="/converters" className="font-semibold text-[#0F766E] underline">unit converters</Link> or the <Link href="/tools" className="font-semibold text-[#0F766E] underline">everyday math and date tools</Link>.
+      </p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {calcs.map(calc => (

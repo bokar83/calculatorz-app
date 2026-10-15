@@ -4,6 +4,7 @@ export const dateDifference: CalculatorConfig = {
   slug: 'date-difference',
   title: 'Date Difference Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate the number of days, weeks, months, and years between two dates.',
   updatedDate: 'April 2026',
   inputs: [

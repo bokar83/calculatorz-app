@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getCalculator, getAllSlugs } from '@/lib/registry'
+import { getCalculator, getAllSlugs, getGroup, GROUP_META } from '@/lib/registry'
 import CalculatorLoader from '@/components/calculator/CalculatorLoader'
 import AdZone from '@/components/AdZone'
 import FormulaBox from '@/components/content/FormulaBox'
@@ -80,9 +80,10 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     })),
   }
 
-  const parent = calc.breadcrumbParent ?? { name: 'Finance', href: '/finance' }
-  const parentName = calc.breadcrumbParent ? parent.name : 'Finance Calculators'
-  const parentUrl = `https://calculatorz.tools${parent.href.endsWith('/') ? parent.href : parent.href + '/'}`
+  const group = GROUP_META[getGroup(calc)]
+  const parent = { name: group.label, href: group.href }
+  const parentName = group.crumb
+  const parentUrl = `https://calculatorz.tools${group.href}/`
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -97,7 +98,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
   const calculatorSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    applicationCategory: 'FinanceApplication',
+    applicationCategory: group.schemaApp,
     name: calc.title,
     description: calc.description,
     url: `https://calculatorz.tools/${calc.category}/${slug}/`,

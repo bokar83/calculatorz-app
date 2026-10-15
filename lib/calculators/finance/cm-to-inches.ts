@@ -4,7 +4,7 @@ export const cmToInches: CalculatorConfig = {
   slug: 'cm-to-inches',
   title: 'CM to Inches Converter',
   category: 'finance',
-  breadcrumbParent: { name: 'Converters', href: '/converters' },
+  displayGroup: 'converters',
   crossLink: { href: '/converters/', label: 'Explore all 28 converters', text: 'Need other units? Browse the full converter section.' },
   description: 'Convert centimeters to inches, feet, and meters instantly. Also converts inches to centimeters. Perfect for clothing sizes, heights, and measurements.',
   updatedDate: 'May 2026',

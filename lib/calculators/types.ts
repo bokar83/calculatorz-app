@@ -66,8 +66,11 @@ export interface CalculatorConfig {
    * cannot regress.
    */
   usesCurrency?: boolean
-  /** Optional breadcrumb parent override (default: the category hub). URL of the page itself never changes. */
-  breadcrumbParent?: { name: string; href: string }
+  /**
+   * Display grouping (listings, hubs, search labels, breadcrumbs). Defaults to `category`.
+   * The URL still follows `category`, so existing routes never move.
+   */
+  displayGroup?: 'converters' | 'tools'
   /** Optional call-out link rendered under the page header. */
   crossLink?: { href: string; label: string; text: string }
   description: string

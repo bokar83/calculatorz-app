@@ -117,6 +117,23 @@ export function getCalculatorsByCategory(category: 'finance' | 'health'): Calcul
   return Object.values(registry).filter(c => c.category === category)
 }
 
+export type DisplayGroup = 'finance' | 'health' | 'converters' | 'tools'
+
+export function getGroup(c: CalculatorConfig): DisplayGroup {
+  return c.displayGroup ?? c.category
+}
+
+export function getCalculatorsByGroup(group: DisplayGroup): CalculatorConfig[] {
+  return Object.values(registry).filter(c => getGroup(c) === group)
+}
+
+export const GROUP_META: Record<DisplayGroup, { label: string; href: string; crumb: string; schemaApp: string }> = {
+  finance: { label: 'Finance', href: '/finance', crumb: 'Finance Calculators', schemaApp: 'FinanceApplication' },
+  health: { label: 'Health', href: '/health', crumb: 'Health Calculators', schemaApp: 'HealthApplication' },
+  converters: { label: 'Converters', href: '/converters', crumb: 'Unit Converters', schemaApp: 'UtilitiesApplication' },
+  tools: { label: 'Everyday Tools', href: '/tools', crumb: 'Everyday Tools', schemaApp: 'UtilitiesApplication' },
+}
+
 export function getAllSlugs(): { slug: string; category: string }[] {
   return Object.values(registry).map(c => ({ slug: c.slug, category: c.category }))
 }

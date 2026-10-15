@@ -1,5 +1,5 @@
 // Builds the site search index from the calculator registry and the converter data.
-import { getCalculatorsByCategory } from '../registry.ts'
+import { getCalculatorsByCategory, getGroup } from '../registry.ts'
 import { buildConverterItems } from './converter-items.ts'
 import type { SearchItem } from './search.ts'
 
@@ -32,6 +32,8 @@ const SYNONYMS: Record<string, string> = {
   'gpa-calculator': 'grade point average college grades',
 }
 
+const SEARCH_LABEL = { finance: 'Finance', health: 'Health', converters: 'Converter', tools: 'Tool' } as const
+
 export function buildSearchIndex(): SearchItem[] {
   const items: SearchItem[] = []
 
@@ -40,9 +42,9 @@ export function buildSearchIndex(): SearchItem[] {
       items.push({
         t: c.title,
         u: `/${category}/${c.slug}/`,
-        g: category === 'finance' ? 'Finance' : 'Health',
+        g: SEARCH_LABEL[getGroup(c)],
         d: c.description,
-        k: `${c.slug.replace(/-/g, ' ')} ${category} ${SYNONYMS[c.slug] ?? ''}`,
+        k: `${c.slug.replace(/-/g, ' ')} ${category} ${getGroup(c)} ${SYNONYMS[c.slug] ?? ''}`,
       })
     }
   }
@@ -55,6 +57,7 @@ export function buildSearchIndex(): SearchItem[] {
     k: 'job offer negotiate raise salary paycheck take home pay state tax',
   })
   items.push({ t: 'All Finance Calculators', u: '/finance/', g: 'Page', d: 'Browse every finance calculator.', k: 'finance money' })
+  items.push({ t: 'Everyday Tools', u: '/tools/', g: 'Page', d: 'Age, date, GPA and percentage tools.', k: 'tools age date gpa percentage' })
   items.push({ t: 'All Health Calculators', u: '/health/', g: 'Page', d: 'Browse every health calculator.', k: 'health fitness' })
   items.push({
     t: 'Unit Converters',

@@ -4,6 +4,7 @@ export const percentage: CalculatorConfig = {
   slug: 'percentage',
   title: 'Percentage Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate percentages, percentage change, or find the original value.',
   updatedDate: 'April 2026',
   tabs: [

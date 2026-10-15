@@ -4,6 +4,7 @@ export const gpaCalculator: CalculatorConfig = {
   slug: 'gpa-calculator',
   title: 'GPA Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate your GPA by entering your course grades and credit hours. Supports letter grades and 4.0 scale.',
   updatedDate: 'April 2026',
   inputs: [

@@ -4,6 +4,7 @@ export const ageCalculator: CalculatorConfig = {
   slug: 'age-calculator',
   title: 'Age Calculator',
   category: 'finance',
+  displayGroup: 'tools',
   description: 'Calculate your exact age in years, months, weeks, and days from your date of birth.',
   updatedDate: 'April 2026',
   inputs: [
