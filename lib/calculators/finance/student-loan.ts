@@ -4,6 +4,7 @@ export const studentLoan: CalculatorConfig = {
   slug: 'student-loan',
   title: 'Student Loan Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate student loan monthly payments and total repayment cost.',
   updatedDate: 'April 2026',
   inputs: [

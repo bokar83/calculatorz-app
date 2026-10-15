@@ -60,6 +60,16 @@ export interface CalculatorConfig {
   slug: string
   title: string
   category: Category
+  /**
+   * Opt-in. Only calculators whose inputs/results are money set this to true; the shell then
+   * shows the currency selector. Default (absent) = NO currency tabs, so a new calculator
+   * cannot regress.
+   */
+  usesCurrency?: boolean
+  /** Optional breadcrumb parent override (default: the category hub). URL of the page itself never changes. */
+  breadcrumbParent?: { name: string; href: string }
+  /** Optional call-out link rendered under the page header. */
+  crossLink?: { href: string; label: string; text: string }
   description: string
   updatedDate: string
   tabs?: Tab[]

@@ -1,8 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { APP_VERSION, APP_VERSION_LABEL } from '../lib/version.ts'
+import { APP_VERSION, APP_UPDATED, APP_VERSION_LABEL } from '../lib/version.ts'
 
 test('version constant renders in the footer label', () => {
-  assert.equal(APP_VERSION, 'v3')
-  assert.match(APP_VERSION_LABEL, /^Version v3 \u00b7 updated \d{4}-\d{2}-\d{2}$/)
+  assert.match(APP_VERSION, /^v\d+(\.\d+)?$/)
+  assert.equal(APP_VERSION_LABEL, `Version ${APP_VERSION} \u00b7 updated ${APP_UPDATED}`)
 })

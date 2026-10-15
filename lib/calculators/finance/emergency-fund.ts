@@ -4,6 +4,7 @@ export const emergencyFund: CalculatorConfig = {
   slug: 'emergency-fund',
   title: 'Emergency Fund Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate how much you need in an emergency fund and how long to save it.',
   updatedDate: 'April 2026',
   inputs: [

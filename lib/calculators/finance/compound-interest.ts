@@ -4,6 +4,7 @@ export const compoundInterest: CalculatorConfig = {
   slug: 'compound-interest',
   title: 'Compound Interest Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate how your money grows over time with compound interest. See the real impact of rate, time, and compounding frequency.',
   updatedDate: 'April 2026',
   tabs: [{ id: 'basic', label: 'Calculator' }],

@@ -80,7 +80,7 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
         </div>
       )}
 
-      {config.category === 'finance' && (
+      {config.usesCurrency === true && (
         <div className="mb-4">
           <CurrencySelector value={currency} onChange={setCurrency} />
         </div>

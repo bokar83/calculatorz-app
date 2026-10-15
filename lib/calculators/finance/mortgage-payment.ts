@@ -4,6 +4,7 @@ export const mortgagePayment: CalculatorConfig = {
   slug: 'mortgage-payment',
   title: 'Mortgage Payment Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate your monthly mortgage payment instantly. Includes principal, interest, and amortization breakdown — no sign-up required.',
   updatedDate: 'April 2026',
   tabs: [{ id: 'basic', label: 'Monthly Payment' }],

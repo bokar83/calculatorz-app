@@ -4,6 +4,7 @@ export const tipCalculator: CalculatorConfig = {
   slug: 'tip-calculator',
   title: 'Tip Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate tip amount, total bill, and split per person for any service.',
   updatedDate: 'April 2026',
   inputs: [

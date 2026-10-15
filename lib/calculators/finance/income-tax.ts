@@ -35,6 +35,7 @@ export const incomeTax: CalculatorConfig = {
   slug: 'income-tax',
   title: 'Income Tax Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Estimate your 2025 federal income tax using official IRS brackets. See your effective rate, marginal rate, and take-home pay.',
   updatedDate: 'April 2026',
   inputs: [

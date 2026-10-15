@@ -4,6 +4,7 @@ export const investmentReturn: CalculatorConfig = {
   slug: 'investment-return',
   title: 'Investment Return Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate the total return on an investment, including annual contributions and the effect of compounding.',
   updatedDate: 'April 2026',
   inputs: [

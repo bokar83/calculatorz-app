@@ -4,6 +4,7 @@ export const salesTax: CalculatorConfig = {
   slug: 'sales-tax',
   title: 'Sales Tax Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate sales tax amount and total price including or excluding tax.',
   updatedDate: 'April 2026',
   tabs: [

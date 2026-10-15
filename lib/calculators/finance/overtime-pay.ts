@@ -4,6 +4,7 @@ export const overtimePay: CalculatorConfig = {
   slug: 'overtime-pay',
   title: 'Overtime Pay Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate overtime earnings based on hours worked and pay rate.',
   updatedDate: 'April 2026',
   inputs: [

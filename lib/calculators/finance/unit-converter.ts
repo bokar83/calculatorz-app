@@ -4,7 +4,9 @@ export const unitConverter: CalculatorConfig = {
   slug: 'unit-converter',
   title: 'Unit Converter',
   category: 'finance',
-  description: 'Convert between common units of length, weight, temperature, and volume instantly.',
+  breadcrumbParent: { name: 'Converters', href: '/converters' },
+  crossLink: { href: '/converters/', label: 'Explore all 28 converters', text: 'This quick converter covers length, weight, temperature and volume. For area, speed, time, data storage, energy, pressure, cooking, shoe sizes and more, browse the full converter section.' },
+  description: 'Quick unit converter for length, weight, temperature and volume. Need more units? Browse all 28 converter categories.',
   updatedDate: 'April 2026',
   inputs: [
     {

@@ -36,6 +36,7 @@ export const takeHomePay: CalculatorConfig = {
   slug: 'take-home-pay',
   title: 'Take-Home Pay Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Estimate your net pay after federal taxes, FICA, and deductions.',
   updatedDate: 'April 2026',
   inputs: [

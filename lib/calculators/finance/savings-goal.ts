@@ -4,6 +4,7 @@ export const savingsGoal: CalculatorConfig = {
   slug: 'savings-goal',
   title: 'Savings Goal Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate how long it will take to reach a savings goal, or how much to save each month to get there.',
   updatedDate: 'April 2026',
   inputs: [

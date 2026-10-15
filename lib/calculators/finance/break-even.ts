@@ -4,6 +4,7 @@ export const breakEven: CalculatorConfig = {
   slug: 'break-even',
   title: 'Break-Even Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate the sales volume needed to cover fixed and variable costs.',
   updatedDate: 'April 2026',
   inputs: [

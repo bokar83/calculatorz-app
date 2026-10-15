@@ -4,6 +4,7 @@ export const capitalGainsTax: CalculatorConfig = {
   slug: 'capital-gains-tax',
   title: 'Capital Gains Tax Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Estimate capital gains tax on the sale of investments or assets.',
   updatedDate: 'April 2026',
   inputs: [

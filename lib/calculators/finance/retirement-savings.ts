@@ -4,6 +4,7 @@ export const retirementSavings: CalculatorConfig = {
   slug: 'retirement-savings',
   title: 'Retirement Savings Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Estimate how much you will have saved by retirement age.',
   updatedDate: 'April 2026',
   inputs: [

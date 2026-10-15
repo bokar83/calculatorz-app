@@ -4,6 +4,7 @@ export const calculator401k: CalculatorConfig = {
   slug: '401k-calculator',
   title: '401(k) Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Estimate your 401(k) balance at retirement based on contributions, employer match, and investment growth.',
   updatedDate: 'April 2026',
   inputs: [

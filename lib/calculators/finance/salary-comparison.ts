@@ -27,6 +27,7 @@ export const salaryComparison: CalculatorConfig = {
   slug: 'salary-comparison',
   title: 'Salary Comparison Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Compare two salaries accounting for cost of living differences between cities.',
   updatedDate: 'April 2026',
   inputs: [

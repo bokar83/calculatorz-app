@@ -4,6 +4,7 @@ export const vatCalculator: CalculatorConfig = {
   slug: 'vat-calculator',
   title: 'VAT Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate VAT amount and net or gross price for any VAT rate.',
   updatedDate: 'April 2026',
   tabs: [

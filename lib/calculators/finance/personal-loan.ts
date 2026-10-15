@@ -4,6 +4,7 @@ export const personalLoan: CalculatorConfig = {
   slug: 'personal-loan',
   title: 'Personal Loan Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate monthly payments, total interest, and full cost for a personal loan.',
   updatedDate: 'April 2026',
   inputs: [

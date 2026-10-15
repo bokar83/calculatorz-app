@@ -4,6 +4,7 @@ export const roiCalculator: CalculatorConfig = {
   slug: 'roi-calculator',
   title: 'ROI Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate return on investment as a percentage of initial cost.',
   updatedDate: 'April 2026',
   inputs: [

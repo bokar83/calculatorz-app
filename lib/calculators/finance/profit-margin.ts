@@ -4,6 +4,7 @@ export const profitMargin: CalculatorConfig = {
   slug: 'profit-margin',
   title: 'Profit Margin Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate gross, operating, or net profit margin for your business.',
   updatedDate: 'April 2026',
   inputs: [

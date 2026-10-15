@@ -4,6 +4,7 @@ export const simpleInterest: CalculatorConfig = {
   slug: 'simple-interest',
   title: 'Simple Interest Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate simple interest earned or owed on a principal amount.',
   updatedDate: 'April 2026',
   inputs: [

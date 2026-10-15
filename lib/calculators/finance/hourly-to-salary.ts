@@ -4,6 +4,7 @@ export const hourlyToSalary: CalculatorConfig = {
   slug: 'hourly-to-salary',
   title: 'Hourly to Annual Salary Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Convert your hourly wage to annual salary, monthly income, and weekly pay in seconds.',
   updatedDate: 'April 2026',
   tabs: [

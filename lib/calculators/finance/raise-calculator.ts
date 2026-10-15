@@ -4,6 +4,7 @@ export const raiseCalculator: CalculatorConfig = {
   slug: 'raise-calculator',
   title: 'Raise Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate your new salary after a raise or percentage increase.',
   updatedDate: 'April 2026',
   inputs: [

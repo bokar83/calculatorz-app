@@ -4,6 +4,7 @@ export const debtToIncome: CalculatorConfig = {
   slug: 'debt-to-income',
   title: 'Debt-to-Income Ratio Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate your debt-to-income ratio to assess financial health and loan eligibility.',
   updatedDate: 'April 2026',
   inputs: [

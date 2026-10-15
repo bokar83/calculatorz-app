@@ -4,6 +4,7 @@ export const debtPayoff: CalculatorConfig = {
   slug: 'debt-payoff',
   title: 'Debt Payoff Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate how long it will take to pay off debt and how much interest you will pay in total.',
   updatedDate: 'April 2026',
   inputs: [

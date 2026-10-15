@@ -4,6 +4,7 @@ export const autoLoan: CalculatorConfig = {
   slug: 'auto-loan',
   title: 'Car Loan Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate your monthly car loan payment, total interest paid, and total cost of the vehicle.',
   updatedDate: 'April 2026',
   inputs: [

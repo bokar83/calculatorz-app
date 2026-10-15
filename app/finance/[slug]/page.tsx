@@ -54,7 +54,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     '@type': 'Article',
     headline: calc.title,
     description: calc.description,
-    dateModified: '2026-04-14',
+    dateModified: '2026-04-19',
     author: { '@type': 'Organization', name: 'CalcFlow Editorial Team', url: 'https://calculatorz.tools/about/' },
     publisher: { '@type': 'Organization', name: 'CalcFlow', url: 'https://calculatorz.tools/' },
   }
@@ -80,12 +80,16 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
     })),
   }
 
+  const parent = calc.breadcrumbParent ?? { name: 'Finance', href: '/finance' }
+  const parentName = calc.breadcrumbParent ? parent.name : 'Finance Calculators'
+  const parentUrl = `https://calculatorz.tools${parent.href.endsWith('/') ? parent.href : parent.href + '/'}`
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://calculatorz.tools/' },
-      { '@type': 'ListItem', position: 2, name: 'Finance Calculators', item: 'https://calculatorz.tools/finance/' },
+      { '@type': 'ListItem', position: 2, name: parentName, item: parentUrl },
       { '@type': 'ListItem', position: 3, name: calc.title, item: `https://calculatorz.tools/finance/${slug}/` },
     ],
   }
@@ -116,7 +120,7 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
         <nav className="text-sm text-[#6B7280] mb-4 flex items-center flex-wrap gap-0.5 min-w-0">
           <Link href="/" className="hover:text-[#0F766E] shrink-0">Home</Link>
           <span className="mx-1.5 shrink-0">/</span>
-          <Link href="/finance" className="hover:text-[#0F766E] shrink-0">Finance</Link>
+          <Link href={parent.href} className="hover:text-[#0F766E] shrink-0">{parent.name}</Link>
           <span className="mx-1.5 shrink-0">/</span>
           <span className="text-[#1A1F36] font-medium truncate">{calc.title}</span>
         </nav>
@@ -127,6 +131,13 @@ export default async function FinanceCalculatorPage({ params }: PageProps) {
               <p className="text-[#6B7280] text-sm mb-1">{calc.description}</p>
               <p className="text-xs text-[#9CA3AF]"><time dateTime="2026-04-19">Updated {calc.updatedDate}</time> &middot; CalcFlow Editorial</p>
             </div>
+
+            {calc.crossLink && (
+              <p className="text-sm text-[#6B7280] mb-4">
+                {calc.crossLink.text}{' '}
+                <Link href={calc.crossLink.href} className="font-semibold text-[#0F766E] underline hover:text-[#115E59]">{calc.crossLink.label} &rarr;</Link>
+              </p>
+            )}
 
             <CalculatorLoader slug={slug} />
             <Disclaimer />

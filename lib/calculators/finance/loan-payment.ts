@@ -4,6 +4,7 @@ export const loanPayment: CalculatorConfig = {
   slug: 'loan-payment',
   title: 'Loan Payment Calculator',
   category: 'finance',
+  usesCurrency: true,
   description: 'Calculate your monthly loan payment, total interest, and full repayment cost.',
   updatedDate: 'April 2026',
   tabs: [{ id: 'basic', label: 'Monthly Payment' }],
