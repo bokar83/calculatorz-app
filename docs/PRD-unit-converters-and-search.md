@@ -89,6 +89,43 @@ Root cause fixed by building the missing feature: `components/SearchBox.tsx` (cl
 
 Revert or delete the branch. All new files live under `lib/converters/`, `lib/search/`, `components/converters/`, `app/converters/`, `app/search-index/`, `tests/`, `docs/`; edits to the 5 pre-existing files are additive and individually revertable.
 
-## 10. Gate log
+## 10. Build order (vertical slices, added after Karpathy)
 
-(pending: Karpathy and Council results are recorded here after they run.)
+1. Slice A: engine + `length` category + category page + sitemap entry + tests, end to end and built.
+2. Slice B: search index route + SearchBox + Nav wiring + search tests (the "mortgage" regression test is written FIRST and shown failing against an empty index).
+3. Slice C: remaining `units` categories as data only (no new components).
+4. Slice D: pair pages, hub, home-page section, nav link.
+5. Slice E: special kinds (cooking/water-weight, numerals, shoe/clothing) last, as they carry the most uncertainty.
+Each slice ends with `npm run build` green and a commit tagged [WIP].
+
+## 11. Gate log
+
+### Karpathy (ran 2026-10-14, design pass): SHIP after the changes below
+- P1 Think: PASS. Program-design layer (file placement, signatures, route scheme) is in sections 3 and 4. CHANGE: added vertical-slice order (section 10); the build had no runnable-early plan.
+- P2 Simplicity: WARN. 28 categories and 3 component kinds is wide, but it was explicitly requested and stays data-driven. CHANGE: no per-category components; pair pages capped at the curated list; no reverse-pair pages.
+- P3 Surgical: WARN. `tsconfig.json` is the one non-feature file touched. Kept (needed for `node --test` on TS with no dependency), disclosed in section 2 and in the final report.
+- P4 Goal-driven: PASS. Machine-checkable done conditions in section 7. CHANGE: route diff is a script comparing `.next/server/app/**/*.html` before (112 files) and after; zero lines may be removed.
+- P5 Hotspots: PASS. Search scans a few hundred entries per keystroke; the pairwise round-trip test is bounded by units per category squared (max about 20^2).
+- P6 Verification: WARN to PASS. CHANGE: search regression test must exist and be seen failing before the fix (slice B). Rung: build and tests (rung 4), screenshots (rung 5).
+- P7 Debugging: PASS. Search failure reproduced in a real browser first; cause identified from code (stub inputs) before any change.
+- P8 Dependencies: PASS. Zero new packages; node built-in test runner; Node 24 native type stripping.
+- P9 Communication: WARN. Three values are not exact definitions and must be labelled in the UI: Mach (ISA 340.294 m/s), cooking densities (vendor chart, grams per US cup), shoe/clothing offsets (US women = US men + 1.5 is a common retailer convention; Wikipedia's FIA scale says +1; the page states both). Live-site state is unverified (Cloudflare 403) and is reported as such.
+- P10 Failure modes: WARN. Optimistic Path: search index fetch failure and number-base/Roman out-of-range input need visible error states (CHANGE added: "Search is unavailable, browse categories" fallback and inline range messages). Kitchen Sink contained by the ADD-ONLY file list.
+FINAL CALL: SHIP (changes folded into this PRD).
+
+### Council (ran 2026-10-14, five voices): SHIP with the changes below
+
+- CONTRARIAN: the fatal flaw is the pair pages. Hundreds of near-identical templated URLs are the classic thin-content/doorway pattern and put the site's AdSense standing at risk. Also: wrong shoe/clothing/cooking numbers cost trust faster than missing pages gain traffic; round-trip tests with a pure relative tolerance fail near zero (0 C, 0 deg).
+- FIRST PRINCIPLES: the real job is "a person types a conversion and gets the answer on a page that matches what they typed". Pair pages are only a means for the "x to y" query shape; the tool itself already converts anything. So pairs must earn their URL or not exist.
+- EXPANSIONIST: the long-tail upside is real if each pair page is genuinely useful: both directions, a values table, a worked example. Cross-link converters to each other and to existing related calculators (water converters to the water intake calculator) inside NEW pages only.
+- OUTSIDER: with 28 categories the hub is a wall unless grouped (Everyday, Science and engineering, Computing, Cooking and water, Sizes, Developer). Mobile search sits behind the hamburger; the result list must be tappable at 44 px rows. "Weight" and "Mass" must both find the same page.
+- EXECUTOR: Monday-morning feasible only if the work ships in slices with the engine and tests first; the pair list must be a fixed small number, not "about 250".
+
+Changes folded in (binding for the build):
+1. Pair pages capped at 8 to 12 per category and 150 in total, chosen by search demand (e.g. kg-to-lbs, c-to-f, miles-to-km, gallons-to-liters). Every pair page must carry: a values table in BOTH directions (12 values each), a worked example with computed numbers, a pair-specific FAQ (3 questions with computed answers), the category educational block, and a link to the full category tool. Reverse-direction pages are not generated. Pairs not in the list are served by the category tool only.
+2. Round-trip tolerance is `|a-b| <= 1e-9 * max(1, |a|, |b|)` (absolute floor near zero), tested at values 1, 0.001, 1234.5678, and 0 where valid.
+3. Hub groups categories into six labelled groups; "mass" and "weight" are both aliases of the weight category in search.
+4. Search result rows are at least 44 px high; the dropdown scrolls inside the viewport at 375 px; Escape and outside-click close it.
+5. `/search-index/` is a `force-static` route handler; the build output is checked for its presence and the response is checked in the browser, not assumed.
+6. Approximate categories (cooking, shoe, clothing, Mach) show a visible "approximate" note directly under the result, not only in the footer.
+Convergence: the five voices agree on SHIP only with change 1; no unresolved divergence. Open question for Boubacar: none blocking (pair-page SEO value is a hypothesis; it can be pruned by deleting lines in the pair list).
