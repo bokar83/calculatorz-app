@@ -1,4 +1,4 @@
-﻿import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
 
 const ACTIVITY_MULT: Record<string, number> = {
   sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, very_active: 1.9,
@@ -46,19 +46,26 @@ export const calorieDeficit: CalculatorConfig = {
 
     const tdee = bmr * (ACTIVITY_MULT[activity] ?? 1.55)
     const lbsToLose = currentLbs - goalLbs
-    const targetCalories1lb = tdee - 500
-    const targetCalories2lb = tdee - 1000
-    const weeksAt1lb = lbsToLose > 0 ? Math.round(lbsToLose) : 0
-    const weeksAt2lb = lbsToLose > 0 ? Math.ceil(lbsToLose / 2) : 0
+    // Gain mode: goal above current weight means a surplus (+500 / +1000 kcal), not a deficit.
+    const gaining = lbsToLose < 0
+    const dir = gaining ? 1 : -1
+    const verb = gaining ? 'gain' : 'lose'
+    const lbsToMove = Math.abs(lbsToLose)
+    const targetCalories1lb = tdee + dir * 500
+    const targetCalories2lb = tdee + dir * 1000
+    const weeksAt1lb = lbsToMove > 0 ? Math.round(lbsToMove) : 0
+    const floor = sex === 'female' ? 1200 : 1500
+    const belowFloor = !gaining && (targetCalories1lb < floor || targetCalories2lb < floor)
+    const floorNote = belowFloor ? ' Note: a target below ' + floor + ' kcal/day is under the commonly cited minimum for unsupervised dieting; talk to a clinician before eating that low.' : ''
 
     return {
       values: [
-        { label: 'Daily Target (lose 1 lb/wk)', value: Math.round(targetCalories1lb) + ' kcal', primary: true },
-        { label: 'Daily Target (lose 2 lb/wk)', value: Math.round(targetCalories2lb) + ' kcal' },
+        { label: 'Daily Target (' + verb + ' 1 lb/wk)', value: Math.round(targetCalories1lb) + ' kcal', primary: true },
+        { label: 'Daily Target (' + verb + ' 2 lb/wk)', value: Math.round(targetCalories2lb) + ' kcal' },
         { label: 'TDEE (maintenance)', value: Math.round(tdee) + ' kcal' },
         { label: 'Time to Goal (1 lb/wk)', value: weeksAt1lb > 0 ? weeksAt1lb + ' weeks' : 'Already at goal' },
       ],
-      summary: 'Maintenance: ' + Math.round(tdee) + ' kcal/day. To lose ' + (lbsToLose > 0 ? lbsToLose : 0) + ' lbs: target ' + Math.round(targetCalories1lb) + ' kcal/day (1 lb/wk) or ' + Math.round(targetCalories2lb) + ' kcal/day (2 lb/wk).',
+      summary: 'Maintenance: ' + Math.round(tdee) + ' kcal/day. To ' + verb + ' ' + lbsToMove + ' lbs: target ' + Math.round(targetCalories1lb) + ' kcal/day (1 lb/wk) or ' + Math.round(targetCalories2lb) + ' kcal/day (2 lb/wk).' + floorNote,
     }
   },
   resultLabels: ['Daily Target (1 lb/wk)', 'Daily Target (2 lb/wk)', 'TDEE', 'Time to Goal'],

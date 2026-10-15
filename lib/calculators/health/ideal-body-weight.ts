@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
 
 export const idealBodyWeight: CalculatorConfig = {
   slug: 'ideal-body-weight',
@@ -21,16 +21,24 @@ export const idealBodyWeight: CalculatorConfig = {
     const inchesOver5Ft = Math.max(0, totalInches - 60)
     const sex = inputs.sex as string || 'male'
 
+    // kg-per-inch published equations, converted to lb. Source: Peterson CM et al., Am J Clin Nutr 2016;103(5):1197-1203,
+    // Table 3 (https://pmc.ncbi.nlm.nih.gov/articles/PMC4841935/), checked 2026-10-15:
+    //   Devine 1974   men 50.0 + 2.3 kg/in, women 45.5 + 2.3 kg/in (over 5 ft)
+    //   Robinson 1983 men 52 + 1.9 kg/in,   women 49 + 1.7 kg/in
+    //   Miller 1983   men 56.2 + 1.41 kg/in, women 53.1 + 1.36 kg/in
+    //   Hamwi 1964    men 106 + 6 lb/in,    women 100 + 5 lb/in
+    const KG_TO_LB = 2.20462262
+    const lb = (kgBase: number, kgPerInch: number) => (kgBase + kgPerInch * inchesOver5Ft) * KG_TO_LB
     let devine: number, robinson: number, miller: number, hamwi: number
     if (sex === 'male') {
-      devine = 110.23 + 5.08 * inchesOver5Ft
-      robinson = 114.64 + 4.19 * inchesOver5Ft
-      miller = 124.23 + 2.84 * inchesOver5Ft
+      devine = lb(50.0, 2.3)
+      robinson = lb(52, 1.9)
+      miller = lb(56.2, 1.41)
       hamwi = 106 + 6 * inchesOver5Ft
     } else {
-      devine = 100.31 + 4.54 * inchesOver5Ft
-      robinson = 105.82 + 3.75 * inchesOver5Ft
-      miller = 116.85 + 2.64 * inchesOver5Ft
+      devine = lb(45.5, 2.3)
+      robinson = lb(49, 1.7)
+      miller = lb(53.1, 1.36)
       hamwi = 100 + 5 * inchesOver5Ft
     }
 

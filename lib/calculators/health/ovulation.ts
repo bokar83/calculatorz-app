@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
 
 export const ovulation: CalculatorConfig = {
   slug: 'ovulation',
@@ -7,9 +7,9 @@ export const ovulation: CalculatorConfig = {
   description: 'Estimate your ovulation window and most fertile days.',
   updatedDate: 'April 2026',
   inputs: [
-    { id: 'lmpYear', label: 'First Day of Last Period - Year', type: 'number', defaultValue: 2025, min: 2020, max: 2030, step: 1 },
+    { id: 'lmpYear', label: 'First Day of Last Period - Year', type: 'number', defaultValue: 2026, min: 2020, max: 2035, step: 1, todayDefault: { part: 'year', offsetDays: -10 } },
     {
-      id: 'lmpMonth', label: 'Month', type: 'select',
+      id: 'lmpMonth', label: 'Month', type: 'select', todayDefault: { part: 'month', offsetDays: -10 },
       options: [
         { value: '1', label: 'January' }, { value: '2', label: 'February' }, { value: '3', label: 'March' },
         { value: '4', label: 'April' }, { value: '5', label: 'May' }, { value: '6', label: 'June' },
@@ -17,7 +17,7 @@ export const ovulation: CalculatorConfig = {
         { value: '10', label: 'October' }, { value: '11', label: 'November' }, { value: '12', label: 'December' },
       ],
     },
-    { id: 'lmpDay', label: 'Day', type: 'number', defaultValue: 1, min: 1, max: 31, step: 1 },
+    { id: 'lmpDay', label: 'Day', type: 'number', defaultValue: 1, min: 1, max: 31, step: 1, todayDefault: { part: 'day', offsetDays: -10 } },
     { id: 'cycleLength', label: 'Average Cycle Length (days)', type: 'number', defaultValue: 28, min: 21, max: 45, step: 1 },
   ],
   calculate: (inputs) => {
@@ -47,7 +47,7 @@ export const ovulation: CalculatorConfig = {
         { label: 'Estimated Ovulation', value: fmt(ovulationDate), primary: true },
         { label: 'Fertile Window', value: fmt(fertileStart) + ' - ' + fmt(fertileEnd) },
         { label: 'Next Period', value: fmt(nextPeriod) },
-        { label: 'Cycle Day of Ovulation', value: 'Day ' + ovulationDay },
+        { label: 'Cycle Day of Ovulation', value: 'Day ' + (ovulationDay + 1) },
       ],
       summary: 'Estimated ovulation: ' + fmt(ovulationDate) + '. Fertile window: ' + fmt(fertileStart) + ' to ' + fmt(fertileEnd) + '.',
     }

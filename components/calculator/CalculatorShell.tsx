@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { todayPart } from '@/lib/todayDefaults'
 import type { CalculatorConfig, CalculatorResult, UnitSystem } from '@/lib/calculators/types'
 import { DEFAULT_CURRENCY } from '@/lib/currencies'
 import CurrencySelector from './CurrencySelector'
@@ -12,19 +13,37 @@ import type { Currency } from '@/lib/calculators/types'
 interface CalculatorShellProps {
   config: CalculatorConfig
   initialCurrency?: Currency
+  /** Values pre-filled into inputs (matching ids) and passed through to calculate() (any key), e.g. { stateSlug: 'texas' }. */
+  presets?: Record<string, number | string>
+  /** Input ids that are driven by presets and therefore not shown (e.g. the manual state-rate field on a state page). */
+  hiddenInputs?: string[]
 }
 
-export default function CalculatorShell({ config, initialCurrency }: CalculatorShellProps) {
+export default function CalculatorShell({ config, initialCurrency, presets, hiddenInputs }: CalculatorShellProps) {
   const [activeTab, setActiveTab] = useState(config.tabs?.[0]?.id ?? 'default')
   const [currency, setCurrency] = useState<Currency>(initialCurrency ?? DEFAULT_CURRENCY)
   const [unitSystem, setUnitSystem] = useState<UnitSystem>('metric')
   const [result, setResult] = useState<CalculatorResult | null>(null)
   const [showAffiliate, setShowAffiliate] = useState(false)
 
-  const defaultInputs = Object.fromEntries(
-    config.inputs.map(f => [f.id, f.defaultValue ?? (f.options?.[0]?.value ?? '')])
+  const baseDefaults = (): Record<string, number | string> => Object.fromEntries(
+    config.inputs.map(f => [f.id, presets?.[f.id] ?? f.defaultValue ?? (f.options?.[0]?.value ?? '')])
   )
-  const [inputs, setInputs] = useState<Record<string, number | string>>(defaultInputs)
+  const [inputs, setInputs] = useState<Record<string, number | string>>(baseDefaults)
+
+  // Today-relative date defaults are applied after mount (the static HTML carries a fixed fallback).
+  useEffect(() => {
+    const dated = config.inputs.filter(f => f.todayDefault)
+    if (dated.length === 0) return
+    setInputs(prev => ({
+      ...prev,
+      ...Object.fromEntries(dated.map(f => {
+        const v = todayPart(f.todayDefault!.part, f.todayDefault!.offsetDays)
+        return [f.id, f.type === 'select' ? String(v) : v]
+      })),
+    }))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   // Per-field input mode for percent-or-amount fields (e.g. down payment). Stored value stays the percent.
   const [pctModes, setPctModes] = useState<Record<string, 'percent' | 'amount'>>({})
 
@@ -39,13 +58,13 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
 
   const handleUnitChange = (u: UnitSystem) => {
     setUnitSystem(u)
-    setInputs(Object.fromEntries(config.inputs.map(f => [f.id, f.defaultValue ?? (f.options?.[0]?.value ?? '')])))
+    setInputs({ ...baseDefaults(), ...(u === 'imperial' ? config.imperialDefaults ?? {} : {}) })
     setResult(null)
   }
 
   const handleCalculate = () => {
     try {
-      const parsed: Record<string, number | string> = {}
+      const parsed: Record<string, number | string> = { ...(presets ?? {}) }
       for (const field of config.inputs) {
         parsed[field.id] = field.type === 'number' ? Number(inputs[field.id]) : inputs[field.id]
       }
@@ -58,7 +77,7 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
   }
 
   const hasTabs = config.tabs && config.tabs.length > 1
-  const isImperial = config.category === 'health' && unitSystem === 'imperial'
+  const isImperial = config.usesUnits === true && unitSystem === 'imperial'
 
   return (
     <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 shadow-sm">
@@ -86,14 +105,14 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
         </div>
       )}
 
-      {config.category === 'health' && (
+      {config.usesUnits === true && (
         <div className="mb-4">
           <UnitToggle value={unitSystem} onChange={handleUnitChange} />
         </div>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {config.inputs.map(field => {
+        {config.inputs.filter(f => !hiddenInputs?.includes(f.id)).map(field => {
           const displayLabel = isImperial
             ? field.label.replace('(kg)', '(lbs)').replace('(cm)', '(in)')
             : field.label
@@ -185,6 +204,16 @@ export default function CalculatorShell({ config, initialCurrency }: CalculatorS
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
                   ))}
                 </select>
+              ) : field.type === 'text' ? (
+                <input
+                  type="text"
+                  value={String(inputs[field.id])}
+                  onChange={e => handleChange(field.id, e.target.value)}
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  className="w-full border border-[#E5E7EB] rounded-md px-3 py-2 text-sm text-[#1A1F36] focus:outline-none focus:ring-2 focus:ring-teal-400"
+                />
               ) : (
                 <div className="flex items-center border border-[#E5E7EB] rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-teal-400">
                   {field.prefix && (

@@ -1,4 +1,4 @@
-import { CalculatorConfig, Currency } from '../types'
+import type { CalculatorConfig, Currency } from '../types.ts'
 
 export const loanPayment: CalculatorConfig = {
   slug: 'loan-payment',
@@ -19,6 +19,19 @@ export const loanPayment: CalculatorConfig = {
     const years = Number(inputs.loanTermYears)
     const r = annualRate / 100 / 12
     const n = years * 12
+
+    if (!Number.isFinite(P) || P < 0 || !Number.isFinite(annualRate) || annualRate < 0 || !Number.isFinite(years) || years <= 0) {
+      const why = !(years > 0) ? 'Enter a loan term greater than 0 years.' : P < 0 || !Number.isFinite(P) ? 'Enter a loan amount of zero or more.' : 'Enter an interest rate of zero or more.'
+      return {
+        values: [
+          { label: 'Monthly Payment', value: 'N/A' },
+          { label: 'Total Payment', value: 'N/A' },
+          { label: 'Total Interest', value: 'N/A' },
+          { label: 'Interest as % of Loan', value: 'N/A' },
+        ],
+        summary: why,
+      }
+    }
 
     let monthly: number
     if (r === 0) {

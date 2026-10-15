@@ -29,7 +29,7 @@
 //   Every Tier 2 state is listed by name in the calculator's report and
 //   flagged as ASSUMPTION / APPROXIMATED in the UI.
 
-import { US_STATES, getStateBySlug } from '../states'
+import { US_STATES, getStateBySlug } from '../states.ts'
 
 export interface StateBracket {
   upTo: number

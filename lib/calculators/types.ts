@@ -15,7 +15,7 @@ export interface Tab {
 export interface InputField {
   id: string
   label: string
-  type: 'number' | 'select'
+  type: 'number' | 'select' | 'text'
   defaultValue?: number | string
   min?: number
   max?: number
@@ -31,6 +31,12 @@ export interface InputField {
    * keeps the two views in sync live. calculate() reads the percent unchanged.
    */
   percentOf?: string
+  /**
+   * Default that follows today's date instead of a fixed number, applied on the client after mount
+   * (a static default goes stale the day after the site is built).
+   * part: which piece of (today + offsetDays) to use.
+   */
+  todayDefault?: { part: 'year' | 'month' | 'day'; offsetDays: number }
 }
 
 export interface CalculatorResult {
@@ -71,6 +77,13 @@ export interface CalculatorConfig {
    * The URL still follows `category`, so existing routes never move.
    */
   displayGroup?: 'converters' | 'tools'
+  /**
+   * Opt-in. Only calculators whose inputs actually read the metric/imperial unit system set this
+   * to true; the shell then shows the unit toggle. Default (absent) = NO toggle.
+   */
+  usesUnits?: boolean
+  /** Input defaults to load when the user switches to imperial (so the shown numbers match the unit). */
+  imperialDefaults?: Record<string, number | string>
   /** Optional call-out link rendered under the page header. */
   crossLink?: { href: string; label: string; text: string }
   description: string

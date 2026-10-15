@@ -1,4 +1,8 @@
-﻿import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
+import { BRACKETS, LTCG_THRESHOLDS, progressiveTax, type FilingStatus } from '../../tax/constants2026.ts'
+
+// 2026 thresholds and brackets come from lib/tax/constants2026.ts (IRS Rev. Proc. 2025-32, cited there).
+// Not modeled: the 3.8% Net Investment Income Tax over $200,000 (single) / $250,000 (MFJ) MAGI, state tax, collectibles/real-property special rates.
 
 export const capitalGainsTax: CalculatorConfig = {
   slug: 'capital-gains-tax',
@@ -17,7 +21,15 @@ export const capitalGainsTax: CalculatorConfig = {
         { value: 'long', label: 'Long-term (over 1 year)' },
       ],
     },
-    { id: 'annualIncome', label: 'Annual Taxable Income', type: 'number', defaultValue: 75000, min: 0, step: 1000, prefix: '$' },
+    { id: 'annualIncome', label: 'Annual Taxable Income (before this gain)', type: 'number', defaultValue: 75000, min: 0, step: 1000, prefix: '$', hint: 'Your taxable income after the standard deduction, not counting this gain. The gain is stacked on top of it.' },
+    {
+      id: 'filingStatus', label: 'Filing Status', type: 'select',
+      options: [
+        { value: 'single', label: 'Single' },
+        { value: 'married', label: 'Married Filing Jointly' },
+        { value: 'hoh', label: 'Head of Household' },
+      ],
+    },
   ],
   calculate: (inputs, currency) => {
     const sale = Number(inputs.salePrice)
@@ -27,34 +39,34 @@ export const capitalGainsTax: CalculatorConfig = {
     const gain = sale - basis
     if (gain <= 0) return { values: [{ label: 'Capital Loss', value: currency.symbol + Math.abs(gain).toLocaleString('en-US') }], summary: 'You have a capital loss. Losses can offset gains and up to $3,000 of ordinary income per year.' }
 
-    let rate: number
+    const status = ((inputs.filingStatus as string) || 'single') as FilingStatus
+    const brackets = BRACKETS[status] ?? BRACKETS.single
+    let tax: number
     if (!isLongTerm) {
-      // Short-term: taxed as ordinary income (simplified)
-      if (income < 47150) rate = 0.22
-      else if (income < 100525) rate = 0.22
-      else if (income < 191950) rate = 0.24
-      else rate = 0.32
+      // Short-term gains are taxed as ordinary income, stacked on top of other taxable income.
+      tax = progressiveTax(income + gain, brackets) - progressiveTax(income, brackets)
     } else {
-      // 2025 long-term rates
-      if (income <= 47025) rate = 0
-      else if (income <= 518900) rate = 0.15
-      else rate = 0.20
+      // Long-term gains: the part of the gain below the 0% ceiling is free, then 15%, then 20%.
+      const t = LTCG_THRESHOLDS[status] ?? LTCG_THRESHOLDS.single
+      const at0 = Math.max(0, Math.min(income + gain, t.zeroUpTo) - income)
+      const at15 = Math.max(0, Math.min(income + gain, t.fifteenUpTo) - Math.max(income, t.zeroUpTo))
+      const at20 = gain - at0 - at15
+      tax = at15 * 0.15 + at20 * 0.20
     }
-
-    const tax = gain * rate
+    const rate = tax / gain
     const netProceeds = gain - tax
     const fmt = (v: number) => currency.symbol + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     return {
       values: [
         { label: 'Capital Gain', value: fmt(gain), primary: true },
         { label: 'Tax Owed', value: fmt(tax) },
-        { label: 'Tax Rate', value: (rate * 100).toFixed(0) + '%' },
+        { label: 'Effective Tax Rate on Gain', value: (rate * 100).toFixed(1) + '%' },
         { label: 'Net Gain After Tax', value: fmt(netProceeds) },
       ],
-      summary: `${fmt(gain)} ${isLongTerm ? 'long-term' : 'short-term'} gain taxed at ${(rate * 100).toFixed(0)}% = ${fmt(tax)} owed. Net gain: ${fmt(netProceeds)}.`,
+      summary: `${fmt(gain)} ${isLongTerm ? 'long-term' : 'short-term'} gain taxed at an effective ${(rate * 100).toFixed(1)}% = ${fmt(tax)} owed. Net gain: ${fmt(netProceeds)}.`,
     }
   },
-  resultLabels: ['Capital Gain', 'Tax Owed', 'Tax Rate', 'Net Gain After Tax'],
+  resultLabels: ['Capital Gain', 'Tax Owed', 'Effective Tax Rate on Gain', 'Net Gain After Tax'],
   formula: 'Capital Gains Tax = (Sale Price - Cost Basis) x Tax Rate',
   content: {
     howTo: ['Enter the sale price of the asset.', 'Enter your cost basis (what you paid).', 'Select short or long-term holding period.', 'Enter your annual income for rate calculation.', 'Click Calculate.'],
@@ -77,8 +89,8 @@ export const capitalGainsTax: CalculatorConfig = {
     ruleOfThumb: 'Hold an asset for more than one year to qualify for long-term capital gains rates, which max out at 20% versus up to 37% for short-term gains taxed as ordinary income.',
     example: 'An investor buys stock for $10,000 and sells for $18,000 after 14 months. Long-term gain = $8,000. At the 15% rate (middle income bracket): tax owed = $1,200. Net gain after tax = $6,800.',
     keyFacts: [
-      'For 2024, the 0% long-term capital gains rate applies to single filers with taxable income up to $47,025 and married filers up to $94,050 (IRS Revenue Procedure 2023-34).',
-      'The 15% long-term rate applies to single filers earning between $47,026 and $518,900 in 2024, covering the vast majority of individual investors (IRS Publication 550, 2024).',
+      'For 2026, the 0% long-term capital gains rate applies to single filers with taxable income up to $49,450 and married filing jointly up to $98,900 (IRS Revenue Procedure 2025-32).',
+      'The 15% long-term rate applies to single filers with taxable income between $49,451 and $545,500 in 2026, covering the vast majority of individual investors (IRS Revenue Procedure 2025-32).',
       'Capital losses can offset capital gains dollar for dollar, and up to $3,000 of excess losses can reduce ordinary income per year, with remaining losses carried forward indefinitely (IRS Publication 550).',
       'The Net Investment Income Tax (NIIT) adds an additional 3.8% on investment income for taxpayers with modified adjusted gross income above $200,000 (single) or $250,000 (married), per IRS Form 8960 instructions.',
     ],

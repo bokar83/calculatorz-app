@@ -112,7 +112,7 @@ export const retirementSavings: CalculatorConfig = {
     example:
       'Starting at age 30 with $20,000 saved, contributing $500/month at a 7% average annual return: by age 65 you would have approximately $932,000. Starting at 40 with the same inputs yields only $432,000 — a $500,000 cost of waiting a decade.',
     keyFacts: [
-      'The 2025 IRS 401(k) contribution limit is $23,500 per year ($31,000 if age 50+), plus employer match.',
+      'The 2026 IRS 401(k) contribution limit is $24,500 per year ($32,500 if age 50+), plus employer match.',
       'Only 56% of American workers have access to a workplace retirement plan; of those, 83% participate (U.S. Department of Labor, 2023).',
       'The median retirement savings for Americans aged 55-64 is $134,000 — far short of the $1M+ typically recommended (Federal Reserve SCF, 2022).',
       'Social Security replaces approximately 40% of pre-retirement income for average earners; financial planners target 70-90% total replacement rate.',

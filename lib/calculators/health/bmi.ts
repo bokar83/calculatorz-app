@@ -1,9 +1,11 @@
-import { CalculatorConfig, Currency, UnitSystem } from '../types'
+import type { CalculatorConfig, Currency, UnitSystem } from '../types.ts'
 
 export const bmi: CalculatorConfig = {
   slug: 'bmi',
   title: 'BMI Calculator',
   category: 'health',
+  usesUnits: true,
+  imperialDefaults: { weight: 154, height: 67 },
   description: 'Calculate your BMI and understand what it means for your health. Supports metric and imperial units. Includes healthy weight range.',
   updatedDate: 'April 2026',
   inputs: [

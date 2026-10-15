@@ -1,4 +1,7 @@
-import { CalculatorConfig, Currency } from '../types'
+import type { CalculatorConfig, Currency } from '../types.ts'
+import { LIMIT_401K } from '../../tax/constants2026.ts'
+
+// 2026 limits come from lib/tax/constants2026.ts (IRS IR-2025-111, cited there).
 
 export const calculator401k: CalculatorConfig = {
   slug: '401k-calculator',
@@ -12,7 +15,7 @@ export const calculator401k: CalculatorConfig = {
     { id: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: 65, min: 50, max: 80, step: 1 },
     { id: 'currentBalance', label: 'Current 401(k) Balance', type: 'number', defaultValue: 25000, min: 0, max: 5000000, step: 1000, prefix: '$' },
     { id: 'annualSalary', label: 'Annual Salary', type: 'number', defaultValue: 75000, min: 10000, max: 1000000, step: 1000, prefix: '$' },
-    { id: 'contributionPct', label: 'Your Contribution (%)', type: 'number', defaultValue: 10, min: 0, max: 23, step: 0.5, suffix: '%', hint: '2025 IRS limit: $23,500 ($31,000 if age 50+). Contribute at least enough to capture the full employer match.' },
+    { id: 'contributionPct', label: 'Your Contribution (%)', type: 'number', defaultValue: 10, min: 0, max: 23, step: 0.5, suffix: '%', hint: '2026 IRS limit: $24,500 ($32,500 if age 50+). Contribute at least enough to capture the full employer match.' },
     { id: 'employerMatchPct', label: 'Employer Match (%)', type: 'number', defaultValue: 4, min: 0, max: 10, step: 0.5, suffix: '%', hint: 'Many employers match 3-6% of salary. Check your plan documents.' },
     { id: 'annualReturn', label: 'Expected Annual Return', type: 'number', defaultValue: 7, min: 1, max: 15, step: 0.1, suffix: '%' },
   ],
@@ -32,8 +35,8 @@ export const calculator401k: CalculatorConfig = {
     }
 
     const years = retirementAge - currentAge
-    const IRS_LIMIT_2025 = 23500
-    const annualContribution = Math.min(annualSalary * contributionPct / 100, IRS_LIMIT_2025)
+    const IRS_LIMIT = LIMIT_401K
+    const annualContribution = Math.min(annualSalary * contributionPct / 100, IRS_LIMIT)
     const employerContribution = annualSalary * Math.min(contributionPct, employerMatchPct) / 100
     const totalAnnualContribution = annualContribution + employerContribution
 
@@ -77,8 +80,8 @@ export const calculator401k: CalculatorConfig = {
     ],
     faqs: [
       {
-        q: 'What is the 2025 401(k) contribution limit?',
-        a: 'The IRS 401(k) contribution limit for 2025 is $23,500 per year. If you are age 50 or older, you can contribute an additional $7,500 in catch-up contributions for a total of $31,000. These limits are set by the IRS and adjusted periodically for inflation.',
+        q: 'What is the 2026 401(k) contribution limit?',
+        a: 'The IRS 401(k) contribution limit for 2026 is $24,500 per year. If you are age 50 or older, you can contribute an additional $8,000 in catch-up contributions for a total of $32,500. These limits are set by the IRS and adjusted periodically for inflation.',
       },
       {
         q: 'What is the 4% rule for retirement income?',
@@ -116,7 +119,7 @@ export const calculator401k: CalculatorConfig = {
     ruleOfThumb: 'Contribute at least enough to capture the full employer match (it is free money, never leave it on the table), then work toward 15% of gross salary total (including employer match). Fidelity benchmarks: 1x salary saved by 30, 3x by 40, 6x by 50, 10x by 67.',
     example: 'Starting at age 30 with $25,000 in a 401(k), contributing 10% of a $75,000 salary with a 4% employer match, at 7% annual return: projected balance at age 65 is approximately $1,050,000. Monthly income using the 4% rule: approximately $3,500/month. Waiting until age 40 to start the same plan produces approximately $480,000 — less than half, from a 10-year delay.',
     keyFacts: [
-      'The IRS 401(k) contribution limit for 2025 is $23,500 per year ($31,000 for those age 50 and older). (Source: IRS)',
+      'The IRS 401(k) contribution limit for 2026 is $24,500 per year ($32,500 for those age 50 and older). (Source: IRS)',
       'Vanguard research found that 59% of 401(k) participants in 2023 received some form of employer matching contribution, with the median match rate at 4% of salary. (Source: Vanguard How America Saves 2024)',
       'Fidelity reports that the average 401(k) balance for participants in their late 60s was approximately $360,000 in 2024, well below the 10x salary benchmark for full retirement readiness. (Source: Fidelity)',
       'The 4% withdrawal rule, derived from the 1994 Trinity Study, has maintained portfolio survival rates of 95%+ over 30-year retirement periods when applied to a diversified stock and bond portfolio. (Source: Trinity Study / Bengen)',
@@ -128,7 +131,7 @@ export const calculator401k: CalculatorConfig = {
       'Always contribute at least enough to capture the full employer match. If your employer matches 4% of salary, contributing 4% yourself means you are effectively doubling that portion of your savings from day one.',
       'Increase your contribution rate by 1% each year, or route every raise directly into your 401(k). Because your take-home pay was already set at the lower rate, lifestyle inflation is avoided and savings compound over decades.',
       'Choose low-cost index funds within your 401(k) plan. A 0.1% expense ratio vs a 1% ratio saves tens of thousands of dollars over a 30-year career on the same underlying investments.',
-      'If you are age 50 or older, take advantage of catch-up contributions. The additional $7,500 allowed in 2025 can add $200,000+ to your final balance if invested for 15 years at 7% annual return.',
+      'If you are age 50 or older, take advantage of catch-up contributions. The additional $8,000 allowed in 2026 can add $200,000+ to your final balance if invested for 15 years at 7% annual return.',
     ],
     commonMistakes: [
       'Not contributing enough to capture the full employer match. Leaving any employer match uncaptured is the equivalent of refusing a portion of your compensation. It is the highest-return financial decision most people have access to.',
@@ -139,7 +142,7 @@ export const calculator401k: CalculatorConfig = {
   },
   jsonLd: {
     faqs: [
-      { q: 'What is the 2025 401(k) contribution limit?', a: '$23,500 per year ($31,000 for those age 50+) per IRS guidelines.' },
+      { q: 'What is the 2026 401(k) contribution limit?', a: '$24,500 per year ($32,500 for those age 50+) per IRS guidelines.' },
       { q: 'What is the 4% rule for retirement income?', a: 'Withdraw 4% of your portfolio in year one, then adjust for inflation annually. Historically sustains portfolios for 30 years.' },
       { q: 'Should I contribute to a traditional or Roth 401(k)?', a: 'Traditional reduces taxes now; Roth provides tax-free withdrawals in retirement. Choose based on your expected tax bracket in retirement.' },
       { q: 'What happens to my 401(k) if I change jobs?', a: 'Roll it to your new employer plan or an IRA. Avoid cashing out — you will pay income tax plus a 10% early withdrawal penalty.' },

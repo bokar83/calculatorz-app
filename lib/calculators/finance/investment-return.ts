@@ -78,7 +78,7 @@ export const investmentReturn: CalculatorConfig = {
       },
       {
         q: 'How much should I invest each year?',
-        a: 'The IRS limit for IRA contributions in 2025 is $7,000 ($8,000 for those 50 and older). For 401(k) accounts, the limit is $23,500 ($31,000 for 50+). Maximizing tax-advantaged accounts first before taxable accounts is the standard guidance.',
+        a: 'The IRS limit for IRA contributions in 2026 is $7,500 (higher for those 50 and older, IRS IR-2025-111). For 401(k) accounts, the limit is $24,500 ($32,500 for 50+). Maximizing tax-advantaged accounts first before taxable accounts is the standard guidance.',
       },
       {
         q: 'What happens if I stop contributing early?',
@@ -129,7 +129,7 @@ export const investmentReturn: CalculatorConfig = {
       { q: 'How does inflation affect investment returns?', a: 'Inflation reduces purchasing power. Real return equals nominal return minus inflation rate. Use real returns for goals expressed in today\'s dollars.' },
       { q: 'What is dollar-cost averaging?', a: 'Investing a fixed amount at regular intervals regardless of market conditions, reducing the average cost per share over time.' },
       { q: 'Should I invest in index funds?', a: 'Low-cost index funds outperform the majority of actively managed funds over 10-20 year periods due to lower expense ratios.' },
-      { q: 'How much should I invest each year?', a: '2025 IRA limit: $7,000 ($8,000 age 50+). 401(k) limit: $23,500 ($31,000 age 50+). Maximize tax-advantaged accounts first.' },
+      { q: 'How much should I invest each year?', a: '2026 IRA limit: $7,500 (higher at 50+). 401(k) limit: $24,500 ($32,500 age 50+). Maximize tax-advantaged accounts first.' },
       { q: 'What happens if I stop contributing early?', a: 'Stopping contributions has a dramatic long-term impact because future years of compounding on those contributions are lost.' },
       { q: 'What is the Rule of 72?', a: 'Divide 72 by your annual return rate to estimate how long money takes to double. At 7%, money doubles every 10.3 years.' },
       { q: 'What is the difference between nominal and real returns?', a: 'Nominal return is the raw gain. Real return subtracts inflation and reflects actual purchasing power gained.' },

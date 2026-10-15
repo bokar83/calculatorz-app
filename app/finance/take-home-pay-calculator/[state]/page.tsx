@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const stateData = getStateBySlug(state)
   if (!stateData) return {}
 
-  const title = `${stateData.name} Take-Home Pay Calculator — Free 2025 Paycheck Estimator`
+  const title = `${stateData.name} Take-Home Pay Calculator — Free 2026 Paycheck Estimator`
   const description = `Calculate your take-home pay in ${stateData.name} after federal taxes, ${stateData.hasNoIncomeTax ? 'FICA, and deductions. ' + stateData.name + ' has no state income tax.' : `${stateData.stateTaxRate}% state income tax, FICA, and deductions.`} Free, no sign-up required.`
 
   return {
@@ -44,8 +44,8 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
   if (!stateData) notFound()
 
   const taxNote = stateData.hasNoIncomeTax
-    ? `${stateData.name} has no state income tax. Set the state tax field to 0%.`
-    : `Use ${stateData.stateTaxRate}% as the starting state tax rate for ${stateData.name}.`
+    ? `${stateData.name} has no state income tax. The calculator below applies 0% state tax.`
+    : `State tax for ${stateData.name} is estimated from its ${stateData.stateTaxRate}% headline rate (full bracket tables where modeled).`
 
   const faqs = [
     {
@@ -56,7 +56,7 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
     },
     {
       q: `How do I calculate take-home pay in ${stateData.name}?`,
-      a: `Start with your gross annual salary. Subtract your pre-tax deductions (401k, HSA). Apply federal tax brackets and the 2025 standard deduction. Add FICA taxes (6.2% Social Security up to $168,600, plus 1.45% Medicare). Then apply ${stateData.name}'s state income tax${stateData.hasNoIncomeTax ? ' — which is 0%' : ` of approximately ${stateData.stateTaxRate}%`}. The result is your estimated net annual take-home pay.`,
+      a: `Start with your gross annual salary. Subtract your pre-tax deductions (401k, HSA). Apply the 2026 federal tax brackets and the 2026 standard deduction ($16,100 single, $32,200 married filing jointly). Add FICA taxes (6.2% Social Security up to $184,500, plus 1.45% Medicare, plus 0.9% Additional Medicare Tax on wages above $200,000 single or $250,000 married). Then apply ${stateData.name}'s state income tax${stateData.hasNoIncomeTax ? ' — which is 0%' : ` of approximately ${stateData.stateTaxRate}%`}. The result is your estimated net annual take-home pay.`,
     },
     {
       q: `Does ${stateData.name} have any special payroll taxes I should know about?`,
@@ -64,7 +64,7 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
     },
     {
       q: 'How accurate is this take-home pay estimate?',
-      a: 'This calculator provides a close estimate using 2025 federal tax brackets, standard deductions, and approximate state tax rates. Your actual paycheck may differ based on your exact withholding elections (W-4), employer benefits, supplemental wages, local taxes, or specific deduction amounts. Use this as a planning tool and consult a tax professional for exact figures.',
+      a: 'This calculator provides a close estimate using 2026 federal tax brackets, standard deductions, and approximate state tax rates. Your actual paycheck may differ based on your exact withholding elections (W-4), employer benefits, supplemental wages, local taxes, or specific deduction amounts. Use this as a planning tool and consult a tax professional for exact figures.',
     },
   ]
 
@@ -128,7 +128,7 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
             Estimate your net paycheck in {stateData.name} after federal taxes, FICA, and state income tax deductions.
           </p>
           <p className="text-xs text-[#9CA3AF]">
-            <time dateTime="2026-05-06">Updated May 2026</time> &middot; CalcFlow Editorial
+            <time dateTime="2026-10-15">Updated October 2026</time> &middot; CalcFlow Editorial
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
           </p>
           <p className="text-sm" style={{ color: stateData.hasNoIncomeTax ? '#047857' : '#1d4ed8' }}>
             {stateData.hasNoIncomeTax
-              ? `${stateData.name} has no state income tax on wages. Set the state tax rate to 0% in the calculator below.`
+              ? `${stateData.name} has no state income tax on wages. The calculator below applies 0% state tax.`
               : `Approximate effective rate for middle-income earners: ${stateData.stateTaxRate}%. ${stateData.brackets ? 'Brackets: ' + stateData.brackets + '.' : ''}`
             }
           </p>
@@ -148,19 +148,18 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
           </p>
         </div>
 
-        {/* Calculator — pre-populated with state rate */}
-        <CalculatorLoader slug="take-home-pay" />
+        {/* Calculator — runs this state's own tax rules (no-tax states = 0, full brackets where modeled) */}
+        <CalculatorLoader slug="take-home-pay" presets={{ stateSlug: stateData.slug, stateRate: stateData.stateTaxRate }} hiddenInputs={['stateRate']} />
         <Disclaimer />
 
         {/* State tax note */}
         <div className="mt-4 bg-[#F8FAFB] border border-[#E5E7EB] rounded-lg p-4">
           <p className="text-sm font-semibold text-[#1A1F36] mb-1">How to Use This Calculator for {stateData.name}</p>
-          <p className="text-sm text-[#6B7280]">{taxNote} The calculator above uses the state tax rate field — enter the rate that matches your income level for the most accurate estimate.</p>
+          <p className="text-sm text-[#6B7280]">{`${taxNote} The calculator above applies these state rules automatically.`}</p>
         </div>
 
-        {/* FAQs */}
+        {/* FAQs (FaqSection renders its own heading) */}
         <div className="mt-6">
-          <h2 className="text-xl font-bold text-[#1A1F36] mb-4">{stateData.name} Take-Home Pay — Frequently Asked Questions</h2>
           <FaqSection faqs={faqs} />
         </div>
 

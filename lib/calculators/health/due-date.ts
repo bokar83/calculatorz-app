@@ -1,4 +1,4 @@
-import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
 
 export const dueDate: CalculatorConfig = {
   slug: 'due-date',
@@ -7,9 +7,9 @@ export const dueDate: CalculatorConfig = {
   description: 'Calculate your estimated due date based on last menstrual period.',
   updatedDate: 'April 2026',
   inputs: [
-    { id: 'lmpYear', label: 'LMP Year', type: 'number', defaultValue: 2025, min: 2020, max: 2030, step: 1 },
+    { id: 'lmpYear', label: 'LMP Year', type: 'number', defaultValue: 2026, min: 2020, max: 2035, step: 1, todayDefault: { part: 'year', offsetDays: -56 } },
     {
-      id: 'lmpMonth', label: 'LMP Month', type: 'select',
+      id: 'lmpMonth', label: 'LMP Month', type: 'select', todayDefault: { part: 'month', offsetDays: -56 },
       options: [
         { value: '1', label: 'January' }, { value: '2', label: 'February' }, { value: '3', label: 'March' },
         { value: '4', label: 'April' }, { value: '5', label: 'May' }, { value: '6', label: 'June' },
@@ -17,7 +17,7 @@ export const dueDate: CalculatorConfig = {
         { value: '10', label: 'October' }, { value: '11', label: 'November' }, { value: '12', label: 'December' },
       ],
     },
-    { id: 'lmpDay', label: 'LMP Day', type: 'number', defaultValue: 15, min: 1, max: 31, step: 1 },
+    { id: 'lmpDay', label: 'LMP Day', type: 'number', defaultValue: 15, min: 1, max: 31, step: 1, todayDefault: { part: 'day', offsetDays: -56 } },
     { id: 'cycleLength', label: 'Average Cycle Length (days)', type: 'number', defaultValue: 28, min: 21, max: 45, step: 1 },
   ],
   calculate: (inputs) => {

@@ -1,4 +1,5 @@
-import { CalculatorConfig, Currency } from '../types'
+import type { CalculatorConfig, Currency } from '../types.ts'
+import { CPI_U_ANNUAL, CPI_FIRST_YEAR, CPI_LAST_YEAR } from '../../data/cpiU.ts'
 
 export const inflation: CalculatorConfig = {
   slug: 'inflation',
@@ -7,15 +8,67 @@ export const inflation: CalculatorConfig = {
   description: 'Calculate the impact of inflation on purchasing power over time.',
   updatedDate: 'April 2026',
   inputs: [
-    { id: 'amount', label: 'Current Amount', type: 'number', defaultValue: 1000, prefix: '$' },
+    { id: 'amount', label: 'Amount', type: 'number', defaultValue: 1000, min: 0, step: 100, prefix: '$' },
+    { id: 'startYear', label: 'Start Year', type: 'number', defaultValue: 2015, min: CPI_FIRST_YEAR, max: CPI_LAST_YEAR, step: 1, hint: `Actual US CPI-U data is available for ${CPI_FIRST_YEAR} to ${CPI_LAST_YEAR}.` },
+    { id: 'endYear', label: 'End Year', type: 'number', defaultValue: 2025, min: CPI_FIRST_YEAR, max: CPI_LAST_YEAR, step: 1 },
+    { id: 'annualRate', label: 'Annual Inflation Rate Override (%, optional)', type: 'number', defaultValue: 0, min: 0, max: 100, step: 0.1, suffix: '%', hint: 'Leave at 0 to use actual US CPI-U between the two years. Enter a rate (for example 3) to project the amount forward at that fixed annual rate over the years between start and end instead.' },
   ],
-  calculate: (_inputs: Record<string, number | string>, _currency: Currency) => ({
-    values: [{ label: 'Adjusted Value', value: '$0.00' }],
-  }),
-  resultLabels: ['Adjusted Value'],
-  formula: 'Future Value = Present Value x (1 + Inflation Rate)^Years',
+  calculate: (inputs: Record<string, number | string>, _currency: Currency) => {
+    const amount = Number(inputs.amount)
+    const startYear = Math.round(Number(inputs.startYear))
+    const endYear = Math.round(Number(inputs.endYear))
+    const rate = Number(inputs.annualRate) || 0
+    const fmt = (v: number) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+    if (!Number.isFinite(amount) || amount < 0) {
+      return { values: [{ label: 'Adjusted Value', value: 'Enter a valid amount' }], summary: 'Enter an amount of zero or more.' }
+    }
+    if (!Number.isFinite(startYear) || !Number.isFinite(endYear)) {
+      return { values: [{ label: 'Adjusted Value', value: 'Enter valid years' }], summary: 'Enter a start year and an end year.' }
+    }
+    const years = endYear - startYear
+
+    // Rate mode: fixed annual rate compounded over the years between start and end.
+    if (rate > 0) {
+      const factor = Math.pow(1 + rate / 100, years)
+      const adjusted = amount * factor
+      return {
+        values: [
+          { label: 'Adjusted Value', value: fmt(adjusted), primary: true },
+          { label: 'Cumulative Inflation', value: ((factor - 1) * 100).toFixed(2) + '%' },
+          { label: 'Annual Rate Used', value: rate.toFixed(2) + '%' },
+          { label: 'Years', value: String(years) },
+        ],
+        summary: `${fmt(amount)} grows to ${fmt(adjusted)} after ${years} years at a fixed ${rate}% annual inflation rate.`,
+      }
+    }
+
+    // CPI mode: Year 2 price = Year 1 price x (CPI year 2 / CPI year 1).
+    const cpiStart = CPI_U_ANNUAL[startYear]
+    const cpiEnd = CPI_U_ANNUAL[endYear]
+    if (cpiStart === undefined || cpiEnd === undefined) {
+      return {
+        values: [{ label: 'Adjusted Value', value: `Years must be ${CPI_FIRST_YEAR} to ${CPI_LAST_YEAR}` }],
+        summary: `Actual CPI-U data covers ${CPI_FIRST_YEAR} to ${CPI_LAST_YEAR}. For other years, enter an annual inflation rate.`,
+      }
+    }
+    const factor = cpiEnd / cpiStart
+    const adjusted = amount * factor
+    const avgAnnual = years === 0 ? 0 : (Math.pow(factor, 1 / Math.abs(years)) - 1) * 100
+    return {
+      values: [
+        { label: 'Adjusted Value', value: fmt(adjusted), primary: true },
+        { label: 'Cumulative Inflation', value: ((factor - 1) * 100).toFixed(2) + '%' },
+        { label: 'Average Annual Inflation', value: avgAnnual.toFixed(2) + '%' },
+        { label: 'CPI-U (start / end)', value: `${cpiStart.toFixed(1)} / ${cpiEnd.toFixed(1)}` },
+      ],
+      summary: `${fmt(amount)} in ${startYear} has the buying power of ${fmt(adjusted)} in ${endYear} (US CPI-U annual averages).`,
+    }
+  },
+  resultLabels: ['Adjusted Value', 'Cumulative Inflation', 'Average Annual Inflation', 'CPI-U (start / end)'],
+  formula: 'Adjusted Value = Amount x (CPI-U in end year / CPI-U in start year). With a fixed rate: Amount x (1 + Rate)^Years',
   content: {
-    howTo: ['Enter the current amount.', 'Enter average inflation rate.', 'Enter number of years.', 'Click Calculate.'],
+    howTo: ['Enter the amount.', 'Enter the start year and the end year (1913 to 2025 uses actual US CPI-U data).', 'Optional: enter a fixed annual inflation rate to project forward instead of using actual CPI data.', 'Click Calculate.'],
     faqs: [
       { q: 'What is inflation?', a: 'The rate at which prices rise and purchasing power falls over time.' },
       { q: 'What is the average US inflation rate?', a: 'Historically around 2-3% per year; the Fed targets 2%.' },
@@ -57,6 +110,6 @@ export const inflation: CalculatorConfig = {
       { q: 'How does it affect savings?', a: 'Savings earning less than inflation lose real value.' },
       { q: 'What is the CPI?', a: 'Measures average price changes across a basket of goods.' },
     ],
-    howToSteps: ['Enter current amount.', 'Enter inflation rate.', 'Enter years.', 'Click Calculate.'],
+    howToSteps: ['Enter amount.', 'Enter start and end year.', 'Optionally enter a fixed inflation rate.', 'Click Calculate.'],
   },
 }

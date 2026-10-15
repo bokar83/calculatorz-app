@@ -1,4 +1,29 @@
-import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
+
+/**
+ * Parses '#FF6B35', 'FF6B35', '#F60' or a decimal number (0 to 16777215) into [r, g, b].
+ * A value with # or a letter a-f is hex. A plain run of digits is hex when it is 3 or 6 long
+ * (112233 is a valid hex code) and decimal otherwise. Returns null when it cannot be read.
+ */
+export function parseColorCode(raw: string): [number, number, number] | null {
+  const t = raw.trim().replace(/^#/, '')
+  if (!t) return null
+  const hasMark = raw.trim().startsWith('#')
+  const isHexChars = /^[0-9a-fA-F]+$/.test(t)
+  const isDigits = /^[0-9]+$/.test(t)
+  let hex: string | null = null
+  if (isHexChars && (hasMark || !isDigits || t.length === 3 || t.length === 6)) {
+    if (t.length === 3) hex = t.split('').map(c => c + c).join('')
+    else if (t.length === 6) hex = t
+    else return null
+  } else if (isDigits) {
+    const n = Number(t)
+    if (!Number.isInteger(n) || n < 0 || n > 0xFFFFFF) return null
+    return [(n >> 16) & 0xFF, (n >> 8) & 0xFF, n & 0xFF]
+  } else return null
+  const n = parseInt(hex, 16)
+  return [(n >> 16) & 0xFF, (n >> 8) & 0xFF, n & 0xFF]
+}
 
 export const hexToRgb: CalculatorConfig = {
   slug: 'hex-to-rgb',
@@ -10,13 +35,10 @@ export const hexToRgb: CalculatorConfig = {
   inputs: [
     {
       id: 'hexInput',
-      label: 'Hex Color Code (e.g. FF6B35 or #FF6B35)',
-      type: 'number',
-      defaultValue: 16737077,
-      min: 0,
-      max: 16777215,
-      step: 1,
-      hint: 'Enter the 6-digit hex color code as a number (without #). For example, FF6B35 = 16737077 in decimal. Or see the FAQ for how to use this.',
+      label: 'Color Code (hex like FF6B35 or #FF6B35, or a decimal number)',
+      type: 'text',
+      defaultValue: 'FF6B35',
+      hint: 'Type a hex code with or without #, 3 or 6 digits (F60 or FF6600). A plain decimal such as 16739125 also works.',
     },
     {
       id: 'red',
@@ -60,11 +82,14 @@ export const hexToRgb: CalculatorConfig = {
       g = Math.min(255, Math.max(0, greenOverride))
       b = Math.min(255, Math.max(0, blueOverride))
     } else {
-      // Use hex input (stored as decimal integer)
-      const hexVal = Math.round(Number(inputs.hexInput))
-      r = (hexVal >> 16) & 0xFF
-      g = (hexVal >> 8) & 0xFF
-      b = hexVal & 0xFF
+      const parsed = parseColorCode(String(inputs.hexInput ?? ''))
+      if (parsed === null) {
+        return {
+          values: [{ label: 'Hex Code', value: 'Invalid code', primary: true }],
+          summary: 'Enter a hex code such as FF6B35 or #FF6B35 (3 or 6 digits), or a decimal number from 0 to 16777215.',
+        }
+      }
+      ;[r, g, b] = parsed
     }
 
     // Build hex string
@@ -128,7 +153,7 @@ export const hexToRgb: CalculatorConfig = {
   },
   content: {
     howTo: [
-      'To convert a hex code: enter the 6-digit hex value as a decimal number (e.g. #FF6B35 = 16737077), leave RGB fields at 0.',
+      'To convert a hex code: type it into the color code field (for example #FF6B35 or FF6B35), leave the RGB fields at 0.',
       'To convert RGB to hex: enter 0 in the hex field and set Red, Green, and Blue channel values.',
       'Click Calculate to see hex, RGB, HSL, and CSS values.',
       'Use the Accessibility result to check if text will be readable on this background color.',
@@ -148,8 +173,8 @@ export const hexToRgb: CalculatorConfig = {
     },
     faqs: [
       {
-        q: 'How do I convert a hex color code to decimal for this calculator?',
-        a: 'Open your browser console (F12) and type: parseInt("FF6B35", 16) — it will output the decimal number (16737077). You can also use Windows Calculator in Programmer mode: switch to Hex, type FF6B35, then switch to Dec.',
+        q: 'Can I type a hex code directly?',
+        a: 'Yes. Type the code with or without the # sign, in 3 or 6 digits (FF6B35, #FF6B35 or F60). A plain decimal number such as 16739125 also works.',
       },
       {
         q: 'What is the difference between RGB and HSL?',
@@ -168,13 +193,13 @@ export const hexToRgb: CalculatorConfig = {
   },
   jsonLd: {
     faqs: [
-      { q: 'How do I convert hex to decimal for this calculator?', a: 'Use parseInt("FF6B35", 16) in a browser console, or Windows Calculator in Programmer mode (Hex to Dec).' },
+      { q: 'Can I type a hex code directly?', a: 'Yes. Type it with or without the # sign, in 3 or 6 digits, or enter a plain decimal number.' },
       { q: 'What is the difference between RGB and HSL?', a: 'RGB uses 0-255 channel values. HSL uses hue (0-360 degrees), saturation (%), and lightness (%).' },
       { q: 'What is WCAG contrast ratio?', a: 'A 4.5:1 contrast between text and background color meets WCAG AA accessibility standard.' },
       { q: 'Can I use the output in CSS?', a: 'Yes. rgb(), hsl(), and rgba() outputs can be pasted directly into CSS color properties.' },
     ],
     howToSteps: [
-      'Enter hex color value as decimal, or enter Red/Green/Blue channel values.',
+      'Enter a hex color code, or enter Red/Green/Blue channel values.',
       'Click Calculate.',
       'Copy hex, RGB, HSL, or CSS rgba output for use in your design or code.',
     ],

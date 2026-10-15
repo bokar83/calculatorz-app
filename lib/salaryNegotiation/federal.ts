@@ -23,40 +23,22 @@
 //   this tool treats the full $2,200 as a nonrefundable-style reduction of
 //   federal tax, which is an ASSUMPTION (see below).
 
-export const TAX_YEAR = 2026
+// Shared constants (single source of truth): lib/tax/constants2026.ts (primary sources cited there).
+import {
+  TAX_YEAR as SHARED_TAX_YEAR, BRACKETS, STANDARD_DEDUCTIONS, SS_WAGE_BASE, SS_RATE as SHARED_SS_RATE,
+  MEDICARE_RATE as SHARED_MEDICARE_RATE, ADDITIONAL_MEDICARE_RATE as SHARED_ADDL_RATE,
+  ADDITIONAL_MEDICARE_THRESHOLD as SHARED_ADDL_THRESHOLD,
+} from '../tax/constants2026.ts'
 
-// VERIFIED LAW -- IRS Rev. Proc. 2025-32 / Tax Foundation 2026 bracket table
-export const FEDERAL_BRACKETS_SINGLE = [
-  { upTo: 12400, rate: 0.10 },
-  { upTo: 50400, rate: 0.12 },
-  { upTo: 105700, rate: 0.22 },
-  { upTo: 201775, rate: 0.24 },
-  { upTo: 256225, rate: 0.32 },
-  { upTo: 640600, rate: 0.35 },
-  { upTo: Infinity, rate: 0.37 },
-] as const
-
-export const FEDERAL_BRACKETS_MFJ = [
-  { upTo: 24800, rate: 0.10 },
-  { upTo: 100800, rate: 0.12 },
-  { upTo: 211400, rate: 0.22 },
-  { upTo: 403550, rate: 0.24 },
-  { upTo: 512450, rate: 0.32 },
-  { upTo: 768700, rate: 0.35 },
-  { upTo: Infinity, rate: 0.37 },
-] as const
-
-// VERIFIED LAW -- IRS Rev. Proc. 2025-32
-export const STANDARD_DEDUCTION = { single: 16100, married: 32200 } as const
-
-// VERIFIED LAW -- SSA 2026 COLA announcement (Oct 2025)
-export const SS_WAGE_BASE_2026 = 184500
-export const SS_RATE = 0.062 // employee share
-export const MEDICARE_RATE = 0.0145 // employee share, all wages, no cap
-
-// VERIFIED LAW -- IRC 3101(b)(2), fixed by statute since 2013, not indexed
-export const ADDITIONAL_MEDICARE_THRESHOLD = { single: 200000, married: 250000 } as const
-export const ADDITIONAL_MEDICARE_RATE = 0.009
+export const TAX_YEAR = SHARED_TAX_YEAR
+export const FEDERAL_BRACKETS_SINGLE = BRACKETS.single
+export const FEDERAL_BRACKETS_MFJ = BRACKETS.married
+export const STANDARD_DEDUCTION = { single: STANDARD_DEDUCTIONS.single, married: STANDARD_DEDUCTIONS.married } as const
+export const SS_WAGE_BASE_2026 = SS_WAGE_BASE
+export const SS_RATE = SHARED_SS_RATE // employee share
+export const MEDICARE_RATE = SHARED_MEDICARE_RATE // employee share, all wages, no cap
+export const ADDITIONAL_MEDICARE_THRESHOLD = { single: SHARED_ADDL_THRESHOLD.single, married: SHARED_ADDL_THRESHOLD.married } as const
+export const ADDITIONAL_MEDICARE_RATE = SHARED_ADDL_RATE
 
 // VERIFIED LAW -- IRC 1401/1402; SE net-earnings haircut and combined rate
 export const SE_NET_EARNINGS_FACTOR = 0.9235

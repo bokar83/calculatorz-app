@@ -1,4 +1,4 @@
-import { CalculatorConfig, Currency } from '../types'
+import type { CalculatorConfig, Currency } from '../types.ts'
 
 export const dateDifference: CalculatorConfig = {
   slug: 'date-difference',
@@ -78,8 +78,10 @@ export const dateDifference: CalculatorConfig = {
       }
     }
 
-    const start = new Date(sy, sm - 1, sd)
-    const end = new Date(ey, em - 1, ed)
+    // UTC date math: local-time dates lose or gain an hour across a DST change, and Math.floor on the
+    // millisecond difference then drops a whole day (e.g. 1 to 31 March in US time zones).
+    const start = new Date(Date.UTC(sy, sm - 1, sd))
+    const end = new Date(Date.UTC(ey, em - 1, ed))
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
       return {
@@ -96,14 +98,14 @@ export const dateDifference: CalculatorConfig = {
     const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
     const totalWeeks = Math.floor(totalDays / 7)
 
-    let years = later.getFullYear() - earlier.getFullYear()
-    let months = later.getMonth() - earlier.getMonth()
-    let days = later.getDate() - earlier.getDate()
+    let years = later.getUTCFullYear() - earlier.getUTCFullYear()
+    let months = later.getUTCMonth() - earlier.getUTCMonth()
+    let days = later.getUTCDate() - earlier.getUTCDate()
 
     if (days < 0) {
       months -= 1
-      const prevMonth = new Date(later.getFullYear(), later.getMonth(), 0)
-      days += prevMonth.getDate()
+      const prevMonth = new Date(Date.UTC(later.getUTCFullYear(), later.getUTCMonth(), 0))
+      days += prevMonth.getUTCDate()
     }
     if (months < 0) {
       years -= 1
@@ -116,9 +118,9 @@ export const dateDifference: CalculatorConfig = {
     let businessDays = 0
     const cursor = new Date(earlier)
     while (cursor < later) {
-      const dow = cursor.getDay()
+      const dow = cursor.getUTCDay()
       if (dow !== 0 && dow !== 6) businessDays++
-      cursor.setDate(cursor.getDate() + 1)
+      cursor.setUTCDate(cursor.getUTCDate() + 1)
     }
 
     return {

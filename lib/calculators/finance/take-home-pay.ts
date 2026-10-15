@@ -1,36 +1,9 @@
-﻿import { CalculatorConfig } from '../types'
+import type { CalculatorConfig } from '../types.ts'
+import { STANDARD_DEDUCTIONS, federalIncomeTax, w2Fica } from '../../tax/constants2026.ts'
+import { calcStateTax } from '../../salaryNegotiation/stateTax.ts'
+import { getStateBySlug } from '../../states.ts'
 
-// 2025 US Federal Tax Brackets (single filer)
-const BRACKETS_SINGLE = [
-  { limit: 11925, rate: 0.10 },
-  { limit: 48475, rate: 0.12 },
-  { limit: 103350, rate: 0.22 },
-  { limit: 197300, rate: 0.24 },
-  { limit: 250525, rate: 0.32 },
-  { limit: 626350, rate: 0.35 },
-  { limit: Infinity, rate: 0.37 },
-]
-const BRACKETS_MARRIED = [
-  { limit: 23850, rate: 0.10 },
-  { limit: 96950, rate: 0.12 },
-  { limit: 206700, rate: 0.22 },
-  { limit: 394600, rate: 0.24 },
-  { limit: 501050, rate: 0.32 },
-  { limit: 751600, rate: 0.35 },
-  { limit: Infinity, rate: 0.37 },
-]
-
-function calcFederalTax(taxable: number, married: boolean): number {
-  const brackets = married ? BRACKETS_MARRIED : BRACKETS_SINGLE
-  let tax = 0
-  let prev = 0
-  for (const b of brackets) {
-    if (taxable <= prev) break
-    tax += (Math.min(taxable, b.limit) - prev) * b.rate
-    prev = b.limit
-  }
-  return tax
-}
+// Tax-year constants come from lib/tax/constants2026.ts (single source of truth, primary sources cited there).
 
 export const takeHomePay: CalculatorConfig = {
   slug: 'take-home-pay',
@@ -49,7 +22,7 @@ export const takeHomePay: CalculatorConfig = {
         { value: 'married', label: 'Married Filing Jointly' },
       ],
     },
-    { id: 'stateRate', label: 'State Income Tax Rate (%)', type: 'number', defaultValue: 5, min: 0, max: 15, step: 0.1, suffix: '%', hint: 'Find your state\'s income tax rate on your state government website. Seven states have 0% income tax.' },
+    { id: 'stateRate', label: 'State Income Tax Rate (%)', type: 'number', defaultValue: 5, min: 0, max: 15, step: 0.1, suffix: '%', hint: 'Find your state\'s income tax rate on your state government website. Nine states have 0% income tax: AK, FL, NV, NH, SD, TN, TX, WA, WY.' },
     { id: 'pretaxDeductions', label: 'Pre-Tax Deductions/Year (401k, HSA)', type: 'number', defaultValue: 3000, min: 0, step: 100, prefix: '$', hint: 'Enter your annual 401(k), HSA, or FSA contributions. These reduce your taxable income before taxes are calculated.' },
   ],
   calculate: (inputs, currency) => {
@@ -58,17 +31,21 @@ export const takeHomePay: CalculatorConfig = {
     const stateRate = Number(inputs.stateRate) / 100
     const pretax = Number(inputs.pretaxDeductions)
 
-    // 2025 standard deductions
-    const standardDeduction = married ? 30000 : 15000
+    const standardDeduction = STANDARD_DEDUCTIONS[married ? 'married' : 'single']
+    const status = married ? 'married' : 'single'
 
     const taxableIncome = Math.max(0, gross - pretax - standardDeduction)
-    const federalTax = calcFederalTax(taxableIncome, married)
-    const stateTax = gross * stateRate
+    const federalTax = federalIncomeTax(taxableIncome, status)
 
-    // FICA: Social Security 6.2% up to $168,600, Medicare 1.45%
-    const socialSecurity = Math.min(gross, 168600) * 0.062
-    const medicare = gross * 0.0145
-    const fica = socialSecurity + medicare
+    // State tax. State pages pass a preset stateSlug and the real state rules are used (no-tax states = 0,
+    // full bracket tables for CA/NY/HI/NJ/OR/MN/DC, headline flat rate elsewhere). On the generic page
+    // the user's own flat rate is applied. Pre-tax 401(k)/HSA/FSA reduce state wages in most states.
+    const stateWages = Math.max(0, gross - pretax)
+    const stateInfo = typeof inputs.stateSlug === 'string' && inputs.stateSlug ? getStateBySlug(inputs.stateSlug) : undefined
+    const stateTax = stateInfo ? calcStateTax(stateInfo.slug, stateWages, status).tax : stateWages * stateRate
+
+    // FICA 2026: Social Security 6.2% up to the SSA wage base, Medicare 1.45%, plus 0.9% Additional Medicare over the threshold.
+    const fica = w2Fica(gross, status).total
 
     const totalDeductions = federalTax + stateTax + fica + pretax
     const netAnnual = gross - totalDeductions
@@ -83,7 +60,7 @@ export const takeHomePay: CalculatorConfig = {
         { label: 'Federal Tax', value: fmt(federalTax) },
         { label: 'Effective Tax Rate', value: effectiveRate.toFixed(1) + '%' },
         { label: 'FICA (SS + Medicare)', value: fmt(fica) },
-        { label: 'State Tax (estimated)', value: fmt(stateTax) },
+        { label: stateInfo ? `${stateInfo.name} State Tax (estimated)` : 'State Tax (estimated)', value: fmt(stateTax) },
       ],
       summary: `Gross ${fmt(gross)} minus ${fmt(totalDeductions)} in taxes/deductions = ${fmt(netAnnual)}/year (${fmt(netAnnual / 12)}/month take-home).`,
     }
@@ -116,11 +93,11 @@ export const takeHomePay: CalculatorConfig = {
     howToSteps: ['Enter gross annual salary.', 'Select filing status.', 'Enter state tax rate.', 'Click Calculate.'],
   },
   educational: {
-    explainer: `Your take-home pay is what actually lands in your bank account after all mandatory deductions. For most employees, four things come out of every paycheck: federal income tax, state income tax, Social Security (6.2% of wages up to $168,600 in 2025), and Medicare (1.45% of all wages). On top of those, any pre-tax contributions you make to a 401(k), HSA, or similar account are deducted before taxes are calculated, which reduces your taxable income and your tax bill at the same time. The gap between your quoted salary and your actual paycheck can be substantial. On a $65,000 salary in a state with 5% income tax, you might take home around $48,000 annually, or about $4,000 a month. That gap is what planning your budget around gross salary (before deductions) misses, and it is the most common reason people feel financially stretched even after a raise.`,
+    explainer: `Your take-home pay is what actually lands in your bank account after all mandatory deductions. For most employees, four things come out of every paycheck: federal income tax, state income tax, Social Security (6.2% of wages up to $184,500 in 2026), and Medicare (1.45% of all wages). On top of those, any pre-tax contributions you make to a 401(k), HSA, or similar account are deducted before taxes are calculated, which reduces your taxable income and your tax bill at the same time. The gap between your quoted salary and your actual paycheck can be substantial. On a $65,000 salary in a state with 5% income tax, you might take home around $48,700 annually, or about $4,056 a month. That gap is what planning your budget around gross salary (before deductions) misses, and it is the most common reason people feel financially stretched even after a raise.`,
     tips: [
       'Always negotiate your salary using gross numbers, but build your budget using net numbers. If you earn $65,000 but take home $48,000, your monthly spending limit is $4,000, not $5,417.',
       'Increasing your 401(k) contribution reduces your taxable income. Raising contributions by $200/month may only reduce your paycheck by $150-$160 after the tax savings, depending on your bracket.',
-      'Know your state rate. Seven states have no income tax: Alaska, Florida, Nevada, South Dakota, Tennessee, Texas, and Wyoming. Moving across a state line can be worth thousands of dollars annually.',
+      'Know your state rate. Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. Moving across a state line can be worth thousands of dollars annually.',
       'Check that your withholding is accurate after any major life change like marriage, a new dependent, or a significant raise. Under-withholding leads to a tax bill in April; over-withholding means you gave the IRS a free loan.',
     ],
     commonMistakes: [
@@ -128,6 +105,6 @@ export const takeHomePay: CalculatorConfig = {
       'Forgetting FICA taxes. Social Security and Medicare together take 7.65% of every paycheck. Many people focus only on income tax and are surprised by how large these withholdings are.',
       'Ignoring the compounding benefit of pre-tax deductions. A $500/month 401(k) contribution in the 22% tax bracket only reduces your net pay by $390, but your retirement account grows by the full $500.',
     ],
-    example: `David earns $75,000 as a single filer in a state with 5% income tax and contributes $3,600/year to his 401(k). His taxable income for federal purposes drops to $56,400 after the standard deduction and 401(k) contribution. Federal tax: approximately $8,000. State tax: $3,750. FICA: $5,738. Total deductions including the 401(k): $21,088. Take-home pay: $53,912 annually, or about $4,493/month. Without the 401(k) contribution, his take-home would be about $4,683 — only $190 more per month, while his retirement savings grow by $300/month net after tax savings.`,
+    example: `David earns $75,000 as a single filer in a state with 5% income tax and contributes $3,600/year to his 401(k). His taxable income for federal purposes drops to $55,300 after the 2026 standard deduction ($16,100) and the 401(k) contribution. Federal tax: approximately $6,878. State tax: $3,570. FICA: $5,738. Total deductions including the 401(k): $19,786. Take-home pay: $55,215 annually, or about $4,601/month. Without the 401(k) contribution, his take-home would be about $4,820/month, only $219 more per month, while his retirement savings grow by $300/month before tax savings.`,
   },
 }

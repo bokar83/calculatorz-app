@@ -1,4 +1,21 @@
-﻿import { CalculatorConfig, Currency } from '../types'
+import type { CalculatorConfig, Currency } from '../types.ts'
+
+/**
+ * Month-by-month payoff. The final payment is only what is still owed (balance plus that month's interest),
+ * so total interest is the sum of interest actually charged, not payment x months - balance.
+ */
+export function payoffSchedule(balance: number, monthlyRate: number, payment: number) {
+  let remaining = balance
+  let months = 0
+  let totalInterest = 0
+  while (remaining > 1e-9 && months < 100000) {
+    const interest = remaining * monthlyRate
+    totalInterest += interest
+    remaining = remaining + interest - payment
+    months++
+  }
+  return { months, totalInterest }
+}
 
 export const debtPayoff: CalculatorConfig = {
   slug: 'debt-payoff',
@@ -30,14 +47,9 @@ export const debtPayoff: CalculatorConfig = {
       }
     }
 
-    const calcMonths = (payment: number): number => {
-      if (monthlyRate === 0) return Math.ceil(balance / payment)
-      return Math.ceil(-Math.log(1 - (balance * monthlyRate) / payment) / Math.log(1 + monthlyRate))
-    }
-
-    const months = calcMonths(monthlyPayment)
-    const totalPaid = monthlyPayment * months
-    const totalInterest = totalPaid - balance
+    const base = payoffSchedule(balance, monthlyRate, monthlyPayment)
+    const months = base.months
+    const totalInterest = base.totalInterest
 
     const totalYears = Math.floor(months / 12)
     const remMonths = months % 12
@@ -51,9 +63,9 @@ export const debtPayoff: CalculatorConfig = {
     if (extraPayment > 0) {
       const totalPaymentWithExtra = monthlyPayment + extraPayment
       if (totalPaymentWithExtra > minInterest || monthlyRate === 0) {
-        const monthsWithExtra = calcMonths(totalPaymentWithExtra)
-        const totalPaidWithExtra = totalPaymentWithExtra * monthsWithExtra
-        const totalInterestWithExtra = totalPaidWithExtra - balance
+        const withExtra = payoffSchedule(balance, monthlyRate, totalPaymentWithExtra)
+        const monthsWithExtra = withExtra.months
+        const totalInterestWithExtra = withExtra.totalInterest
         const interestSaved = totalInterest - totalInterestWithExtra
 
         const yearsExtra = Math.floor(monthsWithExtra / 12)
