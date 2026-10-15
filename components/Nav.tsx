@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import SearchBox from './SearchBox'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -18,16 +19,13 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-0.5 text-[13px] font-medium">
           <Link href="/finance" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Finance</Link>
           <Link href="/health" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Health</Link>
+          <Link href="/converters" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Converters</Link>
           <Link href="/finance/salary-negotiation-calculator" className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-all">Salary Negotiation</Link>
         </div>
 
         {/* Search */}
         <div className="hidden md:block flex-1 max-w-[200px] mx-4">
-          <input
-            type="search"
-            placeholder="Search calculators..."
-            className="w-full bg-white/10 border border-white/15 rounded-md px-3 py-[5px] text-[13px] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
-          />
+          <SearchBox inputClassName="w-full bg-white/10 border border-white/15 rounded-md px-3 py-[5px] text-[13px] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#0F766E]" />
         </div>
 
         {/* Mobile: hamburger only — search lives in the dropdown */}
@@ -49,13 +47,15 @@ export default function Nav() {
 
       {menuOpen && (
         <div className="md:hidden border-t border-white/10 px-4 py-3 flex flex-col gap-1 text-[14px] font-medium">
-          <input
-            type="search"
-            placeholder="Search calculators..."
-            className="w-full bg-white/10 border border-white/15 rounded-md px-3 py-2 text-[13px] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#0F766E] mb-1"
-          />
+          <div className="mb-1">
+            <SearchBox
+              inputClassName="w-full bg-white/10 border border-white/15 rounded-md px-3 py-2 text-[16px] text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+              onNavigate={() => setMenuOpen(false)}
+            />
+          </div>
           <Link href="/finance" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Finance</Link>
           <Link href="/health" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Health</Link>
+          <Link href="/converters" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Converters</Link>
           <Link href="/finance/salary-negotiation-calculator" className="text-white/80 hover:text-white px-2 py-2 rounded hover:bg-white/10 transition-colors" onClick={() => setMenuOpen(false)}>Salary Negotiation</Link>
         </div>
       )}

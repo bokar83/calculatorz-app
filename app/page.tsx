@@ -6,6 +6,7 @@ import HeroCalculator from '@/components/HeroCalculator'
 import MortgageWidget from '@/components/MortgageWidget'
 import BMIWidget from '@/components/BMIWidget'
 import JsonLd from '@/components/content/JsonLd'
+import { CATEGORIES } from '@/lib/converters'
 
 export const revalidate = 60
 
@@ -254,6 +255,25 @@ export default function HomePage() {
                     </div>
                     <div className="text-[14px] font-bold mb-1.5 group-hover:text-[#0F766E]">{calc.title}</div>
                     <div className="text-[12px] text-[#6B7280] leading-snug">{calc.description.slice(0, 68)}&hellip;</div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Unit converters */}
+            <div className="mb-10">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-[18px] font-bold text-[#1A1F36]">Unit Converters</h2>
+                <Link href="/converters" className="text-[13px] font-semibold text-[#0F766E] hover:underline">View all {CATEGORIES.length}</Link>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {CATEGORIES.filter(c => ['length', 'weight', 'volume', 'temperature', 'area', 'speed', 'cooking', 'data-storage', 'shoe-size'].includes(c.id)).map(c => (
+                  <Link
+                    key={c.id}
+                    href={`/converters/${c.id}`}
+                    className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-3 text-[13px] font-semibold text-[#1A1F36] hover:border-[#0F766E] hover:text-[#0F766E] transition-all"
+                  >
+                    {c.short} Converter
                   </Link>
                 ))}
               </div>

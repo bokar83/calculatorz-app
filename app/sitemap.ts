@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getAllSlugs } from '@/lib/registry'
 import { getAllStateSlugs } from '@/lib/states'
+import { CATEGORIES, allPairs } from '@/lib/converters'
 
 export const dynamic = 'force-static'
 
@@ -21,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const converterPages = [
+    { url: `${BASE}/converters/`, lastModified: new Date('2026-10-14'), changeFrequency: 'monthly' as const, priority: 0.9 },
+    ...CATEGORIES.map(c => ({ url: `${BASE}/converters/${c.id}/`, lastModified: new Date('2026-10-14'), changeFrequency: 'monthly' as const, priority: 0.8 })),
+    ...allPairs().map(p => ({ url: `${BASE}/converters/${p.category.id}/${p.slug}/`, lastModified: new Date('2026-10-14'), changeFrequency: 'monthly' as const, priority: 0.6 })),
+  ]
+
   return [
     { url: `${BASE}/`, lastModified: new Date('2026-05-06'), changeFrequency: 'weekly', priority: 1.0 },
     { url: `${BASE}/finance/`, lastModified: new Date('2026-05-06'), changeFrequency: 'weekly', priority: 0.9 },
@@ -32,5 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/editorial-standards/`, lastModified: new Date('2026-04-24'), changeFrequency: 'yearly' as const, priority: 0.6 },
     ...calcs,
     ...statePages,
+    ...converterPages,
   ]
 }
