@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { APP_VERSION, APP_VERSION_LABEL } from '@/lib/version'
 
 export default function Footer() {
   return (
@@ -125,6 +126,13 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-white/65 transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>Terms</Link>
           </div>
         </div>
+        <p
+          data-app-version={APP_VERSION}
+          className="mt-4 text-center text-[12px]"
+          style={{ color: 'rgba(255,255,255,0.7)' }}
+        >
+          {APP_VERSION_LABEL}
+        </p>
       </div>
     </footer>
   )

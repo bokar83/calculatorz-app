@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
+import { APP_VERSION } from '@/lib/version'
 import Footer from '@/components/Footer'
 import JsonLd from '@/components/content/JsonLd'
 import CookieConsent from '@/components/CookieConsent'
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   },
   description: 'Free online calculators for finance, health, math, and more. Over 40 calculators, mobile-friendly.',
   metadataBase: new URL('https://calculatorz.tools'),
+  other: { 'app-version': APP_VERSION },
 }
 
 const GA_ID = 'G-W83XRJE997'
