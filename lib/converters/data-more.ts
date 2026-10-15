@@ -275,7 +275,7 @@ export const torque: Category = {
     linear('kNm', 'kilonewton-meters', 'Kilonewton-meters', 'kN-m', 1e3, ['knm']),
     linear('lbfft', 'pound-feet', 'Pound-feet', 'lbf-ft', FOOT * LBF, ['foot pound', 'foot pounds', 'lb ft', 'ft lb', 'lb-ft']),
     linear('lbfin', 'pound-inches', 'Pound-inches', 'lbf-in', INCH * LBF, ['inch pound', 'inch pounds', 'in lb', 'lb-in']),
-    linear('kgfm', 'kilogram-force-meters', 'Kilogram-force meters', 'kgf-m', G0, ['kgf m', 'kg m']),
+    linear('kgfm', 'kilogram-force-meters', 'Kilogram-force meters', 'kgf-m', G0, ['kgf m']),
   ],
   defaultFrom: 'Nm',
   defaultTo: 'lbfft',
@@ -568,6 +568,7 @@ export const typography: Category = {
   ],
   defaultFrom: 'px',
   defaultTo: 'rem',
+  defaultValue: '16',
   pairs: [
     { from: 'px', to: 'rem' }, { from: 'rem', to: 'px' }, { from: 'px', to: 'em' }, { from: 'em', to: 'px' },
     { from: 'px', to: 'pt' }, { from: 'pt', to: 'px' }, { from: 'pt', to: 'mm' }, { from: 'mm', to: 'px' },

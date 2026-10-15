@@ -3,7 +3,7 @@ import type { Category } from '@/lib/converters/engine'
 import { allPairs, type PairEntry } from '@/lib/converters'
 import {
   BASE_URL, categoryPath, categoryUrl, categoryTable, categoryHowTo, pairContent, pairPath, pairUrl,
-  pageSchemas, relatedCategories,
+  pageSchemas, relatedCategories, initialValueFor,
 } from '@/lib/converters/seo'
 import { getUnit } from '@/lib/converters/engine'
 import ConverterTool from './ConverterTool'
@@ -72,6 +72,7 @@ export default function ConverterPageBody({ category: cat, entry }: Props) {
           initialFrom={entry?.pair.from}
           initialTo={entry?.pair.to}
           initialIngredient={entry?.pair.ingredient}
+          initialValue={entry ? initialValueFor(entry) : undefined}
         />
         <Disclaimer />
 

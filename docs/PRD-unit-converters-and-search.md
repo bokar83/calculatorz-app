@@ -113,6 +113,9 @@ Each slice ends with `npm run build` green and a commit tagged [WIP].
 - P10 Failure modes: WARN. Optimistic Path: search index fetch failure and number-base/Roman out-of-range input need visible error states (CHANGE added: "Search is unavailable, browse categories" fallback and inline range messages). Kitchen Sink contained by the ADD-ONLY file list.
 FINAL CALL: SHIP (changes folded into this PRD).
 
+### Build outcome (2026-10-14)
+28 categories, 150 curated pair pages, 1,822 ordered unit pairs round-trip tested, 16 unit/search tests plus a live-index test (17 total) passing, `tsc` clean, `npm run build` passes (294 static pages; 179 new HTML routes, 0 removed vs the 112 at origin/main). `npm run lint` still reports 3 errors that exist on origin/main in files this branch does not touch (CookieConsent.tsx, hours-worked-calculator.ts, sleep-calculator.ts); every new or edited file lints clean. Deviations from the PRD: none of substance; the `kg` ranking uses a primary-alias field on category entries (search.ts `a`).
+
 ### Council (ran 2026-10-14, five voices): SHIP with the changes below
 
 - CONTRARIAN: the fatal flaw is the pair pages. Hundreds of near-identical templated URLs are the classic thin-content/doorway pattern and put the site's AdSense standing at risk. Also: wrong shoe/clothing/cooking numbers cost trust faster than missing pages gain traffic; round-trip tests with a pure relative tolerance fail near zero (0 C, 0 deg).

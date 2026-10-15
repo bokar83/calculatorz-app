@@ -17,6 +17,8 @@ test('REGRESSION: queries that returned nothing with the stub now find results',
   assert.equal(top('paycheck')[0], '/finance/take-home-pay/')
   assert.ok(top('kg').length > 0)
   assert.ok(top('kg').some(u => u.startsWith('/converters/weight/')))
+  assert.equal(top('kg')[0], '/converters/weight/')
+  assert.ok(top('kg', 8).includes('/converters/weight/kg-to-lbs/'), 'kg-to-lbs should be in the top 8 for "kg"')
 })
 
 test('x to y phrasing hits the matching pair page first', () => {

@@ -134,13 +134,13 @@ export function pairContent(entry: PairEntry): PairContent {
 
   const intro = numeral
     ? `${cat.content.explainer.split('. ')[0]}. Use the converter below to turn ${from.label.toLowerCase()} into ${to.label.toLowerCase()} and back.`
-    : `${lead} equals ${one} ${to.symbol}, and ${leadRev} equals ${oneRev} ${from.symbol}${parts.ingredient ? ` for ${parts.ingredient.toLowerCase()}` : ''}. Enter a value in either box to convert ${from.label.toLowerCase()} to ${to.label.toLowerCase()}${ingSuffix.toLowerCase()} and back. ${cat.formula}.`
+    : `${lead} equals ${one} ${to.symbol}, and ${leadRev} equals ${oneRev} ${from.symbol}${parts.ingredient ? ` for ${parts.ingredient.toLowerCase()}` : ''}. Enter a value in either box to convert ${from.label.toLowerCase()} to ${to.label.toLowerCase()}${ingSuffix.toLowerCase()} and back. Formula: ${cat.formula}.`
 
   const faqs = [
     { q: `How many ${to.label.toLowerCase()} are in ${lead}?`, a: `${lead} equals ${one} ${to.symbol}${parts.ingredient ? ` for ${parts.ingredient.toLowerCase()}` : ''}.` },
     { q: `How many ${from.label.toLowerCase()} are in ${leadRev}?`, a: `${leadRev} equals ${oneRev} ${from.symbol}${parts.ingredient ? ` for ${parts.ingredient.toLowerCase()}` : ''}.` },
     { q: `What is the formula to convert ${from.label.toLowerCase()} to ${to.label.toLowerCase()}?`, a: `${cat.formula}.` },
-    ...cat.content.faqs.slice(0, 1),
+    ...cat.content.faqs.slice(1, 2),
   ]
   const howTo = [
     `Type a number in the ${from.label} box.`,
@@ -148,6 +148,22 @@ export function pairContent(entry: PairEntry): PairContent {
     'Use the swap button to reverse the direction and Copy result to copy the answer.',
   ]
   return { h1, title, description, intro, fwd, rev, example, faqs, howTo }
+}
+
+/** Starting value for a pair page, expressed in that pair's from-unit. */
+export function initialValueFor(entry: PairEntry): string | undefined {
+  const { category: cat, pair } = entry
+  if (!cat.defaultValue) return undefined
+  if (pair.from === cat.defaultFrom) return cat.defaultValue
+  try {
+    if (cat.kind === 'numeral') {
+      return convertNumeral(cat.defaultValue, getUnit(cat, cat.defaultFrom).radix!, getUnit(cat, pair.from).radix!)
+    }
+    const v = convert(cat, cat.defaultFrom, pair.from, Number(cat.defaultValue), { baseFontPx: 16 })
+    return formatNumber(roundDisplay(v, getUnit(cat, pair.from).roundTo)).replace(/,/g, '')
+  } catch {
+    return undefined
+  }
 }
 
 export function categoryFaqs(cat: Category): { q: string; a: string }[] {

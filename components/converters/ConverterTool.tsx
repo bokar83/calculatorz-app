@@ -10,20 +10,21 @@ interface Props {
   initialFrom?: string
   initialTo?: string
   initialIngredient?: string
+  initialValue?: string
 }
 
 const fieldCls =
   'w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2.5 text-[16px] text-[#1A1F36] focus:outline-none focus:ring-2 focus:ring-[#0F766E]'
 const labelCls = 'block text-[11px] font-bold text-[#6B7280] uppercase tracking-wide mb-1.5'
 
-export default function ConverterTool({ categoryId, initialFrom, initialTo, initialIngredient }: Props) {
+export default function ConverterTool({ categoryId, initialFrom, initialTo, initialIngredient, initialValue }: Props) {
   const cat = getCategory(categoryId)!
   const numeral = cat.kind === 'numeral'
   const [from, setFrom] = useState(initialFrom ?? cat.defaultFrom)
   const [to, setTo] = useState(initialTo ?? cat.defaultTo)
   const [ingId, setIngId] = useState(initialIngredient ?? cat.defaultIngredient ?? '')
   const [baseFont, setBaseFont] = useState(String(cat.ctxInput?.default ?? 16))
-  const defaultLeft = cat.id === 'roman-numerals' ? '1994' : numeral ? '255' : cat.id === 'temperature' ? '20' : '1'
+  const defaultLeft = initialValue ?? cat.defaultValue ?? '1'
   const [left, setLeft] = useState(defaultLeft)
   const [lastEdited, setLastEdited] = useState<'left' | 'right'>('left')
   const [rightRaw, setRightRaw] = useState('')

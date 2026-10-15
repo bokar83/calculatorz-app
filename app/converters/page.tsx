@@ -45,7 +45,7 @@ export default function ConvertersHub() {
 
       <h1 className="text-3xl font-extrabold text-[#1A1F36] mb-2">Unit Converters</h1>
       <p className="text-[#6B7280] mb-8 max-w-2xl">
-        {CATEGORIES.length} free converters for everyday measurements, science and engineering, computing, cooking and sizes. Every factor uses an exact published definition, results update as you type, and you can swap direction or copy the answer in one tap. Currency is not included because exchange rates change by the minute.
+        {CATEGORIES.length} free converters for everyday measurements, science and engineering, computing, cooking and sizes. Physical-unit factors use exact published definitions (sizes and cooking weights are labelled approximate), results update as you type, and you can swap direction or copy the answer in one tap. Currency is not included because exchange rates change by the minute.
       </p>
 
       {popularEntries.length > 0 && (

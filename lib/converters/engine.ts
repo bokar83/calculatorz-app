@@ -57,6 +57,8 @@ export interface Category {
   defaultIngredient?: string
   defaultFrom: string
   defaultTo: string
+  /** starting value in the left box (text); defaults to 1 */
+  defaultValue?: string
   pairs: Pair[]
   /** values shown in the common-conversions table */
   tableValues?: number[]

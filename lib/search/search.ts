@@ -11,6 +11,8 @@ export interface SearchItem {
   d?: string
   /** keywords, synonyms and unit aliases (space separated, any case) */
   k: string
+  /** primary aliases (category pages): the words people most likely type, ranked above incidental keywords */
+  a?: string
   /** pair pages only: from-unit aliases joined by "|" */
   f?: string
   /** pair pages only: to-unit aliases joined by "|" */
@@ -83,12 +85,13 @@ export function scoreItem(item: SearchItem, query: string): number {
   if (qts.length === 0) qts = tokens(query)
   const titleT = tokens(item.t)
   const keyT = tokens(item.k)
+  const primT = tokens(item.a ?? '')
   const descT = tokens(item.d ?? '')
 
   let sum = 0
   for (const qt of qts) {
     const a = tokenScore(qt, titleT) * 10
-    const b = tokenScore(qt, keyT) * 7
+    const b = Math.max(tokenScore(qt, keyT) * 7, tokenScore(qt, primT) * 9)
     const c = tokenScore(qt, descT) * 1.5
     const best = Math.max(a, b, c)
     if (best === 0) return score >= 60 ? score : 0 // every query word must match something, unless a strong phrase/pair match already did

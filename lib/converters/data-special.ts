@@ -173,6 +173,7 @@ export const shoeSize: Category = {
   ],
   defaultFrom: 'usm',
   defaultTo: 'eu',
+  defaultValue: '9',
   pairs: [
     { from: 'usm', to: 'eu' }, { from: 'eu', to: 'usm' }, { from: 'usm', to: 'uk' }, { from: 'uk', to: 'usm' },
     { from: 'usw', to: 'eu' }, { from: 'eu', to: 'usw' }, { from: 'usw', to: 'uk' }, { from: 'usm', to: 'usw' },
@@ -212,6 +213,7 @@ export const womensClothing: Category = {
   ],
   defaultFrom: 'us',
   defaultTo: 'uk',
+  defaultValue: '8',
   pairs: [
     { from: 'us', to: 'uk' }, { from: 'uk', to: 'us' }, { from: 'us', to: 'eu' }, { from: 'eu', to: 'us' },
     { from: 'uk', to: 'eu' }, { from: 'eu', to: 'uk' }, { from: 'us', to: 'it' }, { from: 'us', to: 'fr' },
@@ -248,6 +250,7 @@ export const mensSuit: Category = {
   ],
   defaultFrom: 'in',
   defaultTo: 'eu',
+  defaultValue: '40',
   pairs: [
     { from: 'in', to: 'eu' }, { from: 'eu', to: 'in' }, { from: 'in', to: 'cm' }, { from: 'cm', to: 'in' },
     { from: 'cm', to: 'eu' }, { from: 'eu', to: 'cm' },
@@ -284,14 +287,15 @@ export const numberBases: Category = {
   description: 'Convert numbers between binary, octal, decimal, hexadecimal and base 36.',
   aliases: ['binary', 'hex', 'hexadecimal', 'octal', 'decimal', 'base 2', 'base 16', 'binary to decimal', 'decimal to binary', 'hex to decimal', 'radix', 'base36'],
   units: [
-    radixUnit('dec', 'decimal', 'Decimal (base 10)', 'dec', 10, ['base 10']),
-    radixUnit('bin', 'binary', 'Binary (base 2)', 'bin', 2, ['base 2']),
-    radixUnit('oct', 'octal', 'Octal (base 8)', 'oct', 8, ['base 8']),
+    radixUnit('dec', 'decimal', 'Decimal (base 10)', 'decimal', 10, ['base 10']),
+    radixUnit('bin', 'binary', 'Binary (base 2)', 'binary', 2, ['base 2']),
+    radixUnit('oct', 'octal', 'Octal (base 8)', 'octal', 8, ['base 8']),
     radixUnit('hex', 'hex', 'Hexadecimal (base 16)', 'hex', 16, ['hexadecimal', 'base 16']),
-    radixUnit('b36', 'base36', 'Base 36', 'b36', 36, ['base 36']),
+    radixUnit('b36', 'base36', 'Base 36', 'base 36', 36, ['base 36']),
   ],
   defaultFrom: 'dec',
   defaultTo: 'bin',
+  defaultValue: '255',
   pairs: [
     { from: 'dec', to: 'bin' }, { from: 'bin', to: 'dec' }, { from: 'dec', to: 'hex' }, { from: 'hex', to: 'dec' },
     { from: 'bin', to: 'hex' }, { from: 'hex', to: 'bin' }, { from: 'dec', to: 'oct' }, { from: 'oct', to: 'dec' },
@@ -320,11 +324,12 @@ export const romanNumerals: Category = {
   description: 'Convert numbers to Roman numerals and Roman numerals back to numbers, from 1 to 3,999.',
   aliases: ['roman', 'numerals', 'roman numeral', 'xiv', 'mcmxciv', 'year in roman numerals', 'number to roman'],
   units: [
-    radixUnit('dec', 'number', 'Number (1 to 3,999)', 'number', 10, ['decimal', 'arabic']),
-    { ...linear('roman', 'roman-numerals', 'Roman numerals', 'roman', 1, ['roman']), radix: 'roman' },
+    radixUnit('dec', 'number', 'Number (1 to 3,999)', 'decimal', 10, ['decimal', 'arabic']),
+    { ...linear('roman', 'roman-numerals', 'Roman numerals', 'Roman', 1, ['roman']), radix: 'roman' },
   ],
   defaultFrom: 'dec',
   defaultTo: 'roman',
+  defaultValue: '1994',
   pairs: [{ from: 'dec', to: 'roman' }, { from: 'roman', to: 'dec' }],
   formula: 'I=1, V=5, X=10, L=50, C=100, D=500, M=1000; a smaller symbol before a larger one is subtracted (IV = 4, CM = 900)',
   content: {

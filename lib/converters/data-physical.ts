@@ -169,6 +169,7 @@ export const temperature: Category = {
   ],
   defaultFrom: 'c',
   defaultTo: 'f',
+  defaultValue: '20',
   pairs: [
     { from: 'c', to: 'f' }, { from: 'f', to: 'c' }, { from: 'c', to: 'k' }, { from: 'k', to: 'c' },
     { from: 'f', to: 'k' }, { from: 'k', to: 'f' }, { from: 'f', to: 'r' }, { from: 'c', to: 'r' },

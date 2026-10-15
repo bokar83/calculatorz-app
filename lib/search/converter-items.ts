@@ -16,6 +16,7 @@ export function buildConverterItems(): SearchItem[] {
       u: `/converters/${cat.id}/`,
       g: 'Converter',
       d: cat.description,
+      a: `${cat.short} ${cat.aliases.join(' ')}`,
       k: `${cat.id.replace(/-/g, ' ')} ${cat.short} ${cat.aliases.join(' ')} ${unitAliases}`,
     })
   }
@@ -28,7 +29,7 @@ export function buildConverterItems(): SearchItem[] {
       t: `${f.label} to ${t.label}${ing ? ` (${ing})` : ''}`,
       u: `/converters/${p.category.id}/${p.slug}/`,
       g: 'Converter',
-      k: `${p.category.short} ${ing ?? ''} ${p.category.aliases.slice(0, 4).join(' ')} ${f.symbol} ${t.symbol}`,
+      k: `${p.category.short} ${ing ?? ''} ${f.symbol} ${t.symbol}`,
       f: aliasesOf(f).join('|'),
       o: aliasesOf(t).join('|'),
     })
