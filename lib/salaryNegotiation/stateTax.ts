@@ -39,6 +39,8 @@ export interface StateBracket {
 export interface FullStateTax {
   slug: string
   name: string
+  /** True when thresholds/rates are partly derived or from secondary sources: UI labels the result approximate. */
+  approximate?: boolean
   standardDeductionSingle: number
   standardDeductionMarried: number
   bracketsSingle: StateBracket[]
@@ -151,6 +153,37 @@ export const FULL_BRACKET_STATES: Record<string, FullStateTax> = {
       { upTo: Infinity, rate: 0.1075 },
     ],
   },
+  'south-carolina': {
+    slug: 'south-carolina', name: 'South Carolina', approximate: true,
+    // SCDOR Information Letter 26-20 (Act 110 of 2026): 1.99% to $29,999; 5.21% minus $966 at $30,000+ (= 1.99% on first 30,000 then 5.21%).
+    // SC Income Adjusted Deduction (SCIAD) not modeled, so slightly high.
+    standardDeductionSingle: 0, standardDeductionMarried: 0,
+    bracketsSingle: [{ upTo: 30000, rate: 0.0199 }, { upTo: Infinity, rate: 0.0521 }],
+    bracketsMarried: [{ upTo: 30000, rate: 0.0199 }, { upTo: Infinity, rate: 0.0521 }],
+  },
+  'west-virginia': {
+    slug: 'west-virginia', name: 'West Virginia', approximate: true,
+    // SB 392 (2026): top rate 4.82% -> 4.58%, lower brackets cut ~5% (EY 2026-0864). Thresholds are 2025 law ($10k/$25k/$40k/$60k);
+    // lower rates derived as 2025 rate x 0.95 (2.22/2.96/3.33/4.44 -> below). NOT verified against the Tax Division schedule.
+    standardDeductionSingle: 0, standardDeductionMarried: 0,
+    bracketsSingle: [
+      { upTo: 10000, rate: 0.0211 }, { upTo: 25000, rate: 0.0281 }, { upTo: 40000, rate: 0.0316 },
+      { upTo: 60000, rate: 0.0422 }, { upTo: Infinity, rate: 0.0458 },
+    ],
+    bracketsMarried: [
+      { upTo: 10000, rate: 0.0211 }, { upTo: 25000, rate: 0.0281 }, { upTo: 40000, rate: 0.0316 },
+      { upTo: 60000, rate: 0.0422 }, { upTo: Infinity, rate: 0.0458 },
+    ],
+  },
+  'north-dakota': {
+    slug: 'north-dakota', name: 'North Dakota', approximate: true,
+    // Rates 0% / 1.95% / 2.5% consistent across sources. Thresholds DISAGREE across secondary sources
+    // (44,725 / 48,475 / 49,575 single); 49,575 and 250,400 (brackets.tax, 2026) used. ND starts from federal taxable income,
+    // so the federal standard deduction is applied. Married thresholds approximated as 2x. Unverified against tax.nd.gov.
+    standardDeductionSingle: 16100, standardDeductionMarried: 32200,
+    bracketsSingle: [{ upTo: 49575, rate: 0 }, { upTo: 250400, rate: 0.0195 }, { upTo: Infinity, rate: 0.025 }],
+    bracketsMarried: [{ upTo: 99150, rate: 0 }, { upTo: 500800, rate: 0.0195 }, { upTo: Infinity, rate: 0.025 }],
+  },
 }
 
 /** States whose Tier-2 rate is exact because they levy a single flat statutory rate. */
@@ -195,6 +228,9 @@ export function calcStateTax(stateSlug: string, gross: number, status: 'single' 
     const stdDed = status === 'married' ? full.standardDeductionMarried : full.standardDeductionSingle
     const taxable = Math.max(0, gross - stdDed)
     const brackets = status === 'married' ? full.bracketsMarried : full.bracketsSingle
+    if (full.approximate) {
+      return { tax: progressiveTax(taxable, brackets), tier: 'flat-approx', label: 'Bracket estimate: thresholds or rates partly derived or from secondary sources' }
+    }
     return { tax: progressiveTax(taxable, brackets), tier: 'full-bracket', label: 'Full 2026 bracket table (VERIFIED LAW)' }
   }
   const flat = getStateBySlug(stateSlug)
@@ -214,5 +250,5 @@ export function allStateOptions() {
 }
 
 export const APPROXIMATED_STATE_NAMES = US_STATES
-  .filter(s => !NO_TAX_STATE_SLUGS.has(s.slug) && !FULL_BRACKET_STATES[s.slug] && !FLAT_EXACT_STATE_SLUGS.has(s.slug))
+  .filter(s => !NO_TAX_STATE_SLUGS.has(s.slug) && (!FULL_BRACKET_STATES[s.slug] || FULL_BRACKET_STATES[s.slug].approximate) && !FLAT_EXACT_STATE_SLUGS.has(s.slug))
   .map(s => s.name)

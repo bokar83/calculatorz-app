@@ -84,3 +84,35 @@ test('deductions cannot exceed gross pay', () => {
 test('custom rate override still works', () => {
   near(computeTakeHome({ ...base, stateSlug: 'custom', customStateRatePct: 5 }).stateTax, 5000)
 })
+
+// ---- state rate fixes (sources: see lib/states.ts notes) ----
+const rateOf = (slug: string) => US_STATES.find(s => s.slug === slug)!.stateTaxRate
+
+test('GA 2026 flat rate is 4.99% (H.B. 463)', () => {
+  assert.equal(rateOf('georgia'), 4.99)
+  near(computeTakeHome({ ...base, stateSlug: 'georgia' }).stateTax, 4990)
+})
+
+test('SC 2026: 1.99% to $30,000 then 5.21% (SCDOR IL26-20: 5.21% x income - $966 at $30,000+)', () => {
+  const r = computeTakeHome({ ...base, stateSlug: 'south-carolina' })
+  near(r.stateTax, 0.0521 * 100000 - 966)
+  const lo = computeTakeHome({ ...base, grossAnnual: 20000, stateSlug: 'south-carolina' })
+  near(lo.stateTax, 20000 * 0.0199)
+  assert.equal(r.stateTier, 'flat-approx') // SCIAD not modeled, labeled approximate
+})
+
+test('WV 2026 top rate 4.58%, bracket estimate labeled approximate', () => {
+  assert.equal(rateOf('west-virginia'), 4.58)
+  const r = computeTakeHome({ ...base, stateSlug: 'west-virginia' })
+  const exp = 10000 * .0211 + 15000 * .0281 + 15000 * .0316 + 20000 * .0422 + 40000 * .0458
+  near(r.stateTax, exp)
+  assert.equal(r.stateTier, 'flat-approx')
+})
+
+test('ND: 0% below threshold, 1.95% above, labeled approximate', () => {
+  const lo = computeTakeHome({ ...base, grossAnnual: 60000, stateSlug: 'north-dakota' })
+  assert.equal(lo.stateTax, 0)
+  const hi = computeTakeHome({ ...base, stateSlug: 'north-dakota' })
+  near(hi.stateTax, (100000 - 16100 - 49575) * 0.0195)
+  assert.equal(hi.stateTier, 'flat-approx')
+})
