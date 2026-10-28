@@ -37,10 +37,10 @@ export const takeHomePay: CalculatorConfig = {
       id: 'payFrequency', label: 'Pay Frequency', type: 'select', defaultValue: 'biweekly',
       hint: 'How often you are paid. Dollar deductions below are per paycheck, so this sets how many paychecks a year they apply to.',
       options: [
-        { value: 'weekly', label: 'Weekly (52 paychecks)' },
-        { value: 'biweekly', label: 'Biweekly, every 2 weeks (26 paychecks)' },
-        { value: 'semimonthly', label: 'Semi-monthly, twice a month (24 paychecks)' },
-        { value: 'monthly', label: 'Monthly (12 paychecks)' },
+        { value: 'weekly', label: 'Weekly (52 a year)' },
+        { value: 'biweekly', label: 'Biweekly (26 a year)' },
+        { value: 'semimonthly', label: 'Semi-monthly (24 a year)' },
+        { value: 'monthly', label: 'Monthly (12 a year)' },
       ],
     },
     {
