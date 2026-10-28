@@ -149,7 +149,7 @@ export default async function StateTakeHomePayPage({ params }: PageProps) {
         </div>
 
         {/* Calculator — runs this state's own tax rules (no-tax states = 0, full brackets where modeled) */}
-        <CalculatorLoader slug="take-home-pay" presets={{ stateSlug: stateData.slug, stateRate: stateData.stateTaxRate }} hiddenInputs={['stateRate']} />
+        <CalculatorLoader slug="take-home-pay" presets={{ stateSlug: stateData.slug, stateRate: stateData.stateTaxRate }} hiddenInputs={['stateRate', 'stateSlug']} />
         <Disclaimer />
 
         {/* State tax note */}

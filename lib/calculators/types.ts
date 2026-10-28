@@ -32,6 +32,14 @@ export interface InputField {
    */
   percentOf?: string
   /**
+   * Field the user can enter either as a dollar amount or as a percent, chosen by a per-line $ / % toggle.
+   * The shell stores the typed number in inputs[id] and the chosen mode ('amount' | 'percent') in
+   * inputs[`${id}__mode`]; calculate() reads both. What the number is a percent/amount OF is the calculator's job.
+   */
+  amountOrPercent?: { defaultMode: 'amount' | 'percent'; amountLabel?: string }
+  /** Only show this field while another input has the given value (e.g. a custom-rate box shown only for 'custom'). */
+  showWhen?: { id: string; equals: string }
+  /**
    * Default that follows today's date instead of a fixed number, applied on the client after mount
    * (a static default goes stale the day after the site is built).
    * part: which piece of (today + offsetDays) to use.
@@ -88,6 +96,8 @@ export interface CalculatorConfig {
   crossLink?: { href: string; label: string; text: string }
   description: string
   updatedDate: string
+  /** Optional visible footnote rendered under the calculator results (e.g. tax-estimate disclaimer). */
+  footnote?: string
   tabs?: Tab[]
   inputs: InputField[]
   calculate: (inputs: Record<string, number | string>, currency: Currency, unitSystem?: UnitSystem, activeTab?: string) => CalculatorResult

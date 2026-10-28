@@ -45,6 +45,9 @@ export default function CalculatorShell({ config, initialCurrency, presets, hidd
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // Per-field input mode for percent-or-amount fields (e.g. down payment). Stored value stays the percent.
+  // Per-field $ / % mode for amountOrPercent fields (take-home pay deduction lines).
+  const [dualModes, setDualModes] = useState<Record<string, 'amount' | 'percent'>>(() =>
+    Object.fromEntries(config.inputs.filter(f => f.amountOrPercent).map(f => [f.id, f.amountOrPercent!.defaultMode])))
   const [pctModes, setPctModes] = useState<Record<string, 'percent' | 'amount'>>({})
 
   const handleChange = (id: string, value: string) => {
@@ -65,6 +68,7 @@ export default function CalculatorShell({ config, initialCurrency, presets, hidd
   const handleCalculate = () => {
     try {
       const parsed: Record<string, number | string> = { ...(presets ?? {}) }
+      for (const [id, m] of Object.entries(dualModes)) parsed[`${id}__mode`] = m
       for (const field of config.inputs) {
         parsed[field.id] = field.type === 'number' ? Number(inputs[field.id]) : inputs[field.id]
       }
@@ -112,13 +116,61 @@ export default function CalculatorShell({ config, initialCurrency, presets, hidd
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {config.inputs.filter(f => !hiddenInputs?.includes(f.id)).map(field => {
+        {config.inputs.filter(f => !hiddenInputs?.includes(f.id) && (!f.showWhen || String(inputs[f.showWhen.id]) === f.showWhen.equals)).map(field => {
           const displayLabel = isImperial
             ? field.label.replace('(kg)', '(lbs)').replace('(cm)', '(in)')
             : field.label
           const displaySuffix = isImperial
             ? (field.suffix === 'kg' ? 'lbs' : field.suffix === 'cm' ? 'in' : field.suffix)
             : field.suffix
+
+          // Amount-or-percent field: per-line $ / % toggle. The typed number is kept as typed; the mode travels with it.
+          if (field.amountOrPercent) {
+            const mode = dualModes[field.id] ?? field.amountOrPercent.defaultMode
+            return (
+              <div key={field.id}>
+                <div className="flex items-center justify-between mb-1 gap-2">
+                  <label htmlFor={`f-${field.id}`} className="block text-sm font-medium text-[#1A1F36]">{field.label}</label>
+                  <div className="flex rounded-md border border-[#E5E7EB] overflow-hidden text-xs shrink-0" role="group" aria-label={`${field.label}: dollars or percent`}>
+                    {(['amount', 'percent'] as const).map(m => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setDualModes(prev => ({ ...prev, [field.id]: m }))}
+                        className={`px-3 py-1.5 font-medium transition-colors focus:outline-none ${
+                          mode === m ? 'bg-[#0F766E] text-white' : 'bg-white text-[#6B7280] hover:text-[#1A1F36]'
+                        }`}
+                        aria-pressed={mode === m}
+                      >
+                        {m === 'percent' ? '%' : currency.symbol}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center border border-[#E5E7EB] rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-teal-400">
+                  {mode === 'amount' && (
+                    <span className="px-3 py-2 bg-[#F8FAFB] text-[#6B7280] text-sm border-r border-[#E5E7EB]">{currency.symbol}</span>
+                  )}
+                  <input
+                    id={`f-${field.id}`}
+                    type="number"
+                    value={String(inputs[field.id])}
+                    min={0}
+                    max={mode === 'percent' ? 100 : undefined}
+                    step={mode === 'percent' ? 0.5 : 5}
+                    onChange={e => handleChange(field.id, e.target.value)}
+                    className="flex-1 min-w-0 px-3 py-2 text-sm text-[#1A1F36] focus:outline-none bg-white"
+                  />
+                  {mode === 'percent' && (
+                    <span className="px-3 py-2 bg-[#F8FAFB] text-[#6B7280] text-sm border-l border-[#E5E7EB]">%</span>
+                  )}
+                </div>
+                {field.hint && (
+                  <p className="text-[11px] text-[#9CA3AF] mt-1 leading-relaxed">{field.hint}</p>
+                )}
+              </div>
+            )
+          }
 
           // Percent-or-amount field: render a $/% toggle and keep both views in sync live.
           if (field.percentOf) {
@@ -254,6 +306,9 @@ export default function CalculatorShell({ config, initialCurrency, presets, hidd
       </button>
 
       <ResultsBlock result={result} />
+      {config.footnote && (
+        <p className="mt-3 text-[11px] text-[#6B7280] leading-relaxed">{config.footnote}</p>
+      )}
       <AffiliateStrip affiliate={config.affiliate} show={showAffiliate} />
     </div>
   )
